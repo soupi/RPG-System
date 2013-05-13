@@ -10,9 +10,9 @@ bool MainMenu::Update(Controller& ctrl, float elapsedTime) {
 
 		else if (event.type == sf::Event::MouseButtonPressed)
 		{
-			if (event.mouseButton.button == sf::Mouse::Button::Left)
+			if (event.mouseButton.button == sf::Mouse::Left)
 				ctrl.getStateMachine().Change("localmap");
-			else if (event.mouseButton.button == sf::Mouse::Button::Right)
+			else if (event.mouseButton.button == sf::Mouse::Right)
 			{
 				_color += 79 % 255;
 				_rect.setFillColor(sf::Color::Color(100, _color, 100));

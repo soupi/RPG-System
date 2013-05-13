@@ -1,24 +1,38 @@
 #pragma once
 
 #include "State.h"
-#include "StateParams.h"
-
-class StateFactory {
-public:
-	virtual ~StateFactory() { }
-	virtual State* make(StateParams* params = NULL) = 0;
-
-};
 
 template <class T>
-
-class StateFactoryT : public StateFactory 
+class StateFactory : public State
 {
 public:
-	virtual T* make(StateParams* params = NULL)
+
+
+	class IState : public State 
 	{
-		if (params)
-			return new T(params);
-		return new T;
+	public:
+		virtual bool Update(Controller& ctrl, float elapsedTime) { return _state.Update(ctrl, elapsedTime); }
+		virtual void Render(sf::RenderWindow& window) { _state.Render(window); }
+		virtual State* Enter(StateParams* params = NULL) 
+		{ 
+			if (params) 
+				_state.Enter(params);
+			else _state.Enter(); 
+			return this;
+		}
+		virtual bool Exit() { _state.Exit(); return true; }
+
+	private:
+		T _state;
+	};
+
+
+	virtual State* Enter(StateParams* params = NULL)
+	{
+		IState* state = new IState;
+		return state->Enter(params);
 	}
+
+	virtual bool Update(Controller&, float elapsedTime) { return false; }
+	virtual void Render(sf::RenderWindow& window) { }
 };

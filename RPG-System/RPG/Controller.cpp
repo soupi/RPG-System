@@ -39,8 +39,8 @@ void Controller::initWindow()
 
 void Controller::initStateMachine()
 {
-	_stateMachine.Add("mainmenu", new StateFactoryT<MainMenu>);
-	_stateMachine.Add("gamemenu", new StateFactoryT<GameMenu>);
-	_stateMachine.Add("localmap", new StateFactoryT<LocalMap>);
+	_stateMachine.Add("mainmenu", new StateFactory<MainMenu>);
+	_stateMachine.Add("gamemenu", new GameMenu);
+	_stateMachine.Add("localmap", new LocalMap);
 	_stateMachine.Change("mainmenu");
 }

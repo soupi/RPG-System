@@ -7,7 +7,7 @@
 class GameMenu : public State
 {
 public:
-	GameMenu(StateParams* params = NULL) { init(); }
+	virtual State* Enter(StateParams* params = NULL) { init(); return this; }
 	virtual bool Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(sf::RenderWindow& window);
 
