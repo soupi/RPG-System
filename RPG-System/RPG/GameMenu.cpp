@@ -1,24 +1,28 @@
 #include "GameMenu.h"
 #include "Controller.h"
 
-bool GameMenu::Update(Controller& ctrl, float elapsedTime) {
-	sf::Event event;
-	if (ctrl.getWindow().pollEvent(event))
+bool GameMenu::handleEvents(sf::Event& event)
+{
+	if (event.type == sf::Event::Closed)
+		return true;
+
+	else if (event.type == sf::Event::MouseButtonPressed)
 	{
-		if (event.type == sf::Event::Closed)
-			return true;
-		else if (event.type == sf::Event::MouseButtonPressed)
-		{
-			if (event.mouseButton.button == sf::Mouse::Left)
-				ctrl.getStateMachine().Pop();
-			else if (event.mouseButton.button == sf::Mouse::Right)
-			{
-				_color += 79 % 255;
-				_rect.setFillColor(sf::Color::Color(100, 100, _color));
-			}
-		}
+		if (event.mouseButton.button == sf::Mouse::Right)
+			_change_state.set();
+			
+		else if (event.mouseButton.button == sf::Mouse::Left)
+			_color += 79 % 255;	
 	}
+
 	return false;
+}
+void GameMenu::Update(Controller& ctrl, float elapsedTime)
+{
+	if (_change_state)
+		ctrl.getStateMachine().Stack("localmap");
+
+	_rect.setFillColor(sf::Color::Color(_color, 100, 100));
 }
 
 void GameMenu::Render(sf::RenderWindow& window)

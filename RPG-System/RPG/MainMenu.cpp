@@ -1,25 +1,28 @@
 #include "MainMenu.h"
 #include "Controller.h"
 
-bool MainMenu::Update(Controller& ctrl, float elapsedTime) {
-	sf::Event event;
-	if (ctrl.getWindow().pollEvent(event))
-	{
-		if (event.type == sf::Event::Closed)
-			return true;
+bool MainMenu::handleEvents(sf::Event& event)
+{
+	if (event.type == sf::Event::Closed)
+		return true;
 
-		else if (event.type == sf::Event::MouseButtonPressed)
-		{
-			if (event.mouseButton.button == sf::Mouse::Left)
-				ctrl.getStateMachine().Change("localmap");
-			else if (event.mouseButton.button == sf::Mouse::Right)
-			{
-				_color += 79 % 255;
-				_rect.setFillColor(sf::Color::Color(100, _color, 100));
-			}
-		}
+	else if (event.type == sf::Event::MouseButtonPressed)
+	{
+		if (event.mouseButton.button == sf::Mouse::Right)
+			_change_state.set();
+			
+		else if (event.mouseButton.button == sf::Mouse::Left)
+			_color += 79 % 255;	
 	}
+
 	return false;
+}
+void MainMenu::Update(Controller& ctrl, float elapsedTime)
+{
+	if (_change_state)
+		ctrl.getStateMachine().Stack("localmap");
+
+	_rect.setFillColor(sf::Color::Color(_color, 100, 100));
 }
 
 void MainMenu::Render(sf::RenderWindow& window)

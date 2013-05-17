@@ -3,16 +3,21 @@
 #include <SFML/Graphics.hpp>
 #include "State.h"
 #include "StateParams.h"
+#include "Flag.h"
 
 class GameMenu : public State
 {
 public:
-	virtual State* Enter(StateParams* params = NULL) { init(); return this; }
-	virtual bool Update(Controller& ctrl, float elapsedTime);
+	GameMenu() { init(); }
+	virtual State* Enter(StateParams* params = NULL) { return this; }
+	virtual bool handleEvents(sf::Event& event);
+	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(sf::RenderWindow& window);
 
 private:
 	sf::RectangleShape _rect;
+	Flag _change_state;
+
 	char _color;
 	void init();
 

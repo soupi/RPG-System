@@ -78,13 +78,17 @@
   <ItemGroup>
     <ClInclude Include="Controller.h" />
     <ClInclude Include="EmptyState.h" />
+    <ClInclude Include="Flag.h" />
     <ClInclude Include="GameMenu.h" />
     <ClInclude Include="LocalMap.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateFactory.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StateParams.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controller.cpp" />
@@ -92,6 +96,9 @@
     <ClCompile Include="LocalMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

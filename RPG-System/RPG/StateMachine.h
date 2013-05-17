@@ -36,8 +36,10 @@ public:
 		for (vector<State*>::iterator it = _state_stack.begin(); it != _state_stack.end(); ++it)
 			(*it)->Render(window); 
 	}
+
+	virtual bool handleEvents(sf::Event& event) { return _state_stack.back()->handleEvents(event); }
 	// the update function updates the current state
-	bool Update(Controller& ctrl, float elapsedTime) { return _state_stack.back()->Update(ctrl, elapsedTime); }
+	void Update(Controller& ctrl, float elapsedTime) { _state_stack.back()->Update(ctrl, elapsedTime); }
 	// stacks a state on top of the current state
 	void Stack(std::string state, StateParams* params = NULL) 
 	{ 
