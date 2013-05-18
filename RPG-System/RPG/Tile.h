@@ -3,6 +3,7 @@
 #include <SFML\Graphics.hpp>
 
 const unsigned TILE_SIZE = 64;
+const unsigned SCRN_TILE_SIZE = TILE_SIZE;
 
 class Tile {
 public:

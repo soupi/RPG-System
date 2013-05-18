@@ -1,20 +1,23 @@
 #include "LocalMap.h"
 #include "Controller.h"
 #include <string>
+#include "UserMovement.h"
 
-bool LocalMap::handleEvents(sf::Event& event)
+
+LocalMap::LocalMap() 
+{ }
+
+
+bool LocalMap::handleEvents(const Control& controls)
 {
-	if (event.type == sf::Event::Closed)
-		return true;
-
-	else if (event.type == sf::Event::MouseButtonPressed)
-	{
-		if (event.mouseButton.button == sf::Mouse::Right)
-			_change_state.set();
+	if (controls.isPressed(MOUSE_PRIMARY))
+		_change_state.set();
 			
-		else if (event.mouseButton.button == sf::Mouse::Left)
-			_color += 79 % 255;	
-	}
+	else if (controls.isPressed(MOUSE_SECONDARY))
+		_color += 79 % 255;	
+
+	_hero.handleEvents(controls);
+/*
 	else if (event.type == sf::Event::KeyPressed)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -38,7 +41,7 @@ bool LocalMap::handleEvents(sf::Event& event)
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 			_dir.y = 1;
 		else _dir.y = 0;
-	}
+	}*/
 
 	return false;
 }
@@ -47,8 +50,9 @@ void LocalMap::Update(Controller& ctrl, float elapsedTime)
 	if (_change_state)
 		ctrl.getStateMachine().Stack("gamemenu");
 
-	_character.move(speed * _dir.x * elapsedTime, speed * _dir.y * elapsedTime);
-	ctrl.getView().setCenter(_character.getPosition());
+	//_character.move(speed * _dir.x * elapsedTime, speed * _dir.y * elapsedTime);
+	_hero.Update(ctrl, *_map, elapsedTime);
+	ctrl.getView().setCenter(_hero.getPos());
 	//ctrl.getView().rotate(elapsedTime*45);
 
 	_rect.setFillColor(sf::Color::Color(_color, 100, 100));
@@ -60,7 +64,8 @@ void LocalMap::Render(sf::RenderWindow& window)
 {
 	window.draw(_rect);
 	_map->Render(window);
-	window.draw(_character);
+	_hero.Render(window);
+	//window.draw(_character);
 }
 
 void LocalMap::init()
@@ -75,4 +80,7 @@ void LocalMap::init()
 	_character.setOrigin(20.f, 20.f);
 
 	_map = new Map("maps/map.mp");
+
+	_hero.setGraphics(new Graphics(_map->getTileset(), sf::Vector2i(0,0), sf::Vector2u(64,64)));
+	_hero.setMovement(new UserMovement);
 }

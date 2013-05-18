@@ -1,19 +1,14 @@
 #include "MainMenu.h"
 #include "Controller.h"
 
-bool MainMenu::handleEvents(sf::Event& event)
+bool MainMenu::handleEvents(const Control& controls)
 {
-	if (event.type == sf::Event::Closed)
-		return true;
 
-	else if (event.type == sf::Event::MouseButtonPressed)
-	{
-		if (event.mouseButton.button == sf::Mouse::Right)
-			_change_state.set();
+	if (controls.isPressed(MOUSE_PRIMARY))
+		_change_state.set();
 			
-		else if (event.mouseButton.button == sf::Mouse::Left)
-			_color += 79 % 255;	
-	}
+	else if (controls.isPressed(MOUSE_SECONDARY))
+		_color += 79 % 255;	
 
 	return false;
 }

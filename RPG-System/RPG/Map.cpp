@@ -60,7 +60,7 @@ void Map::loadMap(string& filename)
 		try {
 			mapfile >> tile;
 			_background[i] = Tile(_tileset, tile);
-			_background[i].setPos(sf::Vector2f((i%size_w)*float(TILE_SIZE), (i/size_w)*float(TILE_SIZE)));
+			_background[i].setPos(sf::Vector2f((i%size_w)*float(SCRN_TILE_SIZE), (i/size_w)*float(SCRN_TILE_SIZE)));
 		}
 		catch (...) { }
 	}

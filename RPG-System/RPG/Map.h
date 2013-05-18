@@ -16,6 +16,7 @@ public:
 	//void Update(Hero& hero, float elapsedTime);
 	void Update(float elapsedTime);
 	void Render(sf::RenderWindow& _window);
+	sf::Texture* getTileset() { return _tileset; }
 
 private:
 	vector<Tile> _background;

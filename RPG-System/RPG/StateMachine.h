@@ -3,17 +3,18 @@
 #pragma once
 
 #include <SFML\Graphics.hpp>
-#include <vector>
+#include <stack>
 #include <map>
 #include <string>
 #include "State.h"
 #include "StateFactory.h"
 #include "StateParams.h"
 #include "EmptyState.h"
+#include "Control.h"
 
 using std::map;
 using std::string;
-using std::vector;
+using std::stack;
 
 class Controller;
 
@@ -21,7 +22,7 @@ class StateMachine
 {
 public:
 	// Constructor for the state machine is initiallized with an empty state.
-	StateMachine()  { _state_stack.push_back(new EmptyState); }
+	StateMachine()  { _state_stack.push(new EmptyState); }
 	// The Destructor deletes the allocated pointers in the state machine
 	~StateMachine() 
 	{
@@ -33,28 +34,27 @@ public:
 	// the render function renders the all states on the stack state
 	void Render(sf::RenderWindow& window) 
 	{
-		for (vector<State*>::iterator it = _state_stack.begin(); it != _state_stack.end(); ++it)
-			(*it)->Render(window); 
+		_state_stack.top()->Render(window); 
 	}
 
-	virtual bool handleEvents(sf::Event& event) { return _state_stack.back()->handleEvents(event); }
+	virtual bool handleEvents(const Control& controls) { return _state_stack.top()->handleEvents(controls); }
 	// the update function updates the current state
-	void Update(Controller& ctrl, float elapsedTime) { _state_stack.back()->Update(ctrl, elapsedTime); }
+	void Update(Controller& ctrl, float elapsedTime) { _state_stack.top()->Update(ctrl, elapsedTime); }
 	// stacks a state on top of the current state
 	void Stack(std::string state, StateParams* params = NULL) 
 	{ 
 		// enter a new state
 		if (params) 
-			_state_stack.push_back(_states[state]->Enter(params));
-		else _state_stack.push_back(_states[state]->Enter()); 
+			_state_stack.push(_states[state]->Enter(params));
+		else _state_stack.push(_states[state]->Enter()); 
 	}
 	// pop the current state -> back to the previous state.
 	void Pop() { 
 		if (!_state_stack.empty())
 		{
-			if (_state_stack.back()->Exit())
-				delete _state_stack.back();
-			_state_stack.pop_back();
+			if (_state_stack.top()->Exit())
+				delete _state_stack.top();
+			_state_stack.pop();
 		}
 	}
 	// changes the current state
@@ -71,6 +71,6 @@ public:
 
 
 private:
-	vector<State*> _state_stack;
+	stack<State*> _state_stack;
 	map<string, State*> _states;
 };

@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "StateParams.h"
+#include "Control.h"
 
 class Controller;
 
@@ -9,7 +10,7 @@ class State
 {
 public:
 	virtual ~State() {}
-	virtual bool handleEvents(sf::Event& event) = 0;
+	virtual bool handleEvents(const Control& controls) = 0;
 	virtual void Update(Controller&, float elapsedTime) = 0;
 	virtual void Render(sf::RenderWindow& window) = 0;
 	virtual State* Enter(StateParams* params = NULL) = 0;

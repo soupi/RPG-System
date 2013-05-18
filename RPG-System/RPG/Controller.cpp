@@ -3,8 +3,8 @@
 #include "GameMenu.h"
 #include "LocalMap.h"
 
-const int WINDOW_W = 800;
-const int WINDOW_H = 600;
+const int WINDOW_W = 960;
+const int WINDOW_H = 640;
 const unsigned FRAME_RATE = 60;
 
 // tile size is 48x48 -> 32*1.5
@@ -23,8 +23,11 @@ void Controller::run()
 
 		sf::Event event;
 		if (_window.pollEvent(event))
-			if (_stateMachine.handleEvents(event))
+		{
+			if (handleEvents(event))
 				break;
+			else _stateMachine.handleEvents(_controls);
+		}
 
 		_stateMachine.Update(*this,deltaTime);
 
@@ -37,6 +40,47 @@ void Controller::run()
 		if ((deltaTime = _clock.getElapsedTime().asSeconds()) < 1.f/FRAME_RATE)
 			sf::sleep(sf::seconds(1.f/FRAME_RATE - deltaTime));
 	}
+}
+
+bool Controller::handleEvents(sf::Event& event)
+{
+	bool controls[NUM_OF_CONTROLS] = { false };
+	if (event.type == sf::Event::Closed)
+		return true;
+
+	else if (event.type == sf::Event::MouseButtonPressed)
+	{
+		if (event.mouseButton.button == sf::Mouse::Right)
+			controls[MOUSE_SECONDARY] = true;
+			
+		else if (event.mouseButton.button == sf::Mouse::Left)
+			controls[MOUSE_PRIMARY] = true;
+	}
+	else if (event.type == sf::Event::KeyPressed)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			controls[RIGHT] = true;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			controls[LEFT] = true;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			controls[UP] = true;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			controls[DOWN] = true;
+	}
+	else if (event.type == sf::Event::KeyReleased)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			controls[RIGHT] = true;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			controls[LEFT] = true;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			controls[UP] = true;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			controls[DOWN] = true;
+	}
+	_controls = Control(controls);
+
+	return false;
 }
 
 void Controller::initWindow() 
@@ -56,6 +100,7 @@ void Controller::initWindow()
 	// create view
 	_view.setCenter(WINDOW_W/2.f, WINDOW_H/2.f);
 	_view.setSize(float(WINDOW_W), float(WINDOW_H));
+
 	_window.setView(_view);
 }
 

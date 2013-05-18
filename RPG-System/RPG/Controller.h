@@ -1,6 +1,7 @@
 #pragma once
 
 #include "StateMachine.h"
+#include "Control.h"
 
 class Controller
 {
@@ -12,6 +13,7 @@ public:
 	StateMachine& getStateMachine() { return _stateMachine; }
 	sf::RenderWindow& getWindow() { return _window; }
 	sf::View& getView() { return _view; }
+	bool handleEvents(sf::Event& event);
 
 private:
 	sf::RenderWindow _window;
@@ -20,7 +22,7 @@ private:
 	StateMachine _stateMachine;
 
 	// Hero character
-
+	Control _controls;
 
 	void initWindow();
 	void initStateMachine();
