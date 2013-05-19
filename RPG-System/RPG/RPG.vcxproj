@@ -84,11 +84,15 @@
     <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="ItemBank.h" />
     <ClInclude Include="LocalMap.h" />
     <ClInclude Include="Macros.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Movement.h" />
+    <ClInclude Include="NoAction.h" />
+    <ClInclude Include="NoGraphics.h" />
+    <ClInclude Include="NoMovement.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateFactory.h" />
     <ClInclude Include="StateMachine.h" />

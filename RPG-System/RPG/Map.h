@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <fstream>
 #include <vector>
 #include <string>
 #include "Tile.h"
@@ -16,7 +17,6 @@ public:
 	//void Update(Hero& hero, float elapsedTime);
 	void Update(float elapsedTime);
 	void Render(sf::RenderWindow& _window);
-	sf::Texture* getTileset() { return _tileset; }
 
 private:
 	vector<Tile> _background;
@@ -24,9 +24,11 @@ private:
 	//vector<Trigger*> _triggers;
 	vector<Tile> _top;
 
-	sf::Texture* _tileset;
-
+	sf::Texture _tileset_back;
+	sf::Texture _tileset_fore;
+	sf::Texture _tileset_top;
 
 // private functions:
 	void loadMap(string& filename);
+	void loadLayer(std::ifstream&, vector<Tile>& layer, sf::Texture& tileset);
 };

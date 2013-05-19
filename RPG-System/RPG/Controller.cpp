@@ -56,29 +56,21 @@ bool Controller::handleEvents(sf::Event& event)
 		else if (event.mouseButton.button == sf::Mouse::Left)
 			controls[MOUSE_PRIMARY] = true;
 	}
-	else if (event.type == sf::Event::KeyPressed)
-	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			controls[RIGHT] = true;
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			controls[LEFT] = true;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			controls[UP] = true;
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			controls[DOWN] = true;
-	}
-	else if (event.type == sf::Event::KeyReleased)
-	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			controls[RIGHT] = true;
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			controls[LEFT] = true;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			controls[UP] = true;
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			controls[DOWN] = true;
-	}
-	_controls = Control(controls);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		controls[RIGHT] = true;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		controls[LEFT] = true;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		controls[UP] = true;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		controls[DOWN] = true;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+		controls[PRIMARY] = true;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
+		controls[SECONDARY] = true;
+
+	_controls.setControls(controls);
 
 	return false;
 }
@@ -100,6 +92,7 @@ void Controller::initWindow()
 	// create view
 	_view.setCenter(WINDOW_W/2.f, WINDOW_H/2.f);
 	_view.setSize(float(WINDOW_W), float(WINDOW_H));
+	//_view.zoom(1.5f);
 
 	_window.setView(_view);
 }
@@ -109,5 +102,5 @@ void Controller::initStateMachine()
 	_stateMachine.Add("mainmenu", new MainMenu);
 	_stateMachine.Add("gamemenu", new GameMenu);
 	_stateMachine.Add("localmap", new LocalMap);
-	_stateMachine.Change("mainmenu");
+	_stateMachine.Change("localmap");
 }

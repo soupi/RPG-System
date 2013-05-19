@@ -12,8 +12,8 @@ public:
 	Movement(sf::Vector2f pos = sf::Vector2f(0.f, 0.f), unsigned speed = DEFAULT_SPEED) : _direction(0.f,0.f), _speed(speed), _newpos(true), _pos(pos) { }
 	~Movement() { }
 
-	virtual void handleEvents(const Control& controls) { }
-	virtual void Update(Graphics* _graphics, float elapsedTime) { }
+	virtual void handleEvents(const Control& controls) = 0;
+	virtual void Update(Graphics* _graphics, float elapsedTime) = 0;
 	sf::Vector2f getPos() const { return _pos; }
 	void setPos(sf::Vector2f pos) { _pos = pos; _newpos = true; }
 

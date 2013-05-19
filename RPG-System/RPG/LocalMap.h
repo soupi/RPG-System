@@ -22,6 +22,8 @@ private:
 	sf::RectangleShape _rect;
 	sf::RectangleShape _character;
 
+	sf::Texture _hero_texture;
+
 	GameObject _hero;
 
 	Flag _change_state;

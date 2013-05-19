@@ -1,9 +1,8 @@
 #include "Map.h"
-#include <fstream>
 #include <iostream>
 #include "Utility.h"
 
-Map::Map(string filename) : _tileset(new sf::Texture())
+Map::Map(string filename)
 {
 	loadMap(filename);
 }
@@ -23,12 +22,14 @@ void Map::Render(sf::RenderWindow& window)
 {
 	for (vector<Tile>::iterator tile = _background.begin(); tile != _background.end(); ++tile)
 		tile->draw(window);
+	for (vector<Tile>::iterator tile = _foreground.begin(); tile != _foreground.end(); ++tile)
+		tile->draw(window);
 }
 
 void Map::loadMap(string& filename)
 {
 	std::ifstream mapfile;
-	mapfile.open("resources/" + filename);
+	mapfile.open("resources/maps/" + filename);
 
 	if (!mapfile)
 	{
@@ -49,20 +50,37 @@ void Map::loadMap(string& filename)
 		_top.push_back(Tile());
 	}
 
+	loadLayer(mapfile, _background, _tileset_back);
+	loadLayer(mapfile, _foreground, _tileset_fore);
+	//loadLayer(mapfile, _top);
+
+	mapfile.close();
+}
+
+void Map::loadLayer(std::ifstream& mapfile, vector<Tile>& layer, sf::Texture& tileset)
+{
+	unsigned size_w, size_h;
+	mapfile >> size_w >> size_h;
+
+	mapfile.get();
+
 	string tiles;
 	getline(mapfile, tiles);
 
-	loadTexture(*_tileset, tiles);
+	loadTexture(tileset, "resources/" + tiles);
 
 	for (unsigned i = 0; i < size_w*size_h; i++)
 	{
 		int tile;
 		try {
 			mapfile >> tile;
-			_background[i] = Tile(_tileset, tile);
-			_background[i].setPos(sf::Vector2f((i%size_w)*float(SCRN_TILE_SIZE), (i/size_w)*float(SCRN_TILE_SIZE)));
+			if (tile)
+			{
+				layer[i] = Tile(&tileset, tile);
+				layer[i].setPos(sf::Vector2f((i%size_w)*float(SCRN_TILE_SIZE), (i/size_w)*float(SCRN_TILE_SIZE)));
+			}
 		}
 		catch (...) { }
 	}
-	mapfile.close();
 }
+

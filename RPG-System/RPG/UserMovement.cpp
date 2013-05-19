@@ -33,7 +33,7 @@ void UserMovement::Update(Graphics* _graphics, float elapsedTime)
 	if (_run)
 		scalar = 2*SCRN_TILE_SIZE;
 
-	_pos += scalar * _speed * _direction * elapsedTime;
+	_pos += scalar * _speed * _direction  * elapsedTime;
 
 	if (_newpos)
 	{

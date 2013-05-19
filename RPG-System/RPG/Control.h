@@ -24,6 +24,7 @@ class Control
 public:
 	Control();
 	Control(bool controls[NUM_OF_CONTROLS]);
+	void setControls(bool controls[NUM_OF_CONTROLS]);
 	bool isPressed(CONTROL control) const;
 
 
