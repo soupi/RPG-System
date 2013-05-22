@@ -76,7 +76,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Action.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="EmptyState.h" />
     <ClInclude Include="Control.h" />
@@ -84,19 +83,20 @@
     <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Hero.h" />
     <ClInclude Include="ItemBank.h" />
     <ClInclude Include="LocalMap.h" />
     <ClInclude Include="Macros.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Movement.h" />
-    <ClInclude Include="NoAction.h" />
     <ClInclude Include="NoGraphics.h" />
     <ClInclude Include="NoMovement.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateFactory.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StateParams.h" />
+    <ClInclude Include="Stats.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="UserMovement.h" />
     <ClInclude Include="Utility.h" />

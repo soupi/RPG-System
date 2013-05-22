@@ -20,9 +20,9 @@ void MainMenu::Update(Controller& ctrl, float elapsedTime)
 	_rect.setFillColor(sf::Color::Color(_color, 100, 100));
 }
 
-void MainMenu::Render(sf::RenderWindow& window)
+void MainMenu::Render(Controller& ctrl)
 {
-	window.draw(_rect);
+	ctrl.getWindow().draw(_rect);
 }
 
 void MainMenu::init()

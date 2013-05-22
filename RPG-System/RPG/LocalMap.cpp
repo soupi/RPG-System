@@ -28,7 +28,7 @@ void LocalMap::Update(Controller& ctrl, float elapsedTime)
 		ctrl.getStateMachine().Stack("gamemenu");
 
 	//_character.move(speed * _dir.x * elapsedTime, speed * _dir.y * elapsedTime);
-	_hero.Update(ctrl, *_map, elapsedTime);
+	_hero.Update(ctrl, *this, elapsedTime);
 	ctrl.getView().setCenter(_hero.getPos());
 	//ctrl.getView().rotate(elapsedTime*45);
 
@@ -37,12 +37,10 @@ void LocalMap::Update(Controller& ctrl, float elapsedTime)
 
 
 
-void LocalMap::Render(sf::RenderWindow& window)
+void LocalMap::Render(Controller& ctrl)
 {
-	window.draw(_rect);
-	_map->Render(window);
-	_hero.Render(window);
-	//window.draw(_character);
+	_map->Render(ctrl);
+	_hero.Render(ctrl);
 }
 
 void LocalMap::init()

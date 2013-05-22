@@ -1,17 +1,16 @@
 #include "GameObject.h"
 #include "Controller.h"
-#include "Map.h"
+#include "LocalMap.h"
 #include "Control.h"
 
-GameObject::GameObject(Action* action, Graphics* graphics, Movement* movement) : 
-				_action(action), _graphics(graphics), _movement(movement)
+GameObject::GameObject(Graphics* graphics, Movement* movement) : 
+				 _graphics(graphics), _movement(movement)
 {
 
 }
 
 GameObject::~GameObject()
 {
-	delete _action;
 	delete _graphics;
 	delete _movement;
 }
@@ -21,31 +20,20 @@ void GameObject::handleEvents(const Control& controls)
 {
 	if (_movement)
 		_movement->handleEvents(controls);
-	if (_action)
-		_action->handleEvents(controls);
 }
 
-void GameObject::Update(Controller& ctrl, Map& map, float elapsedTime)
+void GameObject::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 {
-	if (_action)
-		_action->Update(ctrl, map, elapsedTime, _movement);
 	if (_movement)
-		_movement->Update(_graphics, elapsedTime);
+		_movement->Update(localmap, _graphics, elapsedTime);
 }
 
-void GameObject::Render(sf::RenderWindow& window)
+void GameObject::Render(Controller& ctrl)
 {
 	if (_graphics)
-		_graphics->Render(window);
+		_graphics->Render(ctrl.getWindow());
 }
 
-
-
-void GameObject::setAction(Action* new_action)
-{
-	delete _action;
-	_action = new_action;
-}
 void GameObject::setGraphics(Graphics* new_graphics)
 {
 	delete _graphics;

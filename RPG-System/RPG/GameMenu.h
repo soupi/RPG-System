@@ -12,7 +12,7 @@ public:
 	virtual State* Enter(StateParams* params = NULL) { return this; }
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
-	virtual void Render(sf::RenderWindow& window);
+	virtual void Render(Controller& ctrl);
 
 private:
 	sf::RectangleShape _rect;

@@ -33,7 +33,7 @@ void Controller::run()
 
 		_window.setView(_view);
 		_window.clear();
-		_stateMachine.Render(_window);
+		_stateMachine.Render(*this);
 		_window.display();
 
 		// fps

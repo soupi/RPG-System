@@ -32,9 +32,9 @@ public:
 			delete (*it).second;
 	}
 	// the render function renders the all states on the stack state
-	void Render(sf::RenderWindow& window) 
+	void Render(Controller& ctrl) 
 	{
-		_state_stack.top()->Render(window); 
+		_state_stack.top()->Render(ctrl); 
 	}
 
 	virtual bool handleEvents(const Control& controls) { return _state_stack.top()->handleEvents(controls); }

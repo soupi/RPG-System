@@ -12,7 +12,7 @@ public:
 	{
 	public:
 		virtual bool Update(Controller& ctrl, float elapsedTime) { return _state.Update(ctrl, elapsedTime); }
-		virtual void Render(sf::RenderWindow& window) { _state.Render(window); }
+		virtual void Render(Controller& ctrl) { _state.Render(ctrl); }
 		virtual State* Enter(StateParams* params = NULL) 
 		{ 
 			if (params) 
@@ -34,5 +34,5 @@ public:
 	}
 
 	virtual bool Update(Controller&, float elapsedTime) { return false; }
-	virtual void Render(sf::RenderWindow& window) { }
+	virtual void Render(Controller& ctrl) { }
 };

@@ -1,5 +1,6 @@
 #include "UserMovement.h"
 #include "Tile.h"
+#include "LocalMap.h"
 
 sf::Vector2f operator*(int scalar, sf::Vector2f vec)
 {
@@ -27,7 +28,7 @@ void UserMovement::handleEvents(const Control& controls)
 	else _run = false;
 }
 
-void UserMovement::Update(Graphics* _graphics, float elapsedTime)
+void UserMovement::Update(LocalMap& localmap, Graphics* _graphics, float elapsedTime)
 {
 	int scalar = SCRN_TILE_SIZE;
 	if (_run)
