@@ -24,6 +24,12 @@ public:
 
 	sf::Vector2f getPos() const { return _movement->getPos(); }
 
+	virtual void Interact(LocalMap& localmap, GameObject& obj) = 0;
+	// double dispatch
+	void InteractWith(LocalMap& localmap, GameObject& obj) { obj.Interact(localmap, *this); }
+	virtual void StepOn(LocalMap& localmap, GameObject& obj) = 0;
+	virtual bool canStepOn(GameObject& obj) = 0;
+
 private:
 	Graphics* _graphics;
 	Movement* _movement;
