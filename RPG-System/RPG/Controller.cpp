@@ -2,13 +2,11 @@
 #include "MainMenu.h"
 #include "GameMenu.h"
 #include "LocalMap.h"
+#include "ParamsCtrl.h"
 
 const int WINDOW_W = 960;
 const int WINDOW_H = 640;
 const unsigned FRAME_RATE = 60;
-
-// tile size is 48x48 -> 32*1.5
-
 
 Controller::Controller() {
 	initWindow();
@@ -102,5 +100,7 @@ void Controller::initStateMachine()
 	_stateMachine.Add("mainmenu", new MainMenu);
 	_stateMachine.Add("gamemenu", new GameMenu);
 	_stateMachine.Add("localmap", new LocalMap);
-	_stateMachine.Change("localmap");
+
+	ParamsCtrl* params = new ParamsCtrl(*this);
+	_stateMachine.Change("mainmenu", params);
 }

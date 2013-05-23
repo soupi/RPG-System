@@ -84,6 +84,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Hero.h" />
+    <ClInclude Include="HeroCharacter.h" />
     <ClInclude Include="ItemBank.h" />
     <ClInclude Include="LocalMap.h" />
     <ClInclude Include="LocalObject.h" />
@@ -93,6 +94,7 @@
     <ClInclude Include="Movement.h" />
     <ClInclude Include="NoGraphics.h" />
     <ClInclude Include="NoMovement.h" />
+    <ClInclude Include="ParamsCtrl.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateFactory.h" />
     <ClInclude Include="StateMachine.h" />
@@ -108,6 +110,7 @@
     <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="HeroCharacter.cpp" />
     <ClCompile Include="LocalMap.cpp" />
     <ClCompile Include="LocalObject.cpp" />
     <ClCompile Include="main.cpp" />

@@ -7,7 +7,7 @@
 class LocalObject : public GameObject
 {
 public:
-	LocalObject(Graphics* graphics = new NoGraphics, Movement* movement = new NoMovement, bool passable = true) : GameObject(graphics, movement) _passable(passable) {}
+	LocalObject(Graphics* graphics = new NoGraphics, Movement* movement = new NoMovement, bool passable = true) : GameObject(graphics, movement), _passable(passable) {}
 	
 	virtual void Interact(LocalMap& localmap, GameObject& obj);
 	// double dispatch

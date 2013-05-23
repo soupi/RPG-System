@@ -19,15 +19,18 @@ class Map
 public:
 	Map(string filename);
 	~Map();
-	//void Update(Hero& hero, float elapsedTime);
+	void handleEvents(const Control& controls);
 	void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 	void Render(Controller& ctrl);
+	void addGameObject(GameObject* obj, unsigned pos);
 
 private:
 	vector<Tile> _background;
 	vector<Tile> _foreground;
 	vector<list<GameObject*>> _game_objects;
 	vector<Tile> _top;
+
+	unsigned _width;
 
 	sf::Texture _tileset_back;
 	sf::Texture _tileset_fore;

@@ -14,7 +14,7 @@ bool GameMenu::handleEvents(const Control& controls)
 void GameMenu::Update(Controller& ctrl, float elapsedTime)
 {
 	if (_change_state)
-		ctrl.getStateMachine().Stack("localmap");
+		ctrl.getStateMachine().Pop();
 
 	_rect.setFillColor(sf::Color::Color(_color, 100, 100));
 }

@@ -2,6 +2,7 @@
 
 #include "StateMachine.h"
 #include "Control.h"
+#include "Hero.h"
 
 class Controller
 {
@@ -9,7 +10,7 @@ public:
 	Controller();
 
 	void run();
-	// get Hero
+	Hero& getHero() { return _hero; }
 	StateMachine& getStateMachine() { return _stateMachine; }
 	sf::RenderWindow& getWindow() { return _window; }
 	sf::View& getView() { return _view; }
@@ -21,7 +22,7 @@ private:
 	sf::Clock _clock;
 	StateMachine _stateMachine;
 
-	// Hero character
+	Hero _hero;
 	Control _controls;
 
 	void initWindow();

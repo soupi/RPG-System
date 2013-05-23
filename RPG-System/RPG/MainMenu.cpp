@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 #include "Controller.h"
+#include "ParamsCtrl.h"
 
 bool MainMenu::handleEvents(const Control& controls)
 {
@@ -15,7 +16,7 @@ bool MainMenu::handleEvents(const Control& controls)
 void MainMenu::Update(Controller& ctrl, float elapsedTime)
 {
 	if (_change_state)
-		ctrl.getStateMachine().Stack("localmap");
+		ctrl.getStateMachine().Change("localmap", new ParamsCtrl(ctrl));
 
 	_rect.setFillColor(sf::Color::Color(_color, 100, 100));
 }

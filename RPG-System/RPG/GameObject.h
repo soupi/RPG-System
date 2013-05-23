@@ -10,6 +10,10 @@
 class Controller;
 class LocalMap;
 
+
+const float speed = 250.f;
+
+
 class GameObject
 {
 public:
@@ -23,10 +27,10 @@ public:
 	void setMovement(Movement* new_Movement);
 
 	sf::Vector2f getPos() const { return _movement->getPos(); }
+	void setPos(sf::Vector2f pos) { if (_movement) _movement->setPos(pos); }
 
-	virtual void Interact(LocalMap& localmap, GameObject& obj) = 0;
 	// double dispatch
-	void InteractWith(LocalMap& localmap, GameObject& obj) { obj.Interact(localmap, *this); }
+	virtual void Interact(LocalMap& localmap, GameObject& obj) { obj.Interact(localmap, *this); }
 	virtual void StepOn(LocalMap& localmap, GameObject& obj) = 0;
 	virtual bool canStepOn(GameObject& obj) = 0;
 

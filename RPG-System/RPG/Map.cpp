@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Utility.h"
 #include "Controller.h"
+#include <exception>
 
 Map::Map(string filename)
 {
@@ -10,16 +11,20 @@ Map::Map(string filename)
 
 Map::~Map() { }
 
-/*void Map::Update(Hero& hero, float elapsedTime)
-{
-
-} */
 void Map::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 {
-	// draw game objects
+	// update game objects
 	for (vector<list<GameObject*>>::iterator tile = _game_objects.begin(); tile != _game_objects.end(); ++tile)
 		for (list<GameObject*>::iterator obj = tile->begin(); obj != tile->end(); ++obj)
 			(*obj)->Update(ctrl, localmap, elapsedTime);
+}
+
+void Map::handleEvents(const Control& controls)
+{
+	// game objects handle events
+	for (vector<list<GameObject*>>::iterator tile = _game_objects.begin(); tile != _game_objects.end(); ++tile)
+		for (list<GameObject*>::iterator obj = tile->begin(); obj != tile->end(); ++obj)
+			(*obj)->handleEvents(controls);
 }
 
 void Map::Render(Controller& ctrl)
@@ -61,6 +66,8 @@ void Map::loadMap(string& filename)
 		_background.push_back(Tile());
 		_foreground.push_back(Tile());
 		_top.push_back(Tile());
+		list<GameObject*> l;
+		_game_objects.push_back(l);
 	}
 
 	loadLayer(mapfile, _background, _tileset_back);
@@ -74,6 +81,8 @@ void Map::loadLayer(std::ifstream& mapfile, vector<Tile>& layer, sf::Texture& ti
 {
 	unsigned size_w, size_h;
 	mapfile >> size_w >> size_h;
+
+	_width = size_w;
 
 	mapfile.get();
 
@@ -97,3 +106,14 @@ void Map::loadLayer(std::ifstream& mapfile, vector<Tile>& layer, sf::Texture& ti
 	}
 }
 
+void Map::addGameObject(GameObject* obj, unsigned pos)
+{
+	if (pos > _game_objects.size())
+	{
+		std::exception e("bad location for obj on map");
+		throw(e);
+	}
+
+	obj->setPos(sf::Vector2f((pos%_width)*float(SCRN_TILE_SIZE), (pos/_width)*float(SCRN_TILE_SIZE)));
+	_game_objects[pos].push_back(obj);
+}
