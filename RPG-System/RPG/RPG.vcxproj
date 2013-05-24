@@ -77,14 +77,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="Dialog.h" />
+    <ClInclude Include="DialogBox.h" />
     <ClInclude Include="EmptyState.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GiveItem.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="HeroCharacter.h" />
+    <ClInclude Include="IFScript.h" />
     <ClInclude Include="ItemBank.h" />
     <ClInclude Include="LocalMap.h" />
     <ClInclude Include="LocalObject.h" />
@@ -95,6 +99,8 @@
     <ClInclude Include="NoGraphics.h" />
     <ClInclude Include="NoMovement.h" />
     <ClInclude Include="ParamsCtrl.h" />
+    <ClInclude Include="Script.h" />
+    <ClInclude Include="Scripts.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateFactory.h" />
     <ClInclude Include="StateMachine.h" />
@@ -107,6 +113,8 @@
   <ItemGroup>
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Dialog.cpp" />
+    <ClCompile Include="DialogBox.cpp" />
     <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Graphics.cpp" />

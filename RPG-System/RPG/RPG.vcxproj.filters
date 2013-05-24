@@ -34,6 +34,12 @@
     <Filter Include="Source Files\GameObject">
       <UniqueIdentifier>{03c54e60-3fa9-45eb-8711-16296b006b2e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Scripts">
+      <UniqueIdentifier>{d03335e3-0c58-4123-8eb8-9c9415410d8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scripts">
+      <UniqueIdentifier>{770ee44c-e83c-438d-b025-169b365c76c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h">
@@ -117,6 +123,24 @@
     <ClInclude Include="ParamsCtrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Dialog.h">
+      <Filter>Header Files\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>Header Files\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts.h">
+      <Filter>Header Files\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="IFScript.h">
+      <Filter>Header Files\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="GiveItem.h">
+      <Filter>Header Files\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogBox.h">
+      <Filter>Header Files\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -160,6 +184,12 @@
     </ClCompile>
     <ClCompile Include="HeroCharacter.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog.cpp">
+      <Filter>Source Files\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogBox.cpp">
+      <Filter>Source Files\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
