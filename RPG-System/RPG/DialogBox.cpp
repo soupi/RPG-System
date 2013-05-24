@@ -1,13 +1,18 @@
 #include "DialogBox.h"
 #include <iostream>
+#include "Utility.h"
 
-DialogBox::DialogBox(const string& str) : _stream(str) 
+
+
+DialogBox::DialogBox(const string& str) : _stream(str), _clock(0.f)
 {
-	_rect.setFillColor(sf::Color::Color(0,160,200,100));
+	_rect.setFillColor(sf::Color::Color(0,160,200,200));
 	_rect.setOutlineColor(sf::Color::White);
 	_rect.setOutlineThickness(2.f);
 
-
+	LoadFont(_font, "resources/consola.ttf");
+	_text.setFont(_font);
+	_text.setCharacterSize(20);
 
 	newLine();
 }
@@ -16,12 +21,13 @@ bool DialogBox::newLine()
 {
 	_line.clear();
 	_str.clear();
-	if (_stream.end)
-		return false;
 	string temp;
-
+	if (_stream.eof())
+		return false;
 	getline(_stream, temp);
 	_line << temp;
+
+	return true;
 }
 
 void DialogBox::Update(Controller& ctrl, float elapsedTime)
@@ -30,15 +36,16 @@ void DialogBox::Update(Controller& ctrl, float elapsedTime)
 	sf::Vector2f size = ctrl.getView().getSize();
 
 	_rect.setSize(sf::Vector2f(size.x/2.f, size.y/4.f));
-	_rect.setPosition(center.x - (_rect.getSize().x/2.f) , center.y + (_rect.getSize().y/2.f));
+	_rect.setPosition(center.x - (_rect.getSize().x/1.5f) , center.y + (_rect.getSize().y/2.f));
+	_text.setPosition(_rect.getPosition() + sf::Vector2f(20.f, 20.f));
 
 	_clock += elapsedTime;
-	if (_clock < 1.f/SPEED || _line.end)
+	if (_clock < 1.f/SPEED || _line.eof())
 		return;
 
 	_clock = 0.f;
-	_str += _line.get();
 	_text.setString(_str);
+	_str += _line.get();
 }
 
 void DialogBox::Render(sf::RenderWindow& window)
