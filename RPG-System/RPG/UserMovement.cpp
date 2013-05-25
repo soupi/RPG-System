@@ -23,7 +23,7 @@ void UserMovement::handleEvents(const Control& controls)
 	else _direction.y = 0;
 
 	// toggle run mode
-	if (controls.isPressed(SECONDARY))
+	if (controls.isPressed(B))
 		_run = true;
 	else _run = false;
 }

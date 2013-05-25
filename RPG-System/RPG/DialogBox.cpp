@@ -17,6 +17,13 @@ DialogBox::DialogBox(const string& str) : _stream(str), _clock(0.f)
 	newLine();
 }
 
+void DialogBox::setString(const string& str)
+{
+	_line = stringstream();
+	_str.clear();
+	_stream = stringstream(str);
+}
+
 bool DialogBox::newLine()
 {
 	_line.clear();
@@ -25,7 +32,7 @@ bool DialogBox::newLine()
 	if (_stream.eof())
 		return false;
 	getline(_stream, temp);
-	_line << temp;
+	_line = stringstream(temp);
 
 	return true;
 }
@@ -42,10 +49,11 @@ void DialogBox::Update(Controller& ctrl, float elapsedTime)
 	_clock += elapsedTime;
 	if (_clock < 1.f/SPEED || _line.eof())
 		return;
-
 	_clock = 0.f;
 	_text.setString(_str);
 	_str += _line.get();
+	if ((_str.length()-(_str.length() / 39)) % 39 == 0)
+		_str += '\n';
 }
 
 void DialogBox::Render(sf::RenderWindow& window)

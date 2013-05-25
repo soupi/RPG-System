@@ -11,6 +11,8 @@ public:
 	virtual bool Update(Controller&, float elapsedTime) = 0;
 	virtual void Render(Controller& ctrl) = 0;
 	virtual void Exit() = 0;
-private:
+	bool Continue() const { return _continue; }
+
+protected:
 	bool _continue;
 };

@@ -9,7 +9,7 @@ using std::string;
 class Dialog : public Script 
 {
 public:
-	Dialog(string& str);
+	Dialog(const string& str);
 	virtual void Enter(Hero& hero);
 	virtual bool handleEvents(const Control& controls);
 	virtual bool Update(Controller&, float elapsedTime);
@@ -18,6 +18,8 @@ public:
 
 private:
 	DialogBox _dialogbox;
+	string _str;
+	float _clock;
 };
 
 

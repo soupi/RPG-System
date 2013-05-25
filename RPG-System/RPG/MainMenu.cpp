@@ -9,10 +9,10 @@ bool MainMenu::handleEvents(const Control& controls)
 		_change_state.set();
 			
 	else if (controls.isPressed(MOUSE_SECONDARY))
-	{
 		_color += 79 % 255;	
-		_dbox.newLine();
-	}
+
+	if (!_dialog.handleEvents(controls))
+			_change_state.set();
 
 	return false;
 }
@@ -21,7 +21,7 @@ void MainMenu::Update(Controller& ctrl, float elapsedTime)
 	if (_change_state)
 		ctrl.getStateMachine().Change("localmap", new ParamsCtrl(ctrl));
 
-	_dbox.Update(ctrl, elapsedTime);
+	_dialog.Update(ctrl, elapsedTime);
 
 	_rect.setFillColor(sf::Color::Color(_color, 100, 100));
 }
@@ -29,7 +29,7 @@ void MainMenu::Update(Controller& ctrl, float elapsedTime)
 void MainMenu::Render(Controller& ctrl)
 {
 	ctrl.getWindow().draw(_rect);
-	_dbox.Render(ctrl.getWindow());
+	_dialog.Render(ctrl);
 }
 
 void MainMenu::init()

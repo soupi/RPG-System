@@ -64,9 +64,13 @@ bool Controller::handleEvents(sf::Event& event)
 		controls[DOWN] = true;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-		controls[PRIMARY] = true;
+		controls[A] = true;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
-		controls[SECONDARY] = true;
+		controls[B] = true;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		controls[C] = true;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		controls[D] = true;
 
 	_controls.setControls(controls);
 
