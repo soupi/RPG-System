@@ -10,6 +10,7 @@
 class Controller;
 class LocalMap;
 
+using std::shared_ptr;
 
 const float speed = 250.f;
 
@@ -27,7 +28,7 @@ public:
 	void setMovement(Movement* new_Movement);
 
 	sf::Vector2f getPos() const { return _movement->getPos(); }
-	void setPos(sf::Vector2f pos) { if (_movement) _movement->setPos(pos); }
+	void setPos(sf::Vector2f pos) { _movement->setPos(pos); }
 
 	// double dispatch
 	virtual void Interact(LocalMap& localmap, GameObject& obj) { obj.Interact(localmap, *this); }
@@ -35,6 +36,6 @@ public:
 	virtual bool canStepOn(GameObject& obj) = 0;
 
 private:
-	Graphics* _graphics;
-	Movement* _movement;
+	shared_ptr<Graphics> _graphics;
+	shared_ptr<Movement> _movement;
 };

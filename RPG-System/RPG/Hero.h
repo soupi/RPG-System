@@ -4,15 +4,18 @@
 #include "Stats.h"
 #include "HeroCharacter.h"
 
+using std::shared_ptr;
+
 class Hero 
 {
 public:
-	HeroCharacter* getHeroForMap() { return &_hero; }
+	Hero() : _hero( new HeroCharacter) { }
+	shared_ptr<HeroCharacter>& getHeroForMap() { return _hero; }
 
 
 
 private:
-	HeroCharacter _hero;
+	shared_ptr<HeroCharacter> _hero;
 	unsigned _exp;
 	unsigned _level;
 	unsigned _coins;

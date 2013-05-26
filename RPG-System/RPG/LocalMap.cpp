@@ -4,10 +4,9 @@
 #include "UserMovement.h"
 #include "Utility.h"
 
-LocalMap::LocalMap() 
+LocalMap::LocalMap()
 {
 }
-
 
 bool LocalMap::handleEvents(const Control& controls)
 {
@@ -31,7 +30,7 @@ void LocalMap::Render(Controller& ctrl)
 
 void LocalMap::init(StateParams* params)
 {
-	_map = new Map("map.mp");
+	_map = shared_ptr<Map>(new Map("map.mp"));
 
-	_map->addGameObject(params->getCtrl().getHero().getHeroForMap(), 1);
+	_map->addGameObject(shared_ptr<GameObject>(params->getCtrl().getHero().getHeroForMap()), 1);
 }

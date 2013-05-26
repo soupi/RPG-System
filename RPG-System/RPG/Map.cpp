@@ -14,16 +14,16 @@ Map::~Map() { }
 void Map::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 {
 	// update game objects
-	for (vector<list<GameObject*>>::iterator tile = _game_objects.begin(); tile != _game_objects.end(); ++tile)
-		for (list<GameObject*>::iterator obj = tile->begin(); obj != tile->end(); ++obj)
+	for (vector<list<shared_ptr<GameObject>>>::iterator tile = _game_objects.begin(); tile != _game_objects.end(); ++tile)
+		for (list<shared_ptr<GameObject>>::iterator obj = tile->begin(); obj != tile->end(); ++obj)
 			(*obj)->Update(ctrl, localmap, elapsedTime);
 }
 
 void Map::handleEvents(const Control& controls)
 {
 	// game objects handle events
-	for (vector<list<GameObject*>>::iterator tile = _game_objects.begin(); tile != _game_objects.end(); ++tile)
-		for (list<GameObject*>::iterator obj = tile->begin(); obj != tile->end(); ++obj)
+	for (vector<list<shared_ptr<GameObject>>>::iterator tile = _game_objects.begin(); tile != _game_objects.end(); ++tile)
+		for (list<shared_ptr<GameObject>>::iterator obj = tile->begin(); obj != tile->end(); ++obj)
 			(*obj)->handleEvents(controls);
 }
 
@@ -36,8 +36,8 @@ void Map::Render(Controller& ctrl)
 	for (vector<Tile>::iterator tile = _foreground.begin(); tile != _foreground.end(); ++tile)
 		tile->draw(ctrl.getWindow());
 	// draw game objects
-	for (vector<list<GameObject*>>::iterator tile = _game_objects.begin(); tile != _game_objects.end(); ++tile)
-		for (list<GameObject*>::iterator obj = tile->begin(); obj != tile->end(); ++obj)
+	for (vector<list<shared_ptr<GameObject>>>::iterator tile = _game_objects.begin(); tile != _game_objects.end(); ++tile)
+		for (list<shared_ptr<GameObject>>::iterator obj = tile->begin(); obj != tile->end(); ++obj)
 			(*obj)->Render(ctrl);
 	// draw top
 	for (vector<Tile>::iterator tile = _top.begin(); tile != _top.end(); ++tile)
@@ -66,7 +66,7 @@ void Map::loadMap(string& filename)
 		_background.push_back(Tile());
 		_foreground.push_back(Tile());
 		_top.push_back(Tile());
-		list<GameObject*> l;
+		list<shared_ptr<GameObject>> l;
 		_game_objects.push_back(l);
 	}
 
@@ -106,7 +106,7 @@ void Map::loadLayer(std::ifstream& mapfile, vector<Tile>& layer, sf::Texture& ti
 	}
 }
 
-void Map::addGameObject(GameObject* obj, unsigned pos)
+void Map::addGameObject(shared_ptr<GameObject>& obj, unsigned pos)
 {
 	if (pos > _game_objects.size())
 	{

@@ -8,6 +8,8 @@
 #include "GameObject.h"
 #include "LocalObject.h"
 
+using std::shared_ptr;
+
 class LocalMap : public State
 {
 public:
@@ -21,6 +23,5 @@ private:
 	Flag _change_state;
 
 	void init(StateParams* params);
-
-	Map* _map;
+	shared_ptr<Map> _map;
 };

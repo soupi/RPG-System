@@ -11,7 +11,7 @@
 using std::list;
 using std::vector;
 using std::string;
-
+using std::shared_ptr;
 class Controller;
 
 class Map
@@ -22,12 +22,12 @@ public:
 	void handleEvents(const Control& controls);
 	void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 	void Render(Controller& ctrl);
-	void addGameObject(GameObject* obj, unsigned pos);
+	void addGameObject(shared_ptr<GameObject>& obj, unsigned pos);
 
 private:
 	vector<Tile> _background;
 	vector<Tile> _foreground;
-	vector<list<GameObject*>> _game_objects;
+	vector<list<shared_ptr<GameObject>>> _game_objects;
 	vector<Tile> _top;
 
 	unsigned _width;
