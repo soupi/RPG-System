@@ -8,7 +8,7 @@ class HeroCharacter : public GameObject
 public:
 	HeroCharacter();
 	virtual void handleEvents(const Control& controls);
-	virtual void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
+	virtual sf::Vector2f Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 	virtual void StepOn(LocalMap& localmap, GameObject& obj);
 	virtual bool canStepOn(GameObject& obj);
 private:

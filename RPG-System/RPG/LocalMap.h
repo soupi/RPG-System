@@ -18,6 +18,7 @@ public:
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(Controller& ctrl);
+	shared_ptr<Map> map() const { return _map; }
 
 private:
 	Flag _change_state;

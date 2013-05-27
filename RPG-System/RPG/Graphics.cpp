@@ -29,10 +29,14 @@ void Graphics::move(const sf::Vector2f& direction)
 
 void Graphics::setPos(const sf::Vector2f& pos)
 {
-	_sprite.setPosition(pos.x, pos.y);
+//	_sprite.setPosition(pos.x, pos.y);
 	// middle point on the bottom of the sprite will be the source of the circle
-	_shadow.setPosition(_sprite.getPosition().x+_sprite.getGlobalBounds().width/2, 
-		_sprite.getPosition().y + _sprite.getGlobalBounds().height);
+//	_shadow.setPosition(_sprite.getPosition().x+_sprite.getGlobalBounds().width/2, 
+//		_sprite.getPosition().y + _sprite.getGlobalBounds().height);
+
+	_shadow.setPosition(pos.x,pos.y);
+	_sprite.setPosition(_shadow.getPosition().x - _sprite.getGlobalBounds().width/2,
+		_shadow.getPosition().y - _sprite.getGlobalBounds().height);
 }
 
 void Graphics::Update()

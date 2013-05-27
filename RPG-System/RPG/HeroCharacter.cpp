@@ -16,12 +16,13 @@ void HeroCharacter::handleEvents(const Control& controls)
 {
 	GameObject::handleEvents(controls);
 }
-void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
+sf::Vector2f HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 {
 
 	GameObject::Update(ctrl, localmap, elapsedTime);
 	// draw Lives and HP
 	ctrl.getView().setCenter(getPos());
+	return getPos();
 }
 void HeroCharacter::StepOn(LocalMap& localmap, GameObject& obj)
 {

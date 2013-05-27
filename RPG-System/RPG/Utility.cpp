@@ -21,3 +21,32 @@ void loadTexture(sf::Texture& texture, const std::string& filename)
 	}
 	texture.setRepeated(true);
 }
+
+// ----- min/max functions ------------
+float max(float a, float b)
+{
+        if (a > b)
+                return a;
+        return b;
+}
+unsigned max(unsigned a, unsigned b)
+{
+        if (a > b)
+                return a;
+        return b;
+}
+unsigned min(unsigned a, unsigned b)
+{
+        if (max(a,b) == a)
+                return b;
+        return a;
+}
+// ---------------------------------
+// round a up or don't (whichever is closeset)
+unsigned round(float a)
+{
+        if (a-unsigned(a) > 0.5)
+                return unsigned(a) +1;
+
+        return unsigned(a);
+}

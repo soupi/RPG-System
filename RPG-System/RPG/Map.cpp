@@ -117,3 +117,15 @@ void Map::addGameObject(shared_ptr<GameObject>& obj, unsigned pos)
 	obj->setPos(sf::Vector2f((pos%_width)*float(SCRN_TILE_SIZE), (pos/_width)*float(SCRN_TILE_SIZE)));
 	_game_objects[pos].push_back(obj);
 }
+
+bool Map::canStepOnFG(sf::Vector2f pos) const
+{
+	sf::Vector2u my_pos(unsigned(pos.x)/SCRN_TILE_SIZE, unsigned(pos.y)/SCRN_TILE_SIZE);
+	if (my_pos.x >= _width || my_pos.y >=  (_foreground.size() / _width)) // out of border
+		return false;
+
+	if (_foreground[my_pos.x + my_pos.y*_width].getNum())
+		return false;
+
+	return true;
+}

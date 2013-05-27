@@ -28,13 +28,19 @@ void UserMovement::handleEvents(const Control& controls)
 	else _run = false;
 }
 
-void UserMovement::Update(LocalMap& localmap, Graphics* _graphics, float elapsedTime)
+sf::Vector2f UserMovement::Update(LocalMap& localmap, Graphics* _graphics, float elapsedTime)
 {
 	int scalar = SCRN_TILE_SIZE;
 	if (_run)
 		scalar = 2*SCRN_TILE_SIZE;
 
+	_lastpos = _pos;
 	_pos += scalar * _speed * _direction  * elapsedTime;
+	if (!localmap.map()->canStepOnFG(_pos))
+	{
+		_pos = _lastpos;
+		return _pos;
+	}
 
 	if (_newpos)
 	{
@@ -45,4 +51,6 @@ void UserMovement::Update(LocalMap& localmap, Graphics* _graphics, float elapsed
 	}
 	else if (_graphics)
 		_graphics->move(scalar * _speed * _direction * elapsedTime);
+
+	return getPos();
 }

@@ -23,6 +23,7 @@ public:
 	void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 	void Render(Controller& ctrl);
 	void addGameObject(shared_ptr<GameObject>& obj, unsigned pos);
+	bool canStepOnFG(sf::Vector2f pos) const;
 
 private:
 	vector<Tile> _background;
