@@ -36,7 +36,7 @@ sf::Vector2f UserMovement::Update(LocalMap& localmap, Graphics* _graphics, float
 
 	_lastpos = _pos;
 	_pos += scalar * _speed * _direction  * elapsedTime;
-	if (!localmap.map()->canStepOnFG(_pos))
+	if (!localmap.map()->canStepOnFG(_pos, _graphics->getRadius()))
 	{
 		_pos = _lastpos;
 		return _pos;

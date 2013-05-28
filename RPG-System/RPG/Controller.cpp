@@ -94,7 +94,7 @@ void Controller::initWindow()
 	// create view
 	_view.setCenter(WINDOW_W/2.f, WINDOW_H/2.f);
 	_view.setSize(float(WINDOW_W), float(WINDOW_H));
-	//_view.zoom(1.5f);
+	_view.zoom(1.25f);
 
 	_window.setView(_view);
 }

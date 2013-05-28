@@ -12,6 +12,7 @@ public:
 	virtual void Render(sf::RenderWindow& window);
 	void move(const sf::Vector2f& direction);
 	void setPos(const sf::Vector2f& pos);
+	float getRadius() const { return _shadow.getRadius(); }
 	void setDisplay(bool dis);
 protected:
 	Graphics() { }

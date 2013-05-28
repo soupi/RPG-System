@@ -8,6 +8,7 @@ Graphics::Graphics(sf::Texture* texture, sf::Vector2i loc_on_texture, const sf::
 	_sprite.setTextureRect(sf::IntRect(loc_on_texture.x, loc_on_texture.y, size.x, size.y));
 
 	_shadow.setRadius(size.x/2.5f);
+	_shadow.setPosition(1 + _shadow.getRadius(), 1 + _shadow.getRadius());
 	_shadow.setFillColor(sf::Color::Color(0,0,0,100));
 	_shadow.setOrigin(_shadow.getRadius(), _shadow.getRadius());
 }
@@ -29,14 +30,9 @@ void Graphics::move(const sf::Vector2f& direction)
 
 void Graphics::setPos(const sf::Vector2f& pos)
 {
-//	_sprite.setPosition(pos.x, pos.y);
-	// middle point on the bottom of the sprite will be the source of the circle
-//	_shadow.setPosition(_sprite.getPosition().x+_sprite.getGlobalBounds().width/2, 
-//		_sprite.getPosition().y + _sprite.getGlobalBounds().height);
-
 	_shadow.setPosition(pos.x,pos.y);
 	_sprite.setPosition(_shadow.getPosition().x - _sprite.getGlobalBounds().width/2,
-		_shadow.getPosition().y - _sprite.getGlobalBounds().height);
+		_shadow.getPosition().y - _sprite.getGlobalBounds().height + _shadow.getRadius()/2.f);
 }
 
 void Graphics::Update()

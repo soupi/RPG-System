@@ -32,5 +32,5 @@ void LocalMap::init(StateParams* params)
 {
 	_map = shared_ptr<Map>(new Map("map.mp"));
 
-	_map->addGameObject(shared_ptr<GameObject>(params->getCtrl().getHero().getHeroForMap()), 1);
+	_map->addGameObject(shared_ptr<GameObject>(params->getCtrl().getHero().getHeroForMap()), 21);
 }

@@ -23,12 +23,14 @@ public:
 	void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 	void Render(Controller& ctrl);
 	void addGameObject(shared_ptr<GameObject>& obj, unsigned pos);
-	bool canStepOnFG(sf::Vector2f pos) const;
+	bool canStepOnFG(sf::Vector2f& pos) const;
+	bool canStepOnFG(sf::Vector2f& pos, float radius) const;
 
 private:
 	vector<Tile> _background;
 	vector<Tile> _foreground;
-	vector<list<shared_ptr<GameObject>>> _game_objects;
+	//vector<list<shared_ptr<GameObject>>> _game_objects;
+	vector<shared_ptr<GameObject>> _game_objects;
 	vector<Tile> _top;
 
 	unsigned _width;

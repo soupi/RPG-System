@@ -14,17 +14,17 @@ Map::~Map() { }
 void Map::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 {
 	// update game objects
-	for (vector<list<shared_ptr<GameObject>>>::iterator tile = _game_objects.begin(); tile != _game_objects.end(); ++tile)
-		for (list<shared_ptr<GameObject>>::iterator obj = tile->begin(); obj != tile->end(); ++obj)
+ 
+	for (vector<shared_ptr<GameObject>>::iterator obj = _game_objects.begin(); obj != _game_objects.end(); ++obj)
 			(*obj)->Update(ctrl, localmap, elapsedTime);
 }
 
 void Map::handleEvents(const Control& controls)
 {
 	// game objects handle events
-	for (vector<list<shared_ptr<GameObject>>>::iterator tile = _game_objects.begin(); tile != _game_objects.end(); ++tile)
-		for (list<shared_ptr<GameObject>>::iterator obj = tile->begin(); obj != tile->end(); ++obj)
-			(*obj)->handleEvents(controls);
+
+	for (vector<shared_ptr<GameObject>>::iterator obj = _game_objects.begin(); obj != _game_objects.end(); ++obj)
+		(*obj)->handleEvents(controls);
 }
 
 void Map::Render(Controller& ctrl)
@@ -36,9 +36,10 @@ void Map::Render(Controller& ctrl)
 	for (vector<Tile>::iterator tile = _foreground.begin(); tile != _foreground.end(); ++tile)
 		tile->draw(ctrl.getWindow());
 	// draw game objects
-	for (vector<list<shared_ptr<GameObject>>>::iterator tile = _game_objects.begin(); tile != _game_objects.end(); ++tile)
-		for (list<shared_ptr<GameObject>>::iterator obj = tile->begin(); obj != tile->end(); ++obj)
-			(*obj)->Render(ctrl);
+	for (vector<shared_ptr<GameObject>>::iterator obj = _game_objects.begin(); obj != _game_objects.end(); ++obj)
+		(*obj)->Render(ctrl);
+
+
 	// draw top
 	for (vector<Tile>::iterator tile = _top.begin(); tile != _top.end(); ++tile)
 		tile->draw(ctrl.getWindow());
@@ -66,13 +67,11 @@ void Map::loadMap(string& filename)
 		_background.push_back(Tile());
 		_foreground.push_back(Tile());
 		_top.push_back(Tile());
-		list<shared_ptr<GameObject>> l;
-		_game_objects.push_back(l);
 	}
 
 	loadLayer(mapfile, _background, _tileset_back);
 	loadLayer(mapfile, _foreground, _tileset_fore);
-	//loadLayer(mapfile, _top);
+	loadLayer(mapfile, _top, _tileset_top);
 
 	mapfile.close();
 }
@@ -108,17 +107,17 @@ void Map::loadLayer(std::ifstream& mapfile, vector<Tile>& layer, sf::Texture& ti
 
 void Map::addGameObject(shared_ptr<GameObject>& obj, unsigned pos)
 {
-	if (pos > _game_objects.size())
+	if (pos > _background.size())
 	{
 		std::exception e("bad location for obj on map");
 		throw(e);
 	}
 
 	obj->setPos(sf::Vector2f((pos%_width)*float(SCRN_TILE_SIZE), (pos/_width)*float(SCRN_TILE_SIZE)));
-	_game_objects[pos].push_back(obj);
+	_game_objects.push_back(obj);
 }
 
-bool Map::canStepOnFG(sf::Vector2f pos) const
+bool Map::canStepOnFG(sf::Vector2f& pos) const
 {
 	sf::Vector2u my_pos(unsigned(pos.x)/SCRN_TILE_SIZE, unsigned(pos.y)/SCRN_TILE_SIZE);
 	if (my_pos.x >= _width || my_pos.y >=  (_foreground.size() / _width)) // out of border
@@ -128,4 +127,12 @@ bool Map::canStepOnFG(sf::Vector2f pos) const
 		return false;
 
 	return true;
+}
+
+bool Map::canStepOnFG(sf::Vector2f& pos, float radius) const
+{
+	if (canStepOnFG(sf::Vector2f(pos.x - radius, pos.y - radius)) && canStepOnFG(sf::Vector2f(pos.x - radius, pos.y +radius)) &&
+		canStepOnFG(sf::Vector2f(pos.x + radius, pos.y - radius)) && canStepOnFG(sf::Vector2f(pos.x + radius, pos.y +radius)))
+		return true;
+	return false;
 }
