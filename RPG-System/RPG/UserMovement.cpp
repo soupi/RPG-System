@@ -35,12 +35,23 @@ sf::Vector2f UserMovement::Update(LocalMap& localmap, Graphics* _graphics, float
 		scalar = 2*SCRN_TILE_SIZE;
 
 	_lastpos = _pos;
-	_pos += scalar * _speed * _direction  * elapsedTime;
-	if (!localmap.map()->canStepOnFG(_pos, _graphics->getRadius()))
-	{
-		_pos = _lastpos;
+
+	sf::Vector2f temp_pos = _pos;
+	temp_pos.x += scalar * _speed * _direction.x  * elapsedTime;
+	if (!localmap.map()->canStepOnFG(temp_pos, _graphics->getRadius()))
+		temp_pos.x = _pos.x;
+
+	temp_pos.y += scalar * _speed * _direction.y  * elapsedTime;
+	if (!localmap.map()->canStepOnFG(temp_pos, _graphics->getRadius()))
+		temp_pos.y = _pos.y;
+
+	if (_pos == temp_pos)
 		return _pos;
-	}
+
+
+	_direction.x = (temp_pos.x - _pos.x) ? _direction.x : 0;
+	_direction.y = (temp_pos.y - _pos.y) ? _direction.y : 0;
+	_pos = temp_pos;
 
 	if (_newpos)
 	{
