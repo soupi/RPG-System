@@ -6,9 +6,12 @@
 #include "NoMovement.h"
 #include "Graphics.h"
 #include "NoGraphics.h"
+#include <memory>
 
 class Controller;
 class LocalMap;
+class HeroCharacter;
+class LocalObject;
 
 using std::shared_ptr;
 
@@ -29,11 +32,25 @@ public:
 
 	sf::Vector2f getPos() const { return _movement->getPos(); }
 	void setPos(sf::Vector2f pos) { _movement->setPos(pos); }
+	
 
-	// double dispatch
-	virtual void Interact(LocalMap& localmap, GameObject& obj) { obj.Interact(localmap, *this); }
-	virtual void StepOn(LocalMap& localmap, GameObject& obj) = 0;
-	virtual bool canStepOn(GameObject& obj) = 0;
+	// interaction using double dispatch
+	void act(LocalMap& localmap, GameObject& obj) { obj.act(localmap, *this); }
+	void StepOn(LocalMap& localmap, GameObject& obj) { obj.StepOn(localmap, *this); }
+	bool canStepOn(GameObject& obj) { obj.canStepOn(*this); }
+
+	// default for heroCharacter
+	virtual void act(LocalMap& localmap, HeroCharacter&) { }
+	virtual void StepOn(LocalMap& localmap, HeroCharacter&) {}
+	virtual bool canStepOn(HeroCharacter&) { return true; } 
+	// default for LocalObject
+	virtual void act(LocalMap& localmap, LocalObject&) { }
+	virtual void StepOn(LocalMap& localmap, LocalObject&) {}
+	virtual bool canStepOn(LocalObject&) { return true; } 
+	// default for Monster
+//	virtual void act(LocalMap& localmap, Monster&) { }
+//	virtual void StepOn(LocalMap& localmap, Monster&) {}
+//	virtual bool canStepOn(Monster&) { return true; } 
 
 private:
 	shared_ptr<Graphics> _graphics;

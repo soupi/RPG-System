@@ -98,6 +98,7 @@
     <ClInclude Include="Movement.h" />
     <ClInclude Include="NoGraphics.h" />
     <ClInclude Include="NoMovement.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="ParamsCtrl.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="Scripts.h" />
@@ -120,10 +121,10 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="HeroCharacter.cpp" />
     <ClCompile Include="LocalMap.cpp" />
-    <ClCompile Include="LocalObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="UserMovement.cpp" />
     <ClCompile Include="Utility.cpp" />

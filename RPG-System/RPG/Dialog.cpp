@@ -6,7 +6,7 @@ Dialog::Dialog(const string& str) : _dialogbox(str), _str(str), _clock(0.f)
 {
 	_continue = true;
 }
-void Dialog::Enter(Hero& hero)
+void Dialog::enter(Hero& hero)
 {
 	_dialogbox.setString(_str);
 	_continue = true;

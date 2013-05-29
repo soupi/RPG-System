@@ -30,6 +30,14 @@ void UserMovement::handleEvents(const Control& controls)
 
 sf::Vector2f UserMovement::Update(LocalMap& localmap, Graphics* _graphics, float elapsedTime)
 {
+	if (_newpos)
+	{
+		if (_graphics)
+			_graphics->setPos(_pos);
+
+		_newpos = false; 
+	}
+
 	int scalar = SCRN_TILE_SIZE;
 	if (_run)
 		scalar = 2*SCRN_TILE_SIZE;
