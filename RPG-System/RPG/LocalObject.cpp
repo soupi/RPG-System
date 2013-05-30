@@ -1,16 +1,7 @@
 #include "LocalObject.h"
+#include "LocalMap.h"
 
-void LocalObject::Interact(LocalMap& localmap, GameObject& obj)
+void LocalObject::act(LocalMap& localmap, HeroCharacter&)
 {
-
-}
-
-void LocalObject::StepOn(LocalMap& localmap, GameObject& obj)
-{
-
-}
-
-bool LocalObject::canStepOn(GameObject& obj)
-{
-	return _passable;
+	localmap.addScript(_script);
 }

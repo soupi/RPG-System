@@ -156,8 +156,23 @@ bool Map::canStepOn(GameObject& obj)
 		return false;
 
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
-		if(it->get()->getGraphics()->checkCollision(box) && !obj.canStepOn(*(it->get())))
+		if((it->get()) != &obj && it->get()->getGraphics()->checkCollision(box) && !obj.canStepOn(*(it->get())))
 			return false;
 	
 	return true;
+}
+
+void Map::Step(LocalMap& localmap, GameObject& obj)
+{
+	sf::FloatRect box = obj.getGraphics()->getCollisionBox();
+	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+		if((it->get()) != &obj && it->get()->getGraphics()->checkCollision(box))
+			obj.StepOn(localmap, *(it->get()));
+}
+
+void Map::Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box)
+{
+	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+		if((it->get()) != &obj && it->get()->getGraphics()->checkCollision(box))
+			obj.act(localmap, *(it->get()));
 }

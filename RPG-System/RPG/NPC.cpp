@@ -3,11 +3,7 @@
 #include "LocalMap.h"
 #include "HeroCharacter.h"
 
-void NPC::act(LocalMap& localmap, HeroCharacter&)
+void NPC::StepOn(LocalMap& localmap, HeroCharacter&)
 {
-	localmap.addScript(_script);
-}
-bool NPC::canStepOn(LocalMap& localmap, HeroCharacter&)
-{
-	return false;
+	
 }

@@ -22,14 +22,16 @@ void Graphics::Render(sf::RenderWindow& window)
 
 void Graphics::move(const sf::Vector2f& direction)
 {
+	_last_pos = _shadow.getPosition();
 	//  change animation according to direction
 	_sprite.move(direction);
 	_shadow.move(direction);
 }
 
 
-void Graphics::setPos(const sf::Vector2f& pos)
+void Graphics::setPos(const sf::Vector2f pos)
 {
+	_last_pos = _shadow.getPosition();
 	_shadow.setPosition(pos.x,pos.y);
 	_sprite.setPosition(_shadow.getPosition().x - _sprite.getGlobalBounds().width/2,
 		_shadow.getPosition().y - _sprite.getGlobalBounds().height + _shadow.getRadius()/2.f);
@@ -50,10 +52,29 @@ sf::FloatRect Graphics::getCollisionBox() const
 {
 	sf::Vector2f pos = _shadow.getPosition();
 	float radius = _shadow.getRadius();
-	return sf::FloatRect(sf::Vector2f(pos.x - radius, pos.y - radius), sf::Vector2f(radius, radius));
+	return _shadow.getGlobalBounds();
 }
 
 sf::Vector2f Graphics::getPos() const
 {
 	return _shadow.getPosition();
+}
+
+void Graphics::undo_move()
+{
+	setPos(_last_pos);
+}
+
+sf::Vector2f Graphics::getFacingDirection() const
+{
+//	sf::Vector2f dir = _shadow.getPosition() - _last_pos;
+//	dir.x = (dir.x != 0) ? abs(dir.x)/dir.x : 0;
+//	dir.y = (dir.y != 0) ? abs(dir.y)/dir.y : 0;
+
+	return _dir;
+}
+
+sf::Vector2f Graphics::getSize() const
+{
+	return sf::Vector2f(_shadow.getGlobalBounds().width, _shadow.getGlobalBounds().height);
 }

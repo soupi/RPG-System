@@ -20,9 +20,9 @@ void GameObject::handleEvents(const Control& controls)
 	_movement->handleEvents(controls);
 }
 
-sf::Vector2f GameObject::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
+void GameObject::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 {
-	return _movement->Update(localmap, *this, elapsedTime);
+	_movement->Update(localmap, *this, elapsedTime);
 }
 
 void GameObject::Render(Controller& ctrl)

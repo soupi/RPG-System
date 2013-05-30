@@ -23,10 +23,9 @@ public:
 	void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 	void Render(Controller& ctrl);
 	void addGameObject(shared_ptr<GameObject>& obj, unsigned pos);
-	bool canStepOnFG(sf::Vector2f& pos) const;
-	bool canStepOnFG(sf::Vector2f& pos, float radius) const;
-	bool canStepOnFG(sf::FloatRect& box) const;
 	bool canStepOn(GameObject& obj);
+	void Step(LocalMap& localmap, GameObject& obj);
+	void Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box);
 
 private:
 	vector<Tile> _background;
@@ -43,4 +42,8 @@ private:
 // private functions:
 	void loadMap(string& filename);
 	void loadLayer(std::ifstream&, vector<Tile>& layer, sf::Texture& tileset);
+
+	bool canStepOnFG(sf::Vector2f& pos) const;
+	bool canStepOnFG(sf::Vector2f& pos, float radius) const;
+	bool canStepOnFG(sf::FloatRect& box) const;
 };

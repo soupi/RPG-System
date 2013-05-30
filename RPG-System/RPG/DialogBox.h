@@ -10,12 +10,14 @@ using std::string;
 
 const unsigned SPEED = 20;
 
+class Controller;
+
 class DialogBox
 {
 public:
 	DialogBox(const string& str);
 	void Update(Controller& ctrl, float elapsedTime);
-	void Render(sf::RenderWindow& window);
+	void Render(Controller& ctrl);
 	void setString(const string& str);
 //	void setPos(const sf::Vector2f& pos);
 //	void setSize(const sf::Vector2u& size);

@@ -4,8 +4,9 @@
 #include "UserMovement.h"
 #include "Utility.h"
 #include "Controller.h"
+#include "LocalMap.h"
 
-HeroCharacter::HeroCharacter() : _act(false)
+HeroCharacter::HeroCharacter() : _act(false), _clock(0.f)
 {
 	loadTexture(_hero_texture, "char.png");
 	GameObject::setGraphics(new Graphics(&_hero_texture, sf::Vector2i(0,0), sf::Vector2u(64,96)));
@@ -15,17 +16,25 @@ HeroCharacter::HeroCharacter() : _act(false)
 void HeroCharacter::handleEvents(const Control& controls)
 {
 	GameObject::handleEvents(controls);
-	if (controls.isPressed(A))
+	if (_clock > PRESS_INTERVAL && controls.isPressed(A))
+	{
 		_act = true;
+		_clock = 0.f;
+	}
 }
-sf::Vector2f HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
+void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 {
-	
+	_clock += elapsedTime;
 	GameObject::Update(ctrl, localmap, elapsedTime);
 	// draw Lives and HP
 	ctrl.getView().setCenter(getPos());
+	if (_act)
+	{
+		_act = false;
+		sf::FloatRect box = getGraphics()->getCollisionBox();
+		box.left += getGraphics()->getFacingDirection().x * getGraphics()->getSize().x;
+		box.top += getGraphics()->getFacingDirection().y * getGraphics()->getSize().y;
 
-	
-
-	return getPos();
+		localmap.map()->Act(localmap, *this, box);
+	}
 }

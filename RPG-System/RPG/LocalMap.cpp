@@ -46,6 +46,10 @@ void LocalMap::Update(Controller& ctrl, float elapsedTime)
 void LocalMap::Render(Controller& ctrl)
 {
 	_map->Render(ctrl);
+	if (!_scripts.empty())
+		if (_scripts.front()->hasEntered())
+			_scripts.front()->Render(ctrl);
+
 }
 
 void LocalMap::init(StateParams* params)

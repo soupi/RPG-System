@@ -1,6 +1,5 @@
 #include "Dialog.h"
-
-const float PRESS_INTERVAL = 1.f/20;
+#include "Macros.h"
 
 Dialog::Dialog(const string& str) : _dialogbox(str), _str(str), _clock(0.f)
 {
@@ -31,9 +30,10 @@ bool Dialog::Update(Controller& ctrl, float elapsedTime)
 }
 void Dialog::Render(Controller& ctrl)
 {
-	_dialogbox.Render(ctrl.getWindow());
+	_dialogbox.Render(ctrl);
 }
 void Dialog::Exit()
 {
 	_continue = false;
+	_entered = false;
 }

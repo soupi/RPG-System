@@ -24,7 +24,7 @@ public:
 	GameObject(Graphics* graphics = new NoGraphics, Movement* movement = new NoMovement);
 	virtual ~GameObject();
 	virtual void handleEvents(const Control& controls);
-	virtual sf::Vector2f Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
+	virtual void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 	virtual void Render(Controller& ctrl);
 
 	void setGraphics(Graphics* new_graphics);

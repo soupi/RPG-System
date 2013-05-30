@@ -14,6 +14,12 @@ public:
 	void StepOn(LocalMap& localmap, GameObject& obj) { obj.StepOn(localmap, *this); }
 	bool canStepOn(GameObject& obj) { return obj.canStepOn(*this); }
 
+	virtual bool canStepOn(LocalObject& obj) { return _passable; }
+	virtual bool canStepOn(HeroCharacter& obj) { return _passable; }
+	//virtual bool canStepOn(Monster& obj) { return _passable; }
+
+	void act(LocalMap& localmap, HeroCharacter&);
+
 private:
 	bool _passable;
 protected:

@@ -121,6 +121,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="HeroCharacter.cpp" />
     <ClCompile Include="LocalMap.cpp" />
+    <ClCompile Include="LocalObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Map.cpp" />
