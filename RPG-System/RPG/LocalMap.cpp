@@ -53,8 +53,8 @@ void LocalMap::init(StateParams* params)
 	_map = shared_ptr<Map>(new Map("map.mp"));
 
 	_map->addGameObject(shared_ptr<GameObject>(params->getCtrl().getHero().getHeroForMap()), 21);
-	_map->addGameObject(shared_ptr<GameObject>(new GameObject(NPC(shared_ptr<Script>(new Dialog("hello!")),
-		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(1,0), sf::Vector2u(64, 96))))),
+	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new Dialog("hello!")),
+		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(1,0), sf::Vector2u(64, 96)))),
 		111);
 }
 

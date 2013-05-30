@@ -192,7 +192,10 @@
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="NPC.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="NoMovement.cpp">
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

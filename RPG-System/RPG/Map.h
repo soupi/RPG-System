@@ -25,11 +25,12 @@ public:
 	void addGameObject(shared_ptr<GameObject>& obj, unsigned pos);
 	bool canStepOnFG(sf::Vector2f& pos) const;
 	bool canStepOnFG(sf::Vector2f& pos, float radius) const;
+	bool canStepOnFG(sf::FloatRect& box) const;
+	bool canStepOn(GameObject& obj);
 
 private:
 	vector<Tile> _background;
 	vector<Tile> _foreground;
-	//vector<list<shared_ptr<GameObject>>> _game_objects;
 	vector<shared_ptr<GameObject>> _game_objects;
 	vector<Tile> _top;
 

@@ -6,6 +6,7 @@
 const unsigned DEFAULT_SPEED = 3; // three tiles per second
 
 class LocalMap;
+class GameObject;
 
 class Movement
 {
@@ -14,9 +15,9 @@ public:
 	virtual ~Movement() { }
 
 	virtual void handleEvents(const Control& controls) = 0;
-	virtual sf::Vector2f Update(LocalMap& localmap, Graphics* _graphics, float elapsedTime) = 0;
-	sf::Vector2f getPos() const { return _pos; }
+	virtual sf::Vector2f Update(LocalMap& localmap, GameObject& my_obj, float elapsedTime) = 0;
 	void setPos(sf::Vector2f pos) { _pos = pos; _newpos = true; }
+
 
 protected:
 	sf::Vector2f _direction;

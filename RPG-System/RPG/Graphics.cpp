@@ -39,3 +39,21 @@ void Graphics::Update()
 {
 	// animation
 }
+
+bool Graphics::checkCollision(sf::FloatRect& box) const
+{
+	bool f = getCollisionBox().intersects(box);
+	return getCollisionBox().intersects(box);
+}
+
+sf::FloatRect Graphics::getCollisionBox() const
+{
+	sf::Vector2f pos = _shadow.getPosition();
+	float radius = _shadow.getRadius();
+	return sf::FloatRect(sf::Vector2f(pos.x - radius, pos.y - radius), sf::Vector2f(radius, radius));
+}
+
+sf::Vector2f Graphics::getPos() const
+{
+	return _shadow.getPosition();
+}

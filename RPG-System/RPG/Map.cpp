@@ -131,8 +131,33 @@ bool Map::canStepOnFG(sf::Vector2f& pos) const
 
 bool Map::canStepOnFG(sf::Vector2f& pos, float radius) const
 {
-	if (canStepOnFG(sf::Vector2f(pos.x - radius, pos.y - radius)) && canStepOnFG(sf::Vector2f(pos.x - radius, pos.y +radius)) &&
-		canStepOnFG(sf::Vector2f(pos.x + radius, pos.y - radius)) && canStepOnFG(sf::Vector2f(pos.x + radius, pos.y +radius)))
-		return true;
-	return false;
+	
+	if (!(canStepOnFG(sf::Vector2f(pos.x - radius, pos.y - radius)) && canStepOnFG(sf::Vector2f(pos.x - radius, pos.y +radius)) &&
+		canStepOnFG(sf::Vector2f(pos.x + radius, pos.y - radius)) && canStepOnFG(sf::Vector2f(pos.x + radius, pos.y +radius))))
+		return false;
+
+	return true;
+}
+
+bool Map::canStepOnFG(sf::FloatRect& box) const
+{
+	
+	if (!(canStepOnFG(sf::Vector2f(box.left, box.top)) && canStepOnFG(sf::Vector2f(box.left + box.width, box.top)) &&
+		canStepOnFG(sf::Vector2f(box.left, box.top + box.height)) && canStepOnFG(sf::Vector2f(box.left + box.width, box.top + box.height))))
+		return false;
+
+	return true;
+}
+
+bool Map::canStepOn(GameObject& obj)
+{
+	sf::FloatRect box = obj.getGraphics()->getCollisionBox();
+	if (!canStepOnFG(box))
+		return false;
+
+	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+		if(it->get()->getGraphics()->checkCollision(box) && !obj.canStepOn(*(it->get())))
+			return false;
+	
+	return true;
 }

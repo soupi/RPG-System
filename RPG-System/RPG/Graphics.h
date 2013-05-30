@@ -12,8 +12,12 @@ public:
 	virtual void Render(sf::RenderWindow& window);
 	void move(const sf::Vector2f& direction);
 	void setPos(const sf::Vector2f& pos);
+	sf::Vector2f getPos() const;
 	float getRadius() const { return _shadow.getRadius(); }
 	void setDisplay(bool dis);
+	bool checkCollision(sf::FloatRect& box) const;
+	sf::FloatRect getCollisionBox() const;
+
 protected:
 	Graphics() { }
 

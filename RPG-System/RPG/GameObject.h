@@ -30,14 +30,19 @@ public:
 	void setGraphics(Graphics* new_graphics);
 	void setMovement(Movement* new_Movement);
 
-	sf::Vector2f getPos() const { return _movement->getPos(); }
+	sf::Vector2f getPos() const { return _graphics->getPos(); }
 	void setPos(sf::Vector2f pos) { _movement->setPos(pos); }
 	
+	bool checkCollision(sf::FloatRect& box);
+
+	shared_ptr<Graphics>& getGraphics() { return _graphics; }
 
 	// interaction using double dispatch
-	void act(LocalMap& localmap, GameObject& obj) { obj.act(localmap, *this); }
-	void StepOn(LocalMap& localmap, GameObject& obj) { obj.StepOn(localmap, *this); }
-	bool canStepOn(GameObject& obj) { obj.canStepOn(*this); }
+
+
+	virtual void act(LocalMap& localmap, GameObject& obj) = 0;
+	virtual void StepOn(LocalMap& localmap, GameObject& obj) = 0;
+	virtual bool canStepOn(GameObject& obj) = 0;
 
 	// default for heroCharacter
 	virtual void act(LocalMap& localmap, HeroCharacter&) { }

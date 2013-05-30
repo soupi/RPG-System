@@ -1,6 +1,7 @@
 #include "UserMovement.h"
 #include "Tile.h"
 #include "LocalMap.h"
+#include "GameObject.h"
 
 sf::Vector2f operator*(int scalar, sf::Vector2f vec)
 {
@@ -28,12 +29,11 @@ void UserMovement::handleEvents(const Control& controls)
 	else _run = false;
 }
 
-sf::Vector2f UserMovement::Update(LocalMap& localmap, Graphics* _graphics, float elapsedTime)
+sf::Vector2f UserMovement::Update(LocalMap& localmap, GameObject& my_obj, float elapsedTime)
 {
 	if (_newpos)
 	{
-		if (_graphics)
-			_graphics->setPos(_pos);
+		my_obj.getGraphics()->setPos(_pos);
 
 		_newpos = false; 
 	}
@@ -46,11 +46,11 @@ sf::Vector2f UserMovement::Update(LocalMap& localmap, Graphics* _graphics, float
 
 	sf::Vector2f temp_pos = _pos;
 	temp_pos.x += scalar * _speed * _direction.x  * elapsedTime;
-	if (!localmap.map()->canStepOnFG(temp_pos, _graphics->getRadius()))
+	if (!localmap.map()->canStepOn(my_obj))
 		temp_pos.x = _pos.x;
 
 	temp_pos.y += scalar * _speed * _direction.y  * elapsedTime;
-	if (!localmap.map()->canStepOnFG(temp_pos, _graphics->getRadius()))
+	if (!localmap.map()->canStepOn(my_obj))
 		temp_pos.y = _pos.y;
 
 	if (_pos == temp_pos)
@@ -61,15 +61,7 @@ sf::Vector2f UserMovement::Update(LocalMap& localmap, Graphics* _graphics, float
 	_direction.y = (temp_pos.y - _pos.y) ? _direction.y : 0;
 	_pos = temp_pos;
 
-	if (_newpos)
-	{
-		if (_graphics)
-			_graphics->setPos(_pos);
+	my_obj.getGraphics()->move(scalar * _speed * _direction * elapsedTime);
 
-		_newpos = false; 
-	}
-	else if (_graphics)
-		_graphics->move(scalar * _speed * _direction * elapsedTime);
-
-	return getPos();
+	return my_obj.getGraphics()->getPos();
 }
