@@ -11,6 +11,10 @@
 #include "StateParams.h"
 #include "EmptyState.h"
 #include "Control.h"
+#include <memory>
+
+using std::shared_ptr;
+
 
 using std::map;
 using std::string;
@@ -41,12 +45,12 @@ public:
 	// the update function updates the current state
 	void Update(Controller& ctrl, float elapsedTime) { _state_stack.top()->Update(ctrl, elapsedTime); }
 	// stacks a state on top of the current state
-	void Stack(std::string state, StateParams* params = NULL) 
+	void Stack(std::string state, shared_ptr<StateParams>& params) 
 	{ 
 		// enter a new state
-		if (params) 
-			_state_stack.push(_states[state]->Enter(params));
-		else _state_stack.push(_states[state]->Enter()); 
+	//	if (params) 
+			_state_stack.push(_states[state]->Enter((params)));
+//		else _state_stack.push(_states[state]->Enter()); 
 	}
 	// pop the current state -> back to the previous state.
 	void Pop() { 
@@ -58,7 +62,7 @@ public:
 		}
 	}
 	// changes the current state
-	void Change(std::string state, StateParams* params = NULL) 
+	void Change(std::string state, shared_ptr<StateParams>& params) 
 	{
 		Pop();
 		Stack(state, params);

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+using std::string;
+
 class Controller;
 
 class StateParams {

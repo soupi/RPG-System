@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Chest.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Dialog.h" />
     <ClInclude Include="DialogBox.h" />

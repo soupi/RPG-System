@@ -13,6 +13,13 @@ Graphics::Graphics(sf::Texture* texture, sf::Vector2i loc_on_texture, const sf::
 	_shadow.setOrigin(_shadow.getRadius(), _shadow.getRadius());
 }
 
+Graphics::Graphics()
+{
+	_shadow.setRadius(SCRN_TILE_SIZE/2.8f);
+	_shadow.setPosition(1 + _shadow.getRadius(), 1 + _shadow.getRadius());
+	_shadow.setOrigin(_shadow.getRadius(), _shadow.getRadius());
+}
+
 void Graphics::Render(sf::RenderWindow& window)
 {
 	window.draw(_shadow);

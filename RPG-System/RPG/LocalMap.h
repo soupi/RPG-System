@@ -17,7 +17,7 @@ class LocalMap : public State
 {
 public:
 	LocalMap();
-	virtual State* Enter(StateParams* params) { init(params); return this; }
+	virtual State* Enter(shared_ptr<StateParams>& params) { init(params); return this; }
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(Controller& ctrl);
@@ -28,6 +28,6 @@ public:
 private:
 	Flag _change_state;
 	queue<shared_ptr<Script>> _scripts;
-	void init(StateParams* params);
+	void init(shared_ptr<StateParams>& params);
 	shared_ptr<Map> _map;
 };

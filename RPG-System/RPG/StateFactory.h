@@ -13,7 +13,7 @@ public:
 	public:
 		virtual bool Update(Controller& ctrl, float elapsedTime) { return _state.Update(ctrl, elapsedTime); }
 		virtual void Render(Controller& ctrl) { _state.Render(ctrl); }
-		virtual State* Enter(StateParams* params = NULL) 
+		virtual State* Enter(shared_ptr<StateParams>& paramsL) 
 		{ 
 			if (params) 
 				_state.Enter(params);
@@ -27,7 +27,7 @@ public:
 	};
 
 
-	virtual State* Enter(StateParams* params = NULL)
+	virtual State* Enter(shared_ptr<StateParams>& params)
 	{
 		IState* state = new IState;
 		return state->Enter(params);

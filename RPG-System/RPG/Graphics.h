@@ -23,7 +23,7 @@ public:
 	void setDir(sf::Vector2f& dir) { _dir = dir; }
 
 protected:
-	Graphics() { }
+	Graphics();
 
 private:
 	sf::Texture* _texture;

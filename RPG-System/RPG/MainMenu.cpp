@@ -1,6 +1,9 @@
 #include "MainMenu.h"
 #include "Controller.h"
 #include "ParamsCtrl.h"
+#include <memory>
+
+using std::shared_ptr;
 
 bool MainMenu::handleEvents(const Control& controls)
 {
@@ -19,7 +22,7 @@ bool MainMenu::handleEvents(const Control& controls)
 void MainMenu::Update(Controller& ctrl, float elapsedTime)
 {
 	if (_change_state)
-		ctrl.getStateMachine().Change("localmap", new ParamsCtrl(ctrl));
+		ctrl.getStateMachine().Change("localmap", shared_ptr<StateParams>(new ParamsMap(ctrl, "map.mp")));
 
 	_dialog.Update(ctrl, elapsedTime);
 

@@ -20,7 +20,7 @@ public:
 	bool canStepOn(GameObject& obj) { return obj.canStepOn(*this); }
 
 	void giveQuestItem(QuestItem& item);
-	bool hasQuestItem(string& item_name);
+	bool hasQuestItem(const string& item_name);
 
 private:
 	sf::Texture _hero_texture;

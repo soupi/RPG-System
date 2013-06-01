@@ -9,7 +9,7 @@ class GameMenu : public State
 {
 public:
 	GameMenu() { init(); }
-	virtual State* Enter(StateParams* params = NULL) { return this; }
+	virtual State* Enter(shared_ptr<StateParams>& params) { return this; }
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(Controller& ctrl);

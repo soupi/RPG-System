@@ -6,8 +6,11 @@
 
 
 #include "NPC.h"
+#include "Chest.h"
 #include "Dialog.h"
 #include "IFScript.h"
+#include "GiveItem.h"
+#include "ParamsCtrl.h"
 
 LocalMap::LocalMap()
 {
@@ -34,7 +37,7 @@ void LocalMap::Update(Controller& ctrl, float elapsedTime)
 {
 	// if change state flag is set, stack game menu state
 	if (_change_state)
-		ctrl.getStateMachine().Stack("gamemenu"/*  ParamsCtrl(ctrl)*/);
+		ctrl.getStateMachine().Stack("gamemenu", shared_ptr<StateParams>(new ParamsCtrl(ctrl)));
 	
 	// update scripts if there is one
 	if (!_scripts.empty())
@@ -62,21 +65,30 @@ void LocalMap::Render(Controller& ctrl)
 }
 
 // init local map
-void LocalMap::init(StateParams* params)
+void LocalMap::init(shared_ptr<StateParams>& params)
 {
-	_map = shared_ptr<Map>(new Map("map.mp")); // create new map from map
-
+	try {
+		ParamsMap* params_map = (ParamsMap*)(params.get());
+		_map = shared_ptr<Map>(new Map(params_map->getMap())); // create new map from map
+	}
+	catch (...)
+	{
+		std::cerr << "No Map";
+		exit(EXIT_FAILURE);
+	}
 	// add game objects to map
 		
 	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new Dialog("hello!\ngoodbye...")),
 		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(4,0), sf::Vector2u(64, 96)))),
 		111);
-	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new Dialog("hello!\ngoodbye...")),
-		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(4,0), sf::Vector2u(64, 96)))),
-		111);
+	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new IFQItem("key", shared_ptr<Script>(new Dialog("I can't give you anything.")), shared_ptr<Script>(new GiveItem("key")))),
+		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(6,4), sf::Vector2u(64, 96)))),
+		61);
+	_map->addGameObject(shared_ptr<GameObject>(new Chest("key")), 4);
+
 	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new Dialog("I have a new chicken!")),
 		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(4,4), sf::Vector2u(64, 96)))),
-		57);
+		207);
 	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new IFQItem("key", shared_ptr<Script>(new Dialog("You have the key.")), shared_ptr<Script>(new Dialog("You don't have the key.")))),
 		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(6,0), sf::Vector2u(64, 96)))),
 		315);

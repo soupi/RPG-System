@@ -105,6 +105,6 @@ void Controller::initStateMachine()
 	_stateMachine.Add("gamemenu", new GameMenu);
 	_stateMachine.Add("localmap", new LocalMap);
 
-	ParamsCtrl* params = new ParamsCtrl(*this);
+	shared_ptr<StateParams> params( new ParamsCtrl(*this));
 	_stateMachine.Change("mainmenu", params);
 }

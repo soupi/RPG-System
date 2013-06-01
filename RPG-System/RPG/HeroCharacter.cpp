@@ -44,7 +44,7 @@ void HeroCharacter::giveQuestItem(QuestItem& item)
 {  
 	_hero_data->addQuestItem(item);
 }
-bool HeroCharacter::hasQuestItem(string& item_name) 
+bool HeroCharacter::hasQuestItem(const string& item_name) 
 {
 	return _hero_data->hasQuestItem(item_name);
 }
