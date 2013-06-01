@@ -144,6 +144,15 @@
     <ClInclude Include="NPC.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="QuestItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroData.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="NoScript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -199,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="LocalObject.cpp">
       <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="IF_Script.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

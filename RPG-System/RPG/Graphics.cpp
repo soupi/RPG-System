@@ -5,7 +5,7 @@ Graphics::Graphics(sf::Texture* texture, sf::Vector2i loc_on_texture, const sf::
 	_display(true), _animation(0), _animation_clock(0.f)
 {
 	_sprite.setTexture(*_texture);
-	_sprite.setTextureRect(sf::IntRect(loc_on_texture.x, loc_on_texture.y, size.x, size.y));
+	_sprite.setTextureRect(sf::IntRect(loc_on_texture.x*size.x, loc_on_texture.y * size.y, size.x, size.y));
 
 	_shadow.setRadius(size.x/2.8f);
 	_shadow.setPosition(1 + _shadow.getRadius(), 1 + _shadow.getRadius());

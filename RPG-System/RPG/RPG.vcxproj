@@ -88,6 +88,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="HeroCharacter.h" />
+    <ClInclude Include="HeroData.h" />
     <ClInclude Include="IFScript.h" />
     <ClInclude Include="ItemBank.h" />
     <ClInclude Include="LocalMap.h" />
@@ -98,8 +99,10 @@
     <ClInclude Include="Movement.h" />
     <ClInclude Include="NoGraphics.h" />
     <ClInclude Include="NoMovement.h" />
+    <ClInclude Include="NoScript.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="ParamsCtrl.h" />
+    <ClInclude Include="QuestItem.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="Scripts.h" />
     <ClInclude Include="State.h" />
@@ -120,6 +123,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="HeroCharacter.cpp" />
+    <ClCompile Include="IF_Script.cpp" />
     <ClCompile Include="LocalMap.cpp" />
     <ClCompile Include="LocalObject.cpp" />
     <ClCompile Include="main.cpp" />

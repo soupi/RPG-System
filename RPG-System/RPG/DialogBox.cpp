@@ -13,7 +13,7 @@ DialogBox::DialogBox(const string& str) : _stream(str), _clock(0.f)
 
 	LoadFont(_font, "resources/consola.ttf");
 	_text.setFont(_font);
-	_text.setCharacterSize(20);
+	_text.setCharacterSize(24);
 
 	newLine();
 }
@@ -23,16 +23,18 @@ void DialogBox::setString(const string& str)
 	_line = stringstream();
 	_str.clear();
 	_stream = stringstream(str);
+	_text.setString(_str);
 	newLine();
 }
 
 bool DialogBox::newLine()
 {
-	_line.clear();
+	_line = stringstream();
 	_str.clear();
-	string temp;
+	_text.setString(_str);
 	if (_stream.eof())
 		return false;
+	string temp;
 	getline(_stream, temp);
 	_line = stringstream(temp);
 
@@ -41,8 +43,6 @@ bool DialogBox::newLine()
 
 void DialogBox::Update(Controller& ctrl, float elapsedTime)
 {
-
-
 	_clock += elapsedTime;
 	if (_clock < 1.f/SPEED || _line.eof())
 		return;

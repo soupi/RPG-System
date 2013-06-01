@@ -24,6 +24,8 @@ bool Dialog::handleEvents(const Control& controls)
 }
 bool Dialog::Update(Controller& ctrl, float elapsedTime)
 {
+	if (!_continue)
+		return false;
 	_clock += elapsedTime;
 	_dialogbox.Update(ctrl, elapsedTime);
 	return _continue;
@@ -32,8 +34,7 @@ void Dialog::Render(Controller& ctrl)
 {
 	_dialogbox.Render(ctrl);
 }
-void Dialog::Exit()
+void Dialog::exit()
 {
 	_continue = false;
-	_entered = false;
 }

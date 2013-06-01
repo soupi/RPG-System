@@ -1,3 +1,3 @@
 #pragma once
 
-const float PRESS_INTERVAL = 1.f/20;
+const float PRESS_INTERVAL = 1.f/10;

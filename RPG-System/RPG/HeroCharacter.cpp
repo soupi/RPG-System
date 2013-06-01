@@ -6,7 +6,7 @@
 #include "Controller.h"
 #include "LocalMap.h"
 
-HeroCharacter::HeroCharacter() : _act(false), _clock(0.f)
+HeroCharacter::HeroCharacter(shared_ptr<HeroData>& data) : _act(false), _clock(0.f), _hero_data(data)
 {
 	loadTexture(_hero_texture, "char.png");
 	GameObject::setGraphics(new Graphics(&_hero_texture, sf::Vector2i(0,0), sf::Vector2u(64,96)));
@@ -37,4 +37,14 @@ void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTi
 
 		localmap.map()->Act(localmap, *this, box);
 	}
+}
+
+
+void HeroCharacter::giveQuestItem(QuestItem& item) 
+{  
+	_hero_data->addQuestItem(item);
+}
+bool HeroCharacter::hasQuestItem(string& item_name) 
+{
+	return _hero_data->hasQuestItem(item_name);
 }
