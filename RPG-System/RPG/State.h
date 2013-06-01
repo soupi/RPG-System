@@ -16,6 +16,6 @@ public:
 	virtual bool handleEvents(const Control& controls) = 0;
 	virtual void Update(Controller&, float elapsedTime) = 0;
 	virtual void Render(Controller& ctrl) = 0;
-	virtual State* Enter(shared_ptr<StateParams>& params) = 0;
-	virtual bool Exit() { return false; }
+	virtual void Enter(shared_ptr<StateParams>& params) = 0;
+	virtual void Exit() = 0;
 };

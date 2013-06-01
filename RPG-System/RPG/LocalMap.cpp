@@ -4,7 +4,7 @@
 #include "UserMovement.h"
 #include "Utility.h"
 
-
+#include "Door.h"
 #include "NPC.h"
 #include "Chest.h"
 #include "Dialog.h"
@@ -67,9 +67,11 @@ void LocalMap::Render(Controller& ctrl)
 // init local map
 void LocalMap::init(shared_ptr<StateParams>& params)
 {
+	unsigned starting_tile = 0;
 	try {
 		ParamsMap* params_map = (ParamsMap*)(params.get());
 		_map = shared_ptr<Map>(new Map(params_map->getMap())); // create new map from map
+		starting_tile = params_map->StartingTile();
 	}
 	catch (...)
 	{
@@ -85,6 +87,7 @@ void LocalMap::init(shared_ptr<StateParams>& params)
 		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(6,4), sf::Vector2u(64, 96)))),
 		61);
 	_map->addGameObject(shared_ptr<GameObject>(new Chest("key")), 4);
+	_map->addGameObject(shared_ptr<GameObject>(new Door("map.mp", 204)), 1);
 
 	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new Dialog("I have a new chicken!")),
 		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(4,4), sf::Vector2u(64, 96)))),
@@ -94,7 +97,7 @@ void LocalMap::init(shared_ptr<StateParams>& params)
 		315);
 
 	// add hero to map
-	_map->addGameObject(shared_ptr<GameObject>(params->getCtrl().getHero().getHeroForMap()), 21);
+	_map->addGameObject(shared_ptr<GameObject>(params->getCtrl().getHero().getHeroForMap()), starting_tile);
 }
 
 // add script to queue

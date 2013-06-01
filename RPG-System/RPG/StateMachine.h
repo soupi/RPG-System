@@ -26,14 +26,12 @@ class StateMachine
 {
 public:
 	// Constructor for the state machine is initiallized with an empty state.
-	StateMachine()  { _state_stack.push(new EmptyState); }
+	StateMachine()  { _state_stack.push(shared_ptr<State>(new EmptyState)); }
 	// The Destructor deletes the allocated pointers in the state machine
 	~StateMachine() 
 	{
 		while (!_state_stack.empty())
 			Pop();
-		for (map<string, State*>::iterator it = _states.begin(); it != _states.end(); ++it)
-			delete (*it).second;
 	}
 	// the render function renders the all states on the stack state
 	void Render(Controller& ctrl) 
@@ -48,16 +46,15 @@ public:
 	void Stack(std::string state, shared_ptr<StateParams>& params) 
 	{ 
 		// enter a new state
-	//	if (params) 
-			_state_stack.push(_states[state]->Enter((params)));
-//		else _state_stack.push(_states[state]->Enter()); 
+		
+		_state_stack.push(_states[state]);
+		_state_stack.top()->Enter(params);
 	}
 	// pop the current state -> back to the previous state.
 	void Pop() { 
 		if (!_state_stack.empty())
 		{
-			if (_state_stack.top()->Exit())
-				delete _state_stack.top();
+			_state_stack.top()->Exit();
 			_state_stack.pop();
 		}
 	}
@@ -68,13 +65,13 @@ public:
 		Stack(state, params);
 	}
 	// adds a state to state machine so we will be able to use it in the future.
-	void Add(std::string desc, State* state)
+	void Add(std::string desc, shared_ptr<State>& state)
 	{
 		_states[desc] = state;
 	}
 
 
 private:
-	stack<State*> _state_stack;
-	map<string, State*> _states;
+	stack<shared_ptr<State>> _state_stack;
+	map<string, shared_ptr<State>> _states;
 };

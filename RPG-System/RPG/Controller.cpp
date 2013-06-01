@@ -3,6 +3,9 @@
 #include "GameMenu.h"
 #include "LocalMap.h"
 #include "ParamsCtrl.h"
+#include <memory>
+
+using std::shared_ptr; 
 
 const int WINDOW_W = 960;
 const int WINDOW_H = 640;
@@ -101,9 +104,9 @@ void Controller::initWindow()
 
 void Controller::initStateMachine()
 {
-	_stateMachine.Add("mainmenu", new MainMenu);
-	_stateMachine.Add("gamemenu", new GameMenu);
-	_stateMachine.Add("localmap", new LocalMap);
+	_stateMachine.Add("mainmenu", shared_ptr<State>(new MainMenu));
+	_stateMachine.Add("gamemenu", shared_ptr<State>(new GameMenu));
+	_stateMachine.Add("localmap", shared_ptr<State>(new LocalMap));
 
 	shared_ptr<StateParams> params( new ParamsCtrl(*this));
 	_stateMachine.Change("mainmenu", params);

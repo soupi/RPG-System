@@ -17,7 +17,8 @@ class LocalMap : public State
 {
 public:
 	LocalMap();
-	virtual State* Enter(shared_ptr<StateParams>& params) { init(params); return this; }
+	virtual void Enter(shared_ptr<StateParams>& params) { init(params); }
+	virtual void Exit() {  }
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(Controller& ctrl);

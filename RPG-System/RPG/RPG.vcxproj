@@ -76,10 +76,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ChangeMap.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Dialog.h" />
     <ClInclude Include="DialogBox.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="EmptyState.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="Flag.h" />

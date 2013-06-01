@@ -11,13 +11,12 @@ public:
 	class IState : public State 
 	{
 	public:
-		virtual bool Update(Controller& ctrl, float elapsedTime) { return _state.Update(ctrl, elapsedTime); }
+		virtual bool handleEvents(const Control& controls) { return _state.handleEvents(controls); }
+		virtual void Update(Controller& ctrl, float elapsedTime) { _state.Update(ctrl, elapsedTime); }
 		virtual void Render(Controller& ctrl) { _state.Render(ctrl); }
-		virtual State* Enter(shared_ptr<StateParams>& paramsL) 
+		virtual void Enter(shared_ptr<StateParams>& params) 
 		{ 
-			if (params) 
-				_state.Enter(params);
-			else _state.Enter(); 
+			_state.Enter(params);
 			return this;
 		}
 		virtual bool Exit() { _state.Exit(); return true; }
@@ -32,7 +31,8 @@ public:
 		IState* state = new IState;
 		return state->Enter(params);
 	}
-
-	virtual bool Update(Controller&, float elapsedTime) { return false; }
+	
+	virtual bool handleEvents(const Control& controls) { return false; }
+	virtual void Update(Controller&, float elapsedTime) {  }
 	virtual void Render(Controller& ctrl) { }
 };

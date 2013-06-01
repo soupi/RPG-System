@@ -10,7 +10,8 @@ class MainMenu : public State
 {
 public:
 	MainMenu() : _dialog("Welcome to a new game made by WhiteStar Games! I hope you'll enjoy it as much as i enjoyed making it!\nHave Fun!") { }
-	virtual State* Enter(shared_ptr<StateParams>& params) { init(); return this; }
+	virtual void Enter(shared_ptr<StateParams>& params) { init(); }
+	virtual void Exit() { }
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(Controller& ctrl);

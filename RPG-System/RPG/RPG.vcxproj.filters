@@ -120,9 +120,6 @@
     <ClInclude Include="Hero.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="ParamsCtrl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Dialog.h">
       <Filter>Header Files\Scripts</Filter>
     </ClInclude>
@@ -144,17 +141,26 @@
     <ClInclude Include="NPC.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="QuestItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HeroData.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="NoScript.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="Chest.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestItem.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ParamsCtrl.h">
+      <Filter>Header Files\StatesMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeMap.h">
+      <Filter>Header Files\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

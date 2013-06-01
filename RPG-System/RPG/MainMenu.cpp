@@ -22,7 +22,7 @@ bool MainMenu::handleEvents(const Control& controls)
 void MainMenu::Update(Controller& ctrl, float elapsedTime)
 {
 	if (_change_state)
-		ctrl.getStateMachine().Change("localmap", shared_ptr<StateParams>(new ParamsMap(ctrl, "map.mp")));
+		ctrl.getStateMachine().Change("localmap", shared_ptr<StateParams>(new ParamsMap(ctrl, "map.mp", 39)));
 
 	_dialog.Update(ctrl, elapsedTime);
 
