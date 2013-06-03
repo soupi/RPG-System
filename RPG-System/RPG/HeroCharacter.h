@@ -19,6 +19,12 @@ public:
 	void StepOn(LocalMap& localmap, GameObject& obj) { obj.StepOn(localmap, *this); }
 	bool canStepOn(GameObject& obj) { return obj.canStepOn(*this); }
 
+	void act(LocalMap& localmap, LocalObject& obj);
+//	void act(LocalMap& localmap, Enemy& obj);
+//	void StepOn(LocalMap& localmap, Enemy& obj);
+//	bool canStepOn(Enemy& obj);
+
+
 	void giveQuestItem(QuestItem& item);
 	bool hasQuestItem(const string& item_name);
 

@@ -5,6 +5,7 @@
 #include "IFScript.h"
 #include "GiveItem.h"
 #include <string>
+#include "LocalMap.h"
 
 using std::string;
 

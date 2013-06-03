@@ -105,7 +105,9 @@
     <ClInclude Include="NoScript.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="ParamsCtrl.h" />
+    <ClInclude Include="Parser.h" />
     <ClInclude Include="QuestItem.h" />
+    <ClInclude Include="readFromFile.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="Scripts.h" />
     <ClInclude Include="State.h" />
@@ -134,6 +136,9 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="NoMovement.cpp" />
     <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="readFromFile.cpp" />
+    <ClCompile Include="Scripts.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="UserMovement.cpp" />
     <ClCompile Include="Utility.cpp" />

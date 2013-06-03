@@ -48,3 +48,8 @@ bool HeroCharacter::hasQuestItem(const string& item_name)
 {
 	return _hero_data->hasQuestItem(item_name);
 }
+
+void HeroCharacter::act(LocalMap& localmap, LocalObject& obj)
+{
+	obj.act(localmap, *this);
+}

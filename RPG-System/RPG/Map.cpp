@@ -167,12 +167,15 @@ void Map::Step(LocalMap& localmap, GameObject& obj)
 	sf::FloatRect box = obj.getGraphics()->getCollisionBox();
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
 		if((it->get()) != &obj && it->get()->getGraphics()->checkCollision(box))
-			obj.StepOn(localmap, *(it->get()));
+			obj.StepOn(localmap, *(it->get())); // double dispatch
 }
 
 void Map::Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box)
 {
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
 		if((it->get()) != &obj && it->get()->getGraphics()->checkCollision(box))
-			obj.act(localmap, *(it->get()));
+		{
+		//	obj.act(localmap, *(it->get())); // double dispatch
+			(*it)->act(localmap, obj);
+		}
 }
