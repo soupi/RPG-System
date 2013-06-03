@@ -87,7 +87,7 @@ void Controller::initWindow()
 	settings.antialiasingLevel = 8;
 
 	_window.create(sf::VideoMode(WINDOW_W, WINDOW_H), 
-					"RPG", sf::Style::Close, settings);
+		"RPG", sf::Style::Close, settings);
 	
 	_window.setVerticalSyncEnabled(true); // set refresh rate as screen's refresh rate
 	_window.setJoystickThreshold(10000); // joystick threshold

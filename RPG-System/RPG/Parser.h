@@ -26,8 +26,6 @@ class Parser
 public:
 	Parser(shared_ptr<istream>& infd) : _infd(infd) {}
 	void Read(Map& map);
-	shared_ptr<GameObject> readObject(const string& obj_name);
-	shared_ptr<Script> readScript(string temp);
 	Graphics* readGraphics();
 	Movement* readMovement();
 
@@ -48,6 +46,6 @@ public:
 private:
 	 shared_ptr<istream> _infd;
 
-//	 map<string, > _gameObjFactoryMap;
-//	 map<string, > _ScriptFactoryMap;
+	 map<string, shared_ptr<GameObject> (Parser::*)(shared_ptr<istream>& infd)> _gameObjFactoryMap;
+	 map<string, shared_ptr<Script> (Parser::*)(shared_ptr<istream>& infd)> _scriptFactoryMap;
 };

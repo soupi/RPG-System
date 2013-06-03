@@ -165,7 +165,7 @@
     <ClInclude Include="Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="readFromFile.h">
+    <ClInclude Include="Bank.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -232,9 +232,6 @@
     </ClCompile>
     <ClCompile Include="Scripts.cpp">
       <Filter>Source Files\Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="readFromFile.cpp">
-      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -15,9 +15,12 @@
 #include "IFScript.h"
 #include "Dialog.h"
 #include "GiveItem.h"
-//#include "NoScript.h"
+#include "NoScript.h"
 
 #include <iostream>
+#include <fstream>
+
+
 
 void Parser::Read(Map& map)
 {
@@ -27,8 +30,8 @@ void Parser::Read(Map& map)
 		*_infd >> temp;
 		if (temp == "END") // end condition
 			break;
-		
-		shared_ptr<GameObject> obj = readObject(temp);
+
+		shared_ptr<GameObject> obj = (this->*_gameObjFactoryMap[temp])(_infd);
 
 		unsigned pos;
 		try { *_infd >> pos; }
@@ -37,6 +40,110 @@ void Parser::Read(Map& map)
 		map.addGameObject(obj, pos);
 	} 
 }
+
+
+Graphics* Parser::readGraphics()
+{
+	return NULL;
+}
+Movement* Parser::readMovement()
+{
+	return NULL;
+}
+
+
+shared_ptr<GameObject> Parser::makeNPC(shared_ptr<istream>& infd)
+{
+	string script_name;
+	*infd >> script_name;
+	return shared_ptr<GameObject>(new NPC( (this->*_scriptFactoryMap[script_name])(infd), readGraphics(), readMovement(), false));
+}
+shared_ptr<GameObject> Parser::makeDoor(shared_ptr<istream>& infd)
+{
+	string map_name;
+	*infd >> map_name;
+
+	unsigned s_pos;
+	*infd >> s_pos;
+
+	return shared_ptr<GameObject>(new Door(map_name, s_pos));
+}
+shared_ptr<GameObject> Parser::makeChest(shared_ptr<istream>& infd)
+{
+	string item;
+	*infd >> item;
+	return shared_ptr<GameObject>(new  Chest(item));
+}
+	
+shared_ptr<Script> Parser::readDialog(shared_ptr<istream>& infd)
+{
+	string str;
+	getline(*infd, str);
+	return shared_ptr<Script>(new Dialog(str));
+}
+shared_ptr<Script> Parser::readGiveItem(shared_ptr<istream>& infd)
+{
+	string item_name;
+	*infd >> item_name;
+	return shared_ptr<Script>(new GiveItem(item_name));
+}
+shared_ptr<Script> Parser::readIFQItem(shared_ptr<istream>& infd)
+{
+	shared_ptr<Script> if_s, else_s;
+	string item_name;
+	*infd >> item_name;
+
+	string script_name;
+	*infd >> script_name;
+	if_s = (this->*_scriptFactoryMap[script_name])(infd);
+	*infd >> script_name;
+	else_s = (this->*_scriptFactoryMap[script_name])(infd);
+	return shared_ptr<Script>(new IFQItem(item_name, if_s, else_s));
+}
+shared_ptr<Script> Parser::readIFLevel(shared_ptr<istream>& infd)
+{
+	shared_ptr<Script> if_s, else_s;
+	unsigned level;
+	*infd >> level;
+
+	string script_name;
+	*infd >> script_name;
+	if_s = (this->*_scriptFactoryMap[script_name])(infd);
+	*infd >> script_name;
+	else_s = (this->*_scriptFactoryMap[script_name])(infd);
+	return shared_ptr<Script>(new IFLevel(level, if_s, else_s));
+}
+shared_ptr<Script> Parser::readScripts(shared_ptr<istream>& infd)
+{
+	string script_name;
+	*infd >> script_name;
+	vector<shared_ptr<Script>> scripts;
+	while (script_name != "END")
+	{
+		scripts.push_back((this->*_scriptFactoryMap[script_name])(infd));
+		*infd >> script_name;
+	}
+	return shared_ptr<Script>(new Scripts(scripts));
+}
+shared_ptr<Script> Parser::readNoScript(shared_ptr<istream>& infd)
+{
+	return shared_ptr<Script>(new NoScript);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 shared_ptr<GameObject> Parser::readObject(const string& obj_name)
 {
@@ -66,7 +173,6 @@ shared_ptr<GameObject> Parser::readObject(const string& obj_name)
 	*_infd >> script_name;
 	return shared_ptr<GameObject>(new LocalObject(readScript(script_name), readGraphics(), readMovement(), true));
 }
-
 shared_ptr<Script> Parser::readScript(string temp)
 {
 	if (temp == "DIALOG")
@@ -115,52 +221,7 @@ shared_ptr<Script> Parser::readScript(string temp)
 	return shared_ptr<Script>(new NoScript);
 }
 
-Graphics* Parser::readGraphics()
-{
-	return NULL;
-}
-Movement* Parser::readMovement()
-{
-	return NULL;
-}
+*/
 
 
-shared_ptr<GameObject> Parser::makeNPC(shared_ptr<istream>& infd)
-{
-	string script_name;
-	*infd >> script_name;
-	return shared_ptr<GameObject>(new NPC(readScript(infd), readGraphics(), readMovement(), false));
-}
-shared_ptr<GameObject> Parser::makeDoor(shared_ptr<istream>& infd)
-{
 
-}
-shared_ptr<GameObject> Parser::makeChest(shared_ptr<istream>& infd)
-{
-
-}
-	
-shared_ptr<Script> Parser::readDialog(shared_ptr<istream>& infd)
-{
-
-}
-shared_ptr<Script> Parser::readGiveItem(shared_ptr<istream>& infd)
-{
-
-}
-shared_ptr<Script> Parser::readIFQItem(shared_ptr<istream>& infd)
-{
-
-}
-shared_ptr<Script> Parser::readIFLevel(shared_ptr<istream>& infd)
-{
-
-}
-shared_ptr<Script> Parser::readScripts(shared_ptr<istream>& infd)
-{
-
-}
-shared_ptr<Script> Parser::readNoScript(shared_ptr<istream>& infd)
-{
-	
-}

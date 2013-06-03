@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bank.h" />
     <ClInclude Include="ChangeMap.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="Controller.h" />
@@ -107,7 +108,6 @@
     <ClInclude Include="ParamsCtrl.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="QuestItem.h" />
-    <ClInclude Include="readFromFile.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="Scripts.h" />
     <ClInclude Include="State.h" />
@@ -137,7 +137,6 @@
     <ClCompile Include="NoMovement.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="readFromFile.cpp" />
     <ClCompile Include="Scripts.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="UserMovement.cpp" />
