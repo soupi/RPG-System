@@ -16,25 +16,51 @@
 #include "Dialog.h"
 #include "GiveItem.h"
 #include "NoScript.h"
+// Graphics types
+#include "Graphics.h"
+#include "NoGraphics.h"
+// movement types
+#include "Movement.h"
+#include "NoMovement.h"
+#include "UserMovement.h"
 
 #include <iostream>
 #include <fstream>
 
+#include "Bank.h"
 
+Parser::Parser(istream& infd) : _infd(infd)
+{
+	_gameObjFactoryMap["NPC"] = &Parser::makeNPC;
+	_gameObjFactoryMap["DOOR"] = &Parser::makeDoor;
+	_gameObjFactoryMap["CHEST"] = &Parser::makeChest;
+
+	_scriptFactoryMap["SCRIPTS"] = &Parser::readScripts;
+	_scriptFactoryMap["NOSCRIPT"] = &Parser::readNoScript;
+	_scriptFactoryMap["DIALOG"] = &Parser::readDialog;
+	_scriptFactoryMap["GIVEITEM"] = &Parser::readGiveItem;
+	_scriptFactoryMap["IFQITEM"] = &Parser::readIFQItem;
+	_scriptFactoryMap["IFLEVEL"] = &Parser::readIFLevel;
+}
 
 void Parser::Read(Map& map)
 {
 	while (true)
 	{
 		std::string temp;
-		*_infd >> temp;
+		_infd >> temp;
 		if (temp == "END") // end condition
 			break;
+		else if (temp == "#") // documentation
+		{
+			getline(_infd, temp);
+			continue;
+		}
 
 		shared_ptr<GameObject> obj = (this->*_gameObjFactoryMap[temp])(_infd);
 
 		unsigned pos;
-		try { *_infd >> pos; }
+		try { _infd >> pos; }
 		catch (...) { std::cerr << "bad position"; break; }
 
 		map.addGameObject(obj, pos);
@@ -42,90 +68,110 @@ void Parser::Read(Map& map)
 }
 
 
-Graphics* Parser::readGraphics()
+Graphics* Parser::readGraphics(istream& infd)
 {
-	return NULL;
+	string type;
+	infd >> type;
+	if (type == "NOGRAPHICS")
+		return new NoGraphics;
+
+	string filename;
+	sf::Vector2i loc_on_file;
+	sf::Vector2u size;
+	//try
+	infd >> filename >> loc_on_file.x >> loc_on_file.y >> size.x >> size.y;
+	//catch
+
+	return new Graphics(&(Bank<sf::Texture>::getInstance().get(filename)), loc_on_file, size);
 }
-Movement* Parser::readMovement()
+Movement* Parser::readMovement(istream& infd)
 {
-	return NULL;
+	string movement;
+	infd >> movement;
+	if (movement == "USERMOVEMENT")
+		return new UserMovement;
+
+	return new NoMovement;
 }
 
 
-shared_ptr<GameObject> Parser::makeNPC(shared_ptr<istream>& infd)
+shared_ptr<GameObject> Parser::makeNPC(istream& infd)
 {
 	string script_name;
-	*infd >> script_name;
-	return shared_ptr<GameObject>(new NPC( (this->*_scriptFactoryMap[script_name])(infd), readGraphics(), readMovement(), false));
+	infd >> script_name;
+
+	shared_ptr<Script> (Parser::*readscript)(istream& infd) = _scriptFactoryMap[script_name];
+	shared_ptr<Script> script = (this->*readscript)(infd);
+	return shared_ptr<GameObject>(new NPC( script, readGraphics(infd), readMovement(infd), false));
 }
-shared_ptr<GameObject> Parser::makeDoor(shared_ptr<istream>& infd)
+shared_ptr<GameObject> Parser::makeDoor(istream& infd)
 {
 	string map_name;
-	*infd >> map_name;
+	infd >> map_name;
 
 	unsigned s_pos;
-	*infd >> s_pos;
+	infd >> s_pos;
 
 	return shared_ptr<GameObject>(new Door(map_name, s_pos));
 }
-shared_ptr<GameObject> Parser::makeChest(shared_ptr<istream>& infd)
+shared_ptr<GameObject> Parser::makeChest(istream& infd)
 {
 	string item;
-	*infd >> item;
+	infd >> item;
 	return shared_ptr<GameObject>(new  Chest(item));
 }
 	
-shared_ptr<Script> Parser::readDialog(shared_ptr<istream>& infd)
+shared_ptr<Script> Parser::readDialog(istream& infd)
 {
 	string str;
-	getline(*infd, str);
+	getline(infd, str);
 	return shared_ptr<Script>(new Dialog(str));
 }
-shared_ptr<Script> Parser::readGiveItem(shared_ptr<istream>& infd)
+shared_ptr<Script> Parser::readGiveItem(istream& infd)
 {
 	string item_name;
-	*infd >> item_name;
+	infd >> item_name;
 	return shared_ptr<Script>(new GiveItem(item_name));
 }
-shared_ptr<Script> Parser::readIFQItem(shared_ptr<istream>& infd)
+shared_ptr<Script> Parser::readIFQItem(istream& infd)
 {
 	shared_ptr<Script> if_s, else_s;
 	string item_name;
-	*infd >> item_name;
+	infd >> item_name;
 
 	string script_name;
-	*infd >> script_name;
+	infd >> script_name;
 	if_s = (this->*_scriptFactoryMap[script_name])(infd);
-	*infd >> script_name;
+	infd >> script_name;
 	else_s = (this->*_scriptFactoryMap[script_name])(infd);
 	return shared_ptr<Script>(new IFQItem(item_name, if_s, else_s));
 }
-shared_ptr<Script> Parser::readIFLevel(shared_ptr<istream>& infd)
+shared_ptr<Script> Parser::readIFLevel(istream& infd)
 {
 	shared_ptr<Script> if_s, else_s;
 	unsigned level;
-	*infd >> level;
+	infd >> level;
 
 	string script_name;
-	*infd >> script_name;
+	infd >> script_name;
 	if_s = (this->*_scriptFactoryMap[script_name])(infd);
-	*infd >> script_name;
+	infd >> script_name;
 	else_s = (this->*_scriptFactoryMap[script_name])(infd);
 	return shared_ptr<Script>(new IFLevel(level, if_s, else_s));
 }
-shared_ptr<Script> Parser::readScripts(shared_ptr<istream>& infd)
+shared_ptr<Script> Parser::readScripts(istream& infd)
 {
 	string script_name;
-	*infd >> script_name;
+	infd >> script_name;
 	vector<shared_ptr<Script>> scripts;
 	while (script_name != "END")
 	{
-		scripts.push_back((this->*_scriptFactoryMap[script_name])(infd));
-		*infd >> script_name;
+		scripts.push_back(((this->*_scriptFactoryMap[script_name])(infd)));
+		infd >> script_name;
 	}
 	return shared_ptr<Script>(new Scripts(scripts));
 }
-shared_ptr<Script> Parser::readNoScript(shared_ptr<istream>& infd)
+shared_ptr<Script> Parser::readNoScript(istream& infd)
 {
 	return shared_ptr<Script>(new NoScript);
 }
@@ -150,49 +196,49 @@ shared_ptr<GameObject> Parser::readObject(const string& obj_name)
 	if (obj_name == "NPC")
 	{
 		string script_name;
-		*_infd >> script_name;
+		_infd >> script_name;
 		return shared_ptr<GameObject>(new NPC(readScript(script_name), readGraphics(), readMovement(), false));
 	}
 	if (obj_name == "DOOR")
 	{
 		string map_name;
-		*_infd >> map_name;
+		_infd >> map_name;
 
 		unsigned s_pos;
-		*_infd >> s_pos;
+		_infd >> s_pos;
 
 		return shared_ptr<GameObject>(new Door(map_name, s_pos));
 	}
 	else if (obj_name == "CHEST")
 	{
 		string item;
-		*_infd >> item;
+		_infd >> item;
 		return shared_ptr<GameObject>(new  Chest(item));
 	}
 	string script_name;
-	*_infd >> script_name;
+	_infd >> script_name;
 	return shared_ptr<GameObject>(new LocalObject(readScript(script_name), readGraphics(), readMovement(), true));
 }
 shared_ptr<Script> Parser::readScript(string temp)
 {
 	if (temp == "DIALOG")
 	{
-		getline(*_infd, temp);
+		getline(_infd, temp);
 		return shared_ptr<Script>(new Dialog(temp));
 	}
 	else if (temp == "GIVEITEM")
 	{
-		*_infd >> temp;
+		_infd >> temp;
 		return shared_ptr<Script>(new GiveItem(temp));
 	}
 	else if (temp == "SCRIPTS")
 	{
-		*_infd >> temp;
+		_infd >> temp;
 		vector<shared_ptr<Script>> scripts;
 		while (temp != "END")
 		{
 			scripts.push_back(readScript(temp));
-			*_infd >> temp;
+			_infd >> temp;
 		}
 		return shared_ptr<Script>(new Scripts(scripts));
 	}
@@ -200,10 +246,10 @@ shared_ptr<Script> Parser::readScript(string temp)
 	{
 		shared_ptr<Script> if_s, else_s;
 		string item_name;
-		*_infd >> item_name;
-		*_infd >> temp;
+		_infd >> item_name;
+		_infd >> temp;
 		if_s = readScript(temp);
-		*_infd >> temp;
+		_infd >> temp;
 		else_s = readScript(temp);
 		return shared_ptr<Script>(new IFQItem(item_name, if_s, else_s));
 	}
@@ -211,10 +257,10 @@ shared_ptr<Script> Parser::readScript(string temp)
 	{
 		shared_ptr<Script> if_s, else_s;
 		unsigned level;
-		*_infd >> level;
-		*_infd >> temp;
+		_infd >> level;
+		_infd >> temp;
 		if_s = readScript(temp);
-		*_infd >> temp;
+		_infd >> temp;
 		else_s = readScript(temp);
 		return shared_ptr<Script>(new IFLevel(level, if_s, else_s));
 	}

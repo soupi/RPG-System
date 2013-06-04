@@ -13,7 +13,7 @@ using std::string;
 class GiveItem : public Script
 {
 public:
-	GiveItem(const string& item_name) : _item(item_name), _info("You have received a new Quest Item " + item_name + "!") { }
+	GiveItem(const string& item_name) : _item(item_name), _info("You have received an Item: \"" + item_name + "\"!") { }
 	virtual bool handleEvents(const Control& controls) { return _info.handleEvents(controls); }
 	virtual bool Update(Controller& ctrl, float elapsedTime) 
 	{ 

@@ -1,8 +1,10 @@
 #include "Dialog.h"
 #include "Macros.h"
+#include <algorithm>
 
 Dialog::Dialog(const string& str) : _dialogbox(str), _str(str), _clock(0.f)
 {
+	std::replace(_str.begin(), _str.end(), ';', '\n');
 	_continue = true;
 }
 void Dialog::enter(Hero& hero)

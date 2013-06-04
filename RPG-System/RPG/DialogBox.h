@@ -8,7 +8,7 @@
 using std::stringstream;
 using std::string;
 
-const unsigned SPEED = 20;
+const unsigned SPEED = 30;
 
 class Controller;
 

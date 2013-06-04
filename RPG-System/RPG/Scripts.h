@@ -21,4 +21,7 @@ private:
 private:
 	vector<shared_ptr<Script>> _scripts;
 	unsigned _current;
+	Hero* _hero;
+
+	bool Switch();
 };

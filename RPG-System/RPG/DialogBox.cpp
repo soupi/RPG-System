@@ -49,8 +49,16 @@ void DialogBox::Update(Controller& ctrl, float elapsedTime)
 	_clock = 0.f;
 	_text.setString(_str);
 	_str += _line.get();
-	if ((_str.length()-(_str.length() / 39)) % 39 == 0)
+	if ((_str.length()-(_str.length() / 40)) % 40 == 0)
+	{
+		if (_str.back() != ' ')
+		{
+			if (_line.peek() != ' ')
+				_str += '-';
+			else _line.get();
+		}
 		_str += '\n';
+	}
 }
 
 void DialogBox::Render(Controller& ctrl)

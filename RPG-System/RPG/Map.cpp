@@ -3,6 +3,7 @@
 #include "Utility.h"
 #include "Controller.h"
 #include <exception>
+#include "Parser.h"
 
 Map::Map(string filename)
 {
@@ -73,6 +74,9 @@ void Map::loadMap(string& filename)
 	loadLayer(mapfile, _foreground, _tileset_fore);
 	loadLayer(mapfile, _top, _tileset_top);
 
+	Parser parser(mapfile);
+	parser.Read(*this);
+
 	mapfile.close();
 }
 
@@ -113,9 +117,13 @@ void Map::addGameObject(shared_ptr<GameObject>& obj, unsigned pos)
 		throw(e);
 	}
 
-	obj->setPos(sf::Vector2f((pos%_width)*float(SCRN_TILE_SIZE), (pos/_width)*float(SCRN_TILE_SIZE)));
+	obj->setPos(sf::Vector2f((pos%_width)*float(SCRN_TILE_SIZE) + obj->getGraphics()->getRadius(), 
+		(pos/_width)*float(SCRN_TILE_SIZE) + obj->getGraphics()->getRadius()));
 	_game_objects.push_back(obj);
 }
+
+
+// ---------------- INTERACTIONS ----------------
 
 bool Map::canStepOnFG(sf::Vector2f& pos) const
 {
@@ -167,7 +175,7 @@ void Map::Step(LocalMap& localmap, GameObject& obj)
 	sf::FloatRect box = obj.getGraphics()->getCollisionBox();
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
 		if((it->get()) != &obj && it->get()->getGraphics()->checkCollision(box))
-			obj.StepOn(localmap, *(it->get())); // double dispatch
+			obj.StepOn(localmap, *(it->get())); // dispatch
 }
 
 void Map::Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box)
@@ -175,7 +183,7 @@ void Map::Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box)
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
 		if((it->get()) != &obj && it->get()->getGraphics()->checkCollision(box))
 		{
-		//	obj.act(localmap, *(it->get())); // double dispatch
+		//	obj.act(localmap, *(it->get())); // dispatch
 			(*it)->act(localmap, obj);
 		}
 }

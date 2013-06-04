@@ -6,7 +6,7 @@
 class Graphics
 {
 public:
-	Graphics(sf::Texture* texture, sf::Vector2i loc_on_texture, const sf::Vector2u& size);
+	Graphics(const sf::Texture* texture, sf::Vector2i loc_on_texture, const sf::Vector2u& size);
 	virtual ~Graphics() { }
 	virtual void Update();
 	virtual void Render(sf::RenderWindow& window);
@@ -26,7 +26,7 @@ protected:
 	Graphics();
 
 private:
-	sf::Texture* _texture;
+	const sf::Texture* _texture;
 	sf::Sprite _sprite;
 	sf::CircleShape _shadow;
 	sf::Vector2f _last_pos;

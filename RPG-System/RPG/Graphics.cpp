@@ -1,7 +1,7 @@
 #include "Graphics.h"
 #include "Tile.h"
 
-Graphics::Graphics(sf::Texture* texture, sf::Vector2i loc_on_texture, const sf::Vector2u& size) : _texture(texture), _loc_on_texture(loc_on_texture), 
+Graphics::Graphics(const sf::Texture* texture, sf::Vector2i loc_on_texture, const sf::Vector2u& size) : _texture(texture), _loc_on_texture(loc_on_texture), 
 	_display(true), _animation(0), _animation_clock(0.f)
 {
 	_sprite.setTexture(*_texture);

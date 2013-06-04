@@ -16,25 +16,29 @@ public:
 		static Bank instance;
 		return instance;
 	}
-	const T* get(string& name)
+	const T& get(string& filename)
 	{
-		return _items[name];
+		// if exists, return it.
+		if (_items.find(filename) != _items.end())
+			return _items[filename];
+
+		T item;
+		if (!item.loadFromFile(filename))
+			std::cerr << "fail to load texture from: " << filename;
+		else
+			_items[filename] = item;
+		return _items[filename];
 	}
 private:
 	// Private Constructor
-	Bank(vector<pair<string, string>>& items) 
+	Bank(vector<string>& items) 
 	{
-
 		for (auto it = items.begin(); it != items.end(); ++it)
 		{
-			T item;
-			if (!item.loadFromFile(it->second()))
-				std::cerr << "fail to load texture from: " << it->second();
-			else
-				_items.insert(it->first(), item);
+			get(*it);
 		}
-	
 	}
+	Bank() { }
 	// Stop the compiler generating methods of copy the object
 	Bank(Bank const& copy) { }           // Not Implemented
 	Bank& operator=(Bank const& copy) { } // Not Implemented

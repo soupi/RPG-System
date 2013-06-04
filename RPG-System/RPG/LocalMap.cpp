@@ -24,7 +24,7 @@ bool LocalMap::handleEvents(const Control& controls)
 		_change_state.set();
 
 	// controls to the scripts if there is one
-	if (!_scripts.empty())
+	if (!_scripts.empty() && _scripts.front()->hasEntered())
 		_scripts.front()->handleEvents(controls);
 	else // controls to the map
 		_map->handleEvents(controls);
@@ -80,7 +80,7 @@ void LocalMap::init(shared_ptr<StateParams>& params)
 	}
 	// add game objects to map
 		
-	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new Dialog("hello!\ngoodbye...")),
+/*	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new Dialog("hello!\ngoodbye...")),
 		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(4,0), sf::Vector2u(64, 96)))),
 		111);
 	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new IFQItem("key", shared_ptr<Script>(new Dialog("I can't give you anything.")), shared_ptr<Script>(new GiveItem("key")))),
@@ -96,6 +96,7 @@ void LocalMap::init(shared_ptr<StateParams>& params)
 		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(6,0), sf::Vector2u(64, 96)))),
 		315);
 
+*/
 	// add hero to map
 	_map->addGameObject(shared_ptr<GameObject>(params->getCtrl().getHero().getHeroForMap()), starting_tile);
 }

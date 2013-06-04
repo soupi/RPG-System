@@ -24,28 +24,28 @@ class Movement;
 class Parser
 {
 public:
-	Parser(shared_ptr<istream>& infd) : _infd(infd) {}
+	Parser(istream& infd);
 	void Read(Map& map);
-	Graphics* readGraphics();
-	Movement* readMovement();
+	Graphics* readGraphics(istream& infd);
+	Movement* readMovement(istream& infd);
 
 
 	// --------------------------------------------------------
 
-	shared_ptr<GameObject> makeNPC(shared_ptr<istream>& infd);
-	shared_ptr<GameObject> makeDoor(shared_ptr<istream>& infd);
-	shared_ptr<GameObject> makeChest(shared_ptr<istream>& infd);
+	shared_ptr<GameObject> makeNPC(istream& infd);
+	shared_ptr<GameObject> makeDoor(istream& infd);
+	shared_ptr<GameObject> makeChest(istream& infd);
 	
-	shared_ptr<Script> readDialog(shared_ptr<istream>& infd);
-	shared_ptr<Script> readGiveItem(shared_ptr<istream>& infd);
-	shared_ptr<Script> readIFQItem(shared_ptr<istream>& infd);
-	shared_ptr<Script> readIFLevel(shared_ptr<istream>& infd);
-	shared_ptr<Script> readScripts(shared_ptr<istream>& infd);
-	shared_ptr<Script> readNoScript(shared_ptr<istream>& infd);
+	shared_ptr<Script> readDialog(istream& infd);
+	shared_ptr<Script> readGiveItem(istream& infd);
+	shared_ptr<Script> readIFQItem(istream& infd);
+	shared_ptr<Script> readIFLevel(istream& infd);
+	shared_ptr<Script> readScripts(istream& infd);
+	shared_ptr<Script> readNoScript(istream& infd);
 
 private:
-	 shared_ptr<istream> _infd;
+	 istream& _infd;
 
-	 map<string, shared_ptr<GameObject> (Parser::*)(shared_ptr<istream>& infd)> _gameObjFactoryMap;
-	 map<string, shared_ptr<Script> (Parser::*)(shared_ptr<istream>& infd)> _scriptFactoryMap;
+	 map<string, shared_ptr<GameObject> (Parser::*)(istream& infd)> _gameObjFactoryMap;
+	 map<string, shared_ptr<Script> (Parser::*)(istream& infd)> _scriptFactoryMap;
 };

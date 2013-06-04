@@ -62,3 +62,44 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+
+# NPC to create on tile 111.
+NPC 
+	DIALOG hello, world!;Welcome!
+	NOMOVEMENT
+	GRAPHICS char.png 
+		4 0 
+		64 96 
+	111
+
+DOOR map.mp 204
+	1
+	
+CHEST key 
+	5
+	
+# NPC to create on tile 10. will check if you have the "key" item
+NPC 
+	IFQITEM key
+		DIALOG You have found my key!; I will tell you my secret.;There is a door at the top left square of this town.
+		DIALOG You don't have the key.;find it and I will tell you something.
+	NOMOVEMENT
+	GRAPHICS char.png 
+		6 4 
+		64 96 
+	10
+
+# NPC on tile 15. will give you a ring if you don't have one.
+NPC 
+	SCRIPTS
+		DIALOG hello, world! here is a gift!
+		IFQITEM ring 
+			DIALOG oh wait. never mind.
+			GIVEITEM ring
+	END
+NOMOVEMENT
+GRAPHICS char.png 
+	6 0 
+	64 96 
+15
+END
