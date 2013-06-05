@@ -33,7 +33,6 @@ private:
 	unsigned _exp;
 	unsigned _level;
 	unsigned _coins;
-	// vector<Item*> _items;
 	std::map<std::string, QuestItem> _quest_items;
 	
 	int _HP;

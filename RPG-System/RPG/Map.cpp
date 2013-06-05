@@ -5,6 +5,12 @@
 #include <exception>
 #include "Parser.h"
 
+struct compare_obj_by_y
+{
+	bool operator() (const shared_ptr<GameObject> & lhs, const shared_ptr<GameObject> & rhs) { return lhs->getPos().y < rhs->getPos().y; }
+};
+
+
 Map::Map(string filename)
 {
 	loadMap(filename);
@@ -18,6 +24,7 @@ void Map::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
  
 	for (vector<shared_ptr<GameObject>>::iterator obj = _game_objects.begin(); obj != _game_objects.end(); ++obj)
 			(*obj)->Update(ctrl, localmap, elapsedTime);
+	std::sort(_game_objects.begin(), _game_objects.end(), compare_obj_by_y());
 }
 
 void Map::handleEvents(const Control& controls)
@@ -119,7 +126,11 @@ void Map::addGameObject(shared_ptr<GameObject>& obj, unsigned pos)
 
 	obj->setPos(sf::Vector2f((pos%_width)*float(SCRN_TILE_SIZE) + obj->getGraphics()->getRadius(), 
 		(pos/_width)*float(SCRN_TILE_SIZE) + obj->getGraphics()->getRadius()));
+
 	_game_objects.push_back(obj);
+
+	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.end()-1; it != _game_objects.begin() && (*it)->getPos().y < (*(it-1))->getPos().y; --it)
+		std::swap(it, it-1);
 }
 
 

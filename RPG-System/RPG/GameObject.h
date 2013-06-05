@@ -12,6 +12,7 @@ class Controller;
 class LocalMap;
 class HeroCharacter;
 class LocalObject;
+class Enemy;
 
 using std::shared_ptr;
 
@@ -52,10 +53,10 @@ public:
 	virtual void act(LocalMap& localmap, LocalObject&) { }
 	virtual void StepOn(LocalMap& localmap, LocalObject&) {}
 	virtual bool canStepOn(LocalObject&) { return true; } 
-	// default for Monster
-//	virtual void act(LocalMap& localmap, Monster&) { }
-//	virtual void StepOn(LocalMap& localmap, Monster&) {}
-//	virtual bool canStepOn(Monster&) { return true; } 
+	// default for Enemy
+	virtual void act(LocalMap& localmap, Enemy&) { }
+	virtual void StepOn(LocalMap& localmap, Enemy&) {}
+	virtual bool canStepOn(Enemy&) { return true; } 
 
 private:
 	shared_ptr<Graphics> _graphics;

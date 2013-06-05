@@ -16,7 +16,7 @@ public:
 
 	virtual bool canStepOn(LocalObject& obj) { return _passable; }
 	virtual bool canStepOn(HeroCharacter& obj) { return _passable; }
-	//virtual bool canStepOn(Monster& obj) { return _passable; }
+	virtual bool canStepOn(Enemy& obj) { return _passable; }
 
 	void act(LocalMap& localmap, HeroCharacter&);
 
