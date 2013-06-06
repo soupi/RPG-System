@@ -80,23 +80,6 @@ void LocalMap::init(shared_ptr<StateParams>& params)
 	}
 	// add game objects to map
 		
-/*	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new Dialog("hello!\ngoodbye...")),
-		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(4,0), sf::Vector2u(64, 96)))),
-		111);
-	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new IFQItem("key", shared_ptr<Script>(new Dialog("I can't give you anything.")), shared_ptr<Script>(new GiveItem("key")))),
-		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(6,4), sf::Vector2u(64, 96)))),
-		61);
-	_map->addGameObject(shared_ptr<GameObject>(new Chest("key")), 4);
-	_map->addGameObject(shared_ptr<GameObject>(new Door("map.mp", 204)), 1);
-
-	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new Dialog("I have a new chicken!")),
-		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(4,4), sf::Vector2u(64, 96)))),
-		207);
-	_map->addGameObject(shared_ptr<GameObject>(new NPC(shared_ptr<Script>(new IFQItem("key", shared_ptr<Script>(new Dialog("You have the key.")), shared_ptr<Script>(new Dialog("You don't have the key.")))),
-		new Graphics(params->getCtrl().getHero().getHeroForMap()->getTexture(), sf::Vector2i(6,0), sf::Vector2u(64, 96)))),
-		315);
-
-*/
 	// add hero to map
 	_map->addGameObject(shared_ptr<GameObject>(params->getCtrl().getHero().getHeroForMap()), starting_tile);
 }

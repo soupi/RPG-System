@@ -129,7 +129,7 @@ void Map::addGameObject(shared_ptr<GameObject>& obj, unsigned pos)
 
 	_game_objects.push_back(obj);
 
-	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.end()-1; it != _game_objects.begin() && (*it)->getPos().y < (*(it-1))->getPos().y; --it)
+	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.end()-1; it != _game_objects.begin() && (*it)->getPos().y < (*(it-1))->getPos().y;)
 		std::swap(it, it-1);
 }
 

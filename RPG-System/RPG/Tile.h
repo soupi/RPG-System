@@ -2,8 +2,8 @@
 
 #include <SFML\Graphics.hpp>
 
-const unsigned TILE_SIZE = 64;
-const unsigned SCRN_TILE_SIZE = TILE_SIZE;
+const unsigned TILE_SIZE = 32;
+const unsigned SCRN_TILE_SIZE = 64;
 
 class Tile {
 public:

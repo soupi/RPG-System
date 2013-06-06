@@ -72,11 +72,11 @@ NPC
 		64 96 
 	111
 
-DOOR map.mp 204
+DOOR map2.mp 1
 	1
 	
-CHEST key 
-	5
+CHEST key
+	6
 	
 # NPC to create on tile 10. will check if you have the "key" item
 NPC 

@@ -8,7 +8,7 @@
 using std::shared_ptr; 
 
 const int WINDOW_W = 960;
-const int WINDOW_H = 640;
+const int WINDOW_H = 540;
 const unsigned FRAME_RATE = 60;
 
 Controller::Controller() {
@@ -85,19 +85,22 @@ void Controller::initWindow()
 	// create window
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
+	
 
 	_window.create(sf::VideoMode(WINDOW_W, WINDOW_H), 
-		"RPG", sf::Style::Close, settings);
+		"RPG", sf::Style::Fullscreen, settings);
 	
+
 	_window.setVerticalSyncEnabled(true); // set refresh rate as screen's refresh rate
 	_window.setJoystickThreshold(10000); // joystick threshold
 	_window.setFramerateLimit(FRAME_RATE);
 	
+	_window.setMouseCursorVisible(false);
 
 	// create view
 	_view.setCenter(WINDOW_W/2.f, WINDOW_H/2.f);
 	_view.setSize(float(WINDOW_W), float(WINDOW_H));
-	_view.zoom(1.25f);
+	_view.zoom(1.5f);
 
 	_window.setView(_view);
 }

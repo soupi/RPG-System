@@ -31,7 +31,7 @@ void MainMenu::Update(Controller& ctrl, float elapsedTime)
 
 void MainMenu::Render(Controller& ctrl)
 {
-	ctrl.getWindow().draw(_rect);
+	//ctrl.getWindow().draw(_rect);
 	_dialog.Render(ctrl);
 }
 
