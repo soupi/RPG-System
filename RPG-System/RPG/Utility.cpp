@@ -13,7 +13,6 @@ void LoadFont(sf::Font& font, const char* filename)
 // load texture from filename
 void loadTexture(sf::Texture& texture, const std::string& filename)
 {
-	//texture.create(TILE_SIZE, TILE_SIZE);
 	if (!texture.loadFromFile(filename))
 	{
 		std::cerr << "fail to load texture from: " << filename;

@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="Attack.h" />
     <ClInclude Include="Bank.h" />
+    <ClInclude Include="Bar.h" />
     <ClInclude Include="ChangeMap.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="Controller.h" />
@@ -122,14 +123,17 @@
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bar.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="DialogBox.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="HeroCharacter.cpp" />
+    <ClCompile Include="HeroData.cpp" />
     <ClCompile Include="IF_Script.cpp" />
     <ClCompile Include="LocalMap.cpp" />
     <ClCompile Include="LocalObject.cpp" />

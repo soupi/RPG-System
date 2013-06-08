@@ -168,10 +168,13 @@
     <ClInclude Include="Bank.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
+    <ClInclude Include="Attack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Attack.h">
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Bar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -230,9 +233,6 @@
     <ClCompile Include="LocalObject.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="IF_Script.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -240,6 +240,18 @@
       <Filter>Source Files\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="Stats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IF_Script.cpp">
+      <Filter>Source Files\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Bar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

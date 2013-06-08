@@ -2,6 +2,8 @@
 
 #include <map>
 #include <string>
+#include <vector>
+#include <iostream>
 
 using std::string;
 using std::map;
@@ -16,7 +18,7 @@ public:
 		static Bank instance;
 		return instance;
 	}
-	const T& get(string& filename)
+	const T& get(string filename)
 	{
 		// if exists, return it.
 		if (_items.find(filename) != _items.end())
@@ -24,14 +26,14 @@ public:
 
 		T item;
 		if (!item.loadFromFile(filename))
-			std::cerr << "fail to load texture from: " << filename;
+			std::cerr << "fail to load item from: " << filename;
 		else
 			_items[filename] = item;
 		return _items[filename];
 	}
 private:
 	// Private Constructor
-	Bank(vector<string>& items) 
+	Bank(std::vector<string>& items) 
 	{
 		for (auto it = items.begin(); it != items.end(); ++it)
 		{

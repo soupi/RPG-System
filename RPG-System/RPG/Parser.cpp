@@ -9,6 +9,7 @@
 #include "Chest.h"
 #include "Door.h"
 #include "NPC.h"
+#include "Enemy.h"
 // include scripts
 #include "Script.h"
 #include "Scripts.h"
@@ -32,6 +33,7 @@
 Parser::Parser(istream& infd) : _infd(infd)
 {
 	_gameObjFactoryMap["NPC"] = &Parser::makeNPC;
+	_gameObjFactoryMap["ENEMY"] = &Parser::makeEnemy;
 	_gameObjFactoryMap["DOOR"] = &Parser::makeDoor;
 	_gameObjFactoryMap["CHEST"] = &Parser::makeChest;
 
@@ -104,6 +106,12 @@ shared_ptr<GameObject> Parser::makeNPC(istream& infd)
 	shared_ptr<Script> script = (this->*readscript)(infd);
 	return shared_ptr<GameObject>(new NPC( script, readGraphics(infd), readMovement(infd), false));
 }
+
+shared_ptr<GameObject> Parser::makeEnemy(istream& infd)
+{
+	return shared_ptr<GameObject>(new Enemy(readGraphics(infd), readMovement(infd)));
+}
+
 shared_ptr<GameObject> Parser::makeDoor(istream& infd)
 {
 	string map_name;
@@ -178,96 +186,6 @@ shared_ptr<Script> Parser::readNoScript(istream& infd)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-shared_ptr<GameObject> Parser::readObject(const string& obj_name)
-{
-	if (obj_name == "NPC")
-	{
-		string script_name;
-		_infd >> script_name;
-		return shared_ptr<GameObject>(new NPC(readScript(script_name), readGraphics(), readMovement(), false));
-	}
-	if (obj_name == "DOOR")
-	{
-		string map_name;
-		_infd >> map_name;
-
-		unsigned s_pos;
-		_infd >> s_pos;
-
-		return shared_ptr<GameObject>(new Door(map_name, s_pos));
-	}
-	else if (obj_name == "CHEST")
-	{
-		string item;
-		_infd >> item;
-		return shared_ptr<GameObject>(new  Chest(item));
-	}
-	string script_name;
-	_infd >> script_name;
-	return shared_ptr<GameObject>(new LocalObject(readScript(script_name), readGraphics(), readMovement(), true));
-}
-shared_ptr<Script> Parser::readScript(string temp)
-{
-	if (temp == "DIALOG")
-	{
-		getline(_infd, temp);
-		return shared_ptr<Script>(new Dialog(temp));
-	}
-	else if (temp == "GIVEITEM")
-	{
-		_infd >> temp;
-		return shared_ptr<Script>(new GiveItem(temp));
-	}
-	else if (temp == "SCRIPTS")
-	{
-		_infd >> temp;
-		vector<shared_ptr<Script>> scripts;
-		while (temp != "END")
-		{
-			scripts.push_back(readScript(temp));
-			_infd >> temp;
-		}
-		return shared_ptr<Script>(new Scripts(scripts));
-	}
-	else if (temp == "IFQITEM")
-	{
-		shared_ptr<Script> if_s, else_s;
-		string item_name;
-		_infd >> item_name;
-		_infd >> temp;
-		if_s = readScript(temp);
-		_infd >> temp;
-		else_s = readScript(temp);
-		return shared_ptr<Script>(new IFQItem(item_name, if_s, else_s));
-	}
-	else if (temp == "IFLevel")
-	{
-		shared_ptr<Script> if_s, else_s;
-		unsigned level;
-		_infd >> level;
-		_infd >> temp;
-		if_s = readScript(temp);
-		_infd >> temp;
-		else_s = readScript(temp);
-		return shared_ptr<Script>(new IFLevel(level, if_s, else_s));
-	}
-	return shared_ptr<Script>(new NoScript);
-}
-
-*/
 
 
 

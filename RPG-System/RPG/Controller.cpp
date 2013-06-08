@@ -18,7 +18,7 @@ Controller::Controller() {
 
 void Controller::run()
 {
-	while (true)
+	while (_hero.isAlive())
 	{
 		float deltaTime = _clock.restart().asSeconds();
 
@@ -41,6 +41,8 @@ void Controller::run()
 		if ((deltaTime = _clock.getElapsedTime().asSeconds()) < 1.f/FRAME_RATE)
 			sf::sleep(sf::seconds(1.f/FRAME_RATE - deltaTime));
 	}
+	shared_ptr<StateParams> params( new ParamsCtrl(*this));
+	_stateMachine.Change("gamemenu", params);
 }
 
 bool Controller::handleEvents(sf::Event& event)
@@ -87,9 +89,10 @@ void Controller::initWindow()
 	settings.antialiasingLevel = 8;
 	
 
-	_window.create(sf::VideoMode(WINDOW_W, WINDOW_H), 
+	double ratio = double(sf::VideoMode::getDesktopMode().height)/sf::VideoMode::getDesktopMode().width;
+
+	_window.create(sf::VideoMode(WINDOW_W, unsigned(WINDOW_W*ratio)), 
 		"RPG", sf::Style::Fullscreen, settings);
-	
 
 	_window.setVerticalSyncEnabled(true); // set refresh rate as screen's refresh rate
 	_window.setJoystickThreshold(10000); // joystick threshold
@@ -100,7 +103,7 @@ void Controller::initWindow()
 	// create view
 	_view.setCenter(WINDOW_W/2.f, WINDOW_H/2.f);
 	_view.setSize(float(WINDOW_W), float(WINDOW_H));
-	_view.zoom(1.5f);
+	_view.zoom(2.f);
 
 	_window.setView(_view);
 }

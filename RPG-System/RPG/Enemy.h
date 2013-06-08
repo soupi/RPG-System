@@ -4,7 +4,7 @@
 #include "Attack.h"
 #include "Stats.h"
 
-class Enemy : GameObject
+class Enemy : public GameObject
 {
 public:
 	Enemy(Graphics* graphics = new NoGraphics, Movement* movement = new NoMovement) : GameObject(graphics, movement) {}
@@ -16,7 +16,9 @@ public:
 	virtual bool canStepOn(HeroCharacter& obj) { return true; }
 	virtual bool canStepOn(Enemy& obj) { return true; }
 
-	void act(LocalMap& localmap, HeroCharacter& hero);
+	virtual void act(LocalMap& localmap, HeroCharacter& hero) { }
+	virtual void StepOn(LocalMap& localmap, HeroCharacter& obj);
+	void attack(Stats& stats);
 private:
 	int _HP;
 	Stats _stats;

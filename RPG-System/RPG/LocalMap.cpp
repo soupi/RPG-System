@@ -4,12 +4,7 @@
 #include "UserMovement.h"
 #include "Utility.h"
 
-#include "Door.h"
-#include "NPC.h"
-#include "Chest.h"
-#include "Dialog.h"
-#include "IFScript.h"
-#include "GiveItem.h"
+#include "Enemy.h"
 #include "ParamsCtrl.h"
 
 LocalMap::LocalMap()
@@ -58,6 +53,7 @@ void LocalMap::Update(Controller& ctrl, float elapsedTime)
 void LocalMap::Render(Controller& ctrl)
 {
 	_map->Render(ctrl);
+	ctrl.getHero().getHeroData()->showHP(ctrl);
 	if (!_scripts.empty())
 		if (_scripts.front()->hasEntered())
 			_scripts.front()->Render(ctrl);

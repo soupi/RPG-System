@@ -6,6 +6,8 @@
 #include "Controller.h"
 #include "LocalMap.h"
 
+const float HURT_TIME = 1.f;
+
 HeroCharacter::HeroCharacter(shared_ptr<HeroData>& data) : _act(false), _clock(0.f), _hero_data(data)
 {
 	loadTexture(_hero_texture, "char.png");
@@ -25,8 +27,10 @@ void HeroCharacter::handleEvents(const Control& controls)
 void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 {
 	_clock += elapsedTime;
+	if (_hurt_timer > 0.f)
+		_hurt_timer -= elapsedTime;
 	GameObject::Update(ctrl, localmap, elapsedTime);
-	// draw Lives and HP
+	
 	ctrl.getView().setCenter(getPos());
 	if (_act)
 	{
@@ -38,7 +42,6 @@ void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTi
 		localmap.map()->Act(localmap, *this, box);
 	}
 }
-
 
 void HeroCharacter::giveQuestItem(QuestItem& item) 
 {  
@@ -52,4 +55,13 @@ bool HeroCharacter::hasQuestItem(const string& item_name)
 void HeroCharacter::act(LocalMap& localmap, LocalObject& obj)
 {
 	obj.act(localmap, *this);
+}
+
+void HeroCharacter::attack(Stats& stats)
+{
+	if (_hurt_timer <= 0)
+	{
+		_hero_data->takeDamage(calcDamage(stats, _hero_data->getStats()));
+		_hurt_timer = HURT_TIME;
+	}
 }

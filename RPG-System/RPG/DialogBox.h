@@ -25,7 +25,6 @@ public:
 
 private:
 	sf::RectangleShape _rect;
-	sf::Font _font;
 	sf::Text _text;
 	stringstream _stream;
 	stringstream _line;

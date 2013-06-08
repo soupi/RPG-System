@@ -33,6 +33,7 @@ public:
 	// --------------------------------------------------------
 
 	shared_ptr<GameObject> makeNPC(istream& infd);
+	shared_ptr<GameObject> makeEnemy(istream& infd);
 	shared_ptr<GameObject> makeDoor(istream& infd);
 	shared_ptr<GameObject> makeChest(istream& infd);
 	

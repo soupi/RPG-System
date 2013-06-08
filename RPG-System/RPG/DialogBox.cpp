@@ -2,6 +2,7 @@
 #include "Controller.h"
 #include <iostream>
 #include "Utility.h"
+#include "Bank.h"
 
 
 
@@ -11,8 +12,7 @@ DialogBox::DialogBox(const string& str) : _stream(str), _clock(0.f)
 	_rect.setOutlineColor(sf::Color::White);
 	_rect.setOutlineThickness(2.f);
 
-	LoadFont(_font, "resources/consola.ttf");
-	_text.setFont(_font);
+	_text.setFont(Bank<sf::Font>::getInstance().get("resources/consola.ttf"));
 	_text.setCharacterSize(24);
 
 	newLine();
@@ -49,7 +49,7 @@ void DialogBox::Update(Controller& ctrl, float elapsedTime)
 	_clock = 0.f;
 	_text.setString(_str);
 	_str += _line.get();
-	if ((_str.length()-(_str.length() / 49)) % 49 == 0)
+	if ((_str.length()-(_str.length() / 52)) % 52 == 0)
 	{
 		if (_str.back() != ' ')
 		{
@@ -66,7 +66,7 @@ void DialogBox::Render(Controller& ctrl)
 	sf::Vector2f center = ctrl.getView().getCenter();
 	sf::Vector2f size = ctrl.getView().getSize();
 
-	_rect.setSize(sf::Vector2f(size.x/2.f, size.y/4.f));
+	_rect.setSize(sf::Vector2f(size.x/2.5f, size.y/4.f));
 	_rect.setPosition(center.x - (_rect.getSize().x/1.5f) , center.y + (_rect.getSize().y/2.f));
 	_text.setPosition(_rect.getPosition() + sf::Vector2f(20.f, 20.f));
 

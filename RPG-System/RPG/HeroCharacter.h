@@ -24,6 +24,7 @@ public:
 //	void StepOn(LocalMap& localmap, Enemy& obj);
 //	bool canStepOn(Enemy& obj);
 
+	void attack(Stats& stats);
 
 	void giveQuestItem(QuestItem& item);
 	bool hasQuestItem(const string& item_name);
@@ -33,4 +34,6 @@ private:
 	bool _act;
 	float _clock;
 	shared_ptr<HeroData> _hero_data;
+	float _hurt_timer;
+	bool _ishurt;
 };

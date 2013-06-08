@@ -71,6 +71,14 @@ NPC
 		4 0 
 		64 96 
 	111
+	
+# NPC to create on tile 101.
+ENEMY 
+	NOMOVEMENT
+	GRAPHICS char.png 
+		4 4 
+		64 96 
+	101
 
 DOOR map2.mp 1
 	1
