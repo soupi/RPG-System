@@ -9,7 +9,7 @@ class Bar
 public:
 	Bar(unsigned base = 100, sf::Vector2f& size = sf::Vector2f(400, 40), bool color = true);
 	void setValue(unsigned value);
-	void show(Controller& ctrl, const sf::Vector2f& pos);
+	void show(Controller& ctrl, sf::Vector2f& position);
 	void setPosition(sf::Vector2f&);
 
 private:

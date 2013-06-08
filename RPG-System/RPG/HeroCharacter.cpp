@@ -5,6 +5,7 @@
 #include "Utility.h"
 #include "Controller.h"
 #include "LocalMap.h"
+#include "Enemy.h"
 
 const float HURT_TIME = 1.f;
 
@@ -57,7 +58,11 @@ void HeroCharacter::act(LocalMap& localmap, LocalObject& obj)
 	obj.act(localmap, *this);
 }
 
-void HeroCharacter::attack(Stats& stats)
+void HeroCharacter::act(LocalMap& localmap, Enemy& obj)
+{
+	obj.attack(_hero_data->getStats());
+}
+void HeroCharacter::attack(const Stats& stats)
 {
 	if (_hurt_timer <= 0)
 	{

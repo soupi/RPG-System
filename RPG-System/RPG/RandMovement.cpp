@@ -1,31 +1,16 @@
-#include "UserMovement.h"
+#include "RandMovement.h"
 #include "Tile.h"
 #include "LocalMap.h"
 #include "GameObject.h"
 #include "Utility.h"
 
-void UserMovement::handleEvents(const Control& controls)
+
+void RandMovement::handleEvents(const Control& controls)
 {
 
-	if (controls.isPressed(RIGHT))
-		_direction.x = 1;
-	else if (controls.isPressed(LEFT))
-		_direction.x = -1;
-	else _direction.x = 0;
-
-	if (controls.isPressed(UP))
-		_direction.y = -1;
-	else if (controls.isPressed(DOWN))
-		_direction.y = 1;
-	else _direction.y = 0;
-
-	// toggle run mode
-	if (controls.isPressed(B))
-		_run = true;
-	else _run = false;
 }
 
-void UserMovement::Update(LocalMap& localmap, GameObject& my_obj, float elapsedTime)
+void RandMovement::Update(LocalMap& localmap, GameObject& my_obj, float elapsedTime)
 {
 	if (_newpos)
 	{
@@ -34,14 +19,27 @@ void UserMovement::Update(LocalMap& localmap, GameObject& my_obj, float elapsedT
 		_newpos = false; 
 	}
 
+	_next_move_timer -= elapsedTime;
+	_moving_duration_timer -= elapsedTime;
+
+	if (_next_move_timer <= 0)
+	{
+		_direction.x = float(rand() % 3 -1);
+		_direction.y = float(rand() % 3 -1);
+		_next_move_timer = _time_between_moves;
+		_moving_duration_timer = 1.f;
+	}
+
+	if (_moving_duration_timer > 0)
+		return;
+
+
 	if (isZero(_direction))
 		return;
 
 	my_obj.getGraphics()->setDir(_direction);
 
 	int scalar = SCRN_TILE_SIZE;
-	if (_run)
-		scalar = 2*SCRN_TILE_SIZE;
 
 	sf::Vector2f temp_dir(scalar * _speed * _direction.x  * elapsedTime, 0);
 	my_obj.getGraphics()->move(temp_dir);
@@ -49,7 +47,6 @@ void UserMovement::Update(LocalMap& localmap, GameObject& my_obj, float elapsedT
 	if (!localmap.map()->canStepOn(my_obj))
 	{
 		my_obj.getGraphics()->undo_move();
-	//	_direction.x = 0;
 	}
 
 	temp_dir.y = scalar * _speed * _direction.y  * elapsedTime;
@@ -58,7 +55,6 @@ void UserMovement::Update(LocalMap& localmap, GameObject& my_obj, float elapsedT
 	if (!localmap.map()->canStepOn(my_obj))
 	{
 		my_obj.getGraphics()->undo_move();
-	//	_direction.y = 0;
 	}
 
 	localmap.map()->Step(localmap, my_obj);

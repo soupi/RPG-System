@@ -13,4 +13,5 @@ unsigned max(unsigned a, unsigned b);
 unsigned min(unsigned a, unsigned b);
 unsigned round(float a);
 
-
+sf::Vector2f operator*(int scalar, sf::Vector2f vec);
+bool isZero(sf::Vector2f vec);

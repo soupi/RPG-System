@@ -48,10 +48,9 @@ void Bar::setColor()
 }
 
 
-void Bar::show(Controller& ctrl, const sf::Vector2f& pos)
+void Bar::show(Controller& ctrl, sf::Vector2f& position)
 {
-	sf::Vector2f init_window_pos = ctrl.getView().getCenter() - sf::Vector2f(ctrl.getView().getSize().x/2, ctrl.getView().getSize().y/2);
-	sf::Vector2f position = init_window_pos + pos;
+
 
 	setPosition(position);
 	

@@ -23,6 +23,7 @@ public:
 	void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 	void Render(Controller& ctrl);
 	void addGameObject(shared_ptr<GameObject>& obj, unsigned pos);
+	void remGameObject(GameObject* obj);
 	bool canStepOn(GameObject& obj);
 	void Step(LocalMap& localmap, GameObject& obj);
 	void Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box);

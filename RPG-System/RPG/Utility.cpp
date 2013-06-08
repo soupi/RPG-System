@@ -49,3 +49,13 @@ unsigned round(float a)
 
         return unsigned(a);
 }
+
+
+sf::Vector2f operator*(int scalar, sf::Vector2f vec)
+{
+	return sf::Vector2f(scalar*vec.x, scalar*vec.y);
+}
+bool isZero(sf::Vector2f vec)
+{
+	return (vec.x == 0.f && vec.y == 0.f) ? true : false;
+}

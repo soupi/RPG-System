@@ -73,8 +73,8 @@ NPC
 	111
 	
 # NPC to create on tile 101.
-ENEMY 
-	NOMOVEMENT
+ENEMY 4 7 2
+	RANDMOVEMENT
 	GRAPHICS char.png 
 		4 4 
 		64 96 

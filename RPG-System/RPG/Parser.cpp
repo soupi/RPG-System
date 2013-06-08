@@ -24,6 +24,7 @@
 #include "Movement.h"
 #include "NoMovement.h"
 #include "UserMovement.h"
+#include "RandMovement.h"
 
 #include <iostream>
 #include <fstream>
@@ -92,6 +93,8 @@ Movement* Parser::readMovement(istream& infd)
 	infd >> movement;
 	if (movement == "USERMOVEMENT")
 		return new UserMovement;
+	else if (movement == "RANDMOVEMENT")
+		return new RandMovement(3.f);
 
 	return new NoMovement;
 }
@@ -109,7 +112,12 @@ shared_ptr<GameObject> Parser::makeNPC(istream& infd)
 
 shared_ptr<GameObject> Parser::makeEnemy(istream& infd)
 {
-	return shared_ptr<GameObject>(new Enemy(readGraphics(infd), readMovement(infd)));
+	unsigned atk, def, lck;
+	infd >> atk >> def >> lck;
+
+	Stats stats(atk, def, lck);
+
+	return shared_ptr<GameObject>(new Enemy(readGraphics(infd), readMovement(infd), stats));
 }
 
 shared_ptr<GameObject> Parser::makeDoor(istream& infd)

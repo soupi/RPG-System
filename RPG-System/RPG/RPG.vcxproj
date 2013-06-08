@@ -111,10 +111,11 @@
     <ClInclude Include="ParamsCtrl.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="QuestItem.h" />
+    <ClInclude Include="RandMovement.h" />
+    <ClInclude Include="remObject.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="Scripts.h" />
     <ClInclude Include="State.h" />
-    <ClInclude Include="StateFactory.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StateParams.h" />
     <ClInclude Include="Stats.h" />
@@ -143,6 +144,8 @@
     <ClCompile Include="NoMovement.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="RandMovement.cpp" />
+    <ClCompile Include="remObjScript.cpp" />
     <ClCompile Include="Scripts.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Tile.cpp" />

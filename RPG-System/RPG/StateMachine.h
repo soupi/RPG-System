@@ -7,7 +7,6 @@
 #include <map>
 #include <string>
 #include "State.h"
-#include "StateFactory.h"
 #include "StateParams.h"
 #include "EmptyState.h"
 #include "Control.h"

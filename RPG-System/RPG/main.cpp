@@ -3,6 +3,8 @@
 
 int main()
 {
+	srand(unsigned(time(NULL)));
+
 	Controller ctrl;
 	ctrl.run();
 

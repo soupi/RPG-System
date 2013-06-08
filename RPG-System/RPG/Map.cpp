@@ -198,3 +198,13 @@ void Map::Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box)
 			(*it)->act(localmap, obj);
 		}
 }
+
+void Map::remGameObject(GameObject* obj)
+{
+	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+		if ((*it).get() == obj)
+		{
+			_game_objects.erase(it);
+			break;
+		}
+}

@@ -51,9 +51,6 @@
     <ClInclude Include="State.h">
       <Filter>Header Files\StatesMachine</Filter>
     </ClInclude>
-    <ClInclude Include="StateFactory.h">
-      <Filter>Header Files\StatesMachine</Filter>
-    </ClInclude>
     <ClInclude Include="StateMachine.h">
       <Filter>Header Files\StatesMachine</Filter>
     </ClInclude>
@@ -177,6 +174,12 @@
     <ClInclude Include="Bar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="remObject.h">
+      <Filter>Header Files\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="RandMovement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -252,6 +255,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HeroData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="remObjScript.cpp">
+      <Filter>Source Files\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="RandMovement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

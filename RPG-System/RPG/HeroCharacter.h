@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "HeroData.h"
+#include "Enemy.h"
 
 using std::weak_ptr;
 
@@ -20,11 +21,11 @@ public:
 	bool canStepOn(GameObject& obj) { return obj.canStepOn(*this); }
 
 	void act(LocalMap& localmap, LocalObject& obj);
-//	void act(LocalMap& localmap, Enemy& obj);
-//	void StepOn(LocalMap& localmap, Enemy& obj);
+	void act(LocalMap& localmap, Enemy& obj);
+	void StepOn(LocalMap& localmap, Enemy& obj) { obj.StepOn(localmap, *this); }
 //	bool canStepOn(Enemy& obj);
 
-	void attack(Stats& stats);
+	void attack(const Stats& stats);
 
 	void giveQuestItem(QuestItem& item);
 	bool hasQuestItem(const string& item_name);
