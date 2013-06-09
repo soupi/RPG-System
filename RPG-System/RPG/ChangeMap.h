@@ -4,7 +4,7 @@
 #include <string>
 #include <memory>
 #include "Controller.h"
-#include "ParamsCtrl.h"
+#include "ParamsMap.h"
 
 using std::string;
 

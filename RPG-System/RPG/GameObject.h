@@ -1,3 +1,5 @@
+// base class for game objects.
+
 #pragma once
 
 #include <SFML\Graphics.hpp>
@@ -16,14 +18,12 @@ class Enemy;
 
 using std::shared_ptr;
 
-const float speed = 250.f;
-
-
 class GameObject
 {
 public:
+	// basic interface
 	GameObject(Graphics* graphics = new NoGraphics, Movement* movement = new NoMovement);
-	virtual ~GameObject();
+	virtual ~GameObject() {}
 	virtual void handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 	virtual void Render(Controller& ctrl);
@@ -33,14 +33,15 @@ public:
 
 	sf::Vector2f getPos() const { return _graphics->getPos(); }
 	void setPos(sf::Vector2f pos) { _movement->setPos(pos); }
+	float getRadius() const { return _graphics->getRadius(); }
+	bool checkCollision(sf::FloatRect& box) const { return _graphics->checkCollision(box); }
+	sf::FloatRect getCollisionBox() const { return _graphics->getCollisionBox(); }
+	sf::Vector2f getFacingDirection() const { return _graphics->getFacingDirection(); }
+	sf::Vector2f getSize() const { return _graphics->getSize(); }
+
+	shared_ptr<Graphics> getGraphics() { return _graphics; }
 	
-	bool checkCollision(sf::FloatRect& box);
-
-	shared_ptr<Graphics>& getGraphics() { return _graphics; }
-
 	// interaction using double dispatch
-
-
 	virtual void act(LocalMap& localmap, GameObject& obj) = 0;
 	virtual void StepOn(LocalMap& localmap, GameObject& obj) = 0;
 	virtual bool canStepOn(GameObject& obj) = 0;
@@ -59,6 +60,7 @@ public:
 	virtual bool canStepOn(Enemy&) { return true; } 
 
 private:
+	// strategy pattern
 	shared_ptr<Graphics> _graphics;
 	shared_ptr<Movement> _movement;
 };

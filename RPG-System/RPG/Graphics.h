@@ -1,3 +1,5 @@
+// graphics representation class.  also holds the location on the window
+
 #pragma once
 
 #include <SFML\Graphics.hpp>
@@ -10,17 +12,19 @@ public:
 	virtual ~Graphics() { }
 	virtual void Update();
 	virtual void Render(sf::RenderWindow& window);
+	// ----------------
 	void move(const sf::Vector2f& direction);
 	void setPos(const sf::Vector2f pos);
 	void undo_move();
 	sf::Vector2f getPos() const;
+	void setDir(sf::Vector2f& dir) { _dir = dir; }
+	// ----------------
 	float getRadius() const { return _shadow.getRadius(); }
 	void setDisplay(bool dis);
 	bool checkCollision(sf::FloatRect& box) const;
 	sf::FloatRect getCollisionBox() const;
 	sf::Vector2f getFacingDirection() const;
 	sf::Vector2f getSize() const;
-	void setDir(sf::Vector2f& dir) { _dir = dir; }
 
 protected:
 	Graphics();

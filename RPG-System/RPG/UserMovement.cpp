@@ -4,20 +4,20 @@
 #include "GameObject.h"
 #include "Utility.h"
 
+// handle events. set direction from events
 void UserMovement::handleEvents(const Control& controls)
 {
-
 	if (controls.isPressed(RIGHT))
-		_direction.x = 1;
+		_dir.x = 1;
 	else if (controls.isPressed(LEFT))
-		_direction.x = -1;
-	else _direction.x = 0;
+		_dir.x = -1;
+	else _dir.x = 0;
 
 	if (controls.isPressed(UP))
-		_direction.y = -1;
+		_dir.y = -1;
 	else if (controls.isPressed(DOWN))
-		_direction.y = 1;
-	else _direction.y = 0;
+		_dir.y = 1;
+	else _dir.y = 0;
 
 	// toggle run mode
 	if (controls.isPressed(B))
@@ -25,42 +25,13 @@ void UserMovement::handleEvents(const Control& controls)
 	else _run = false;
 }
 
-void UserMovement::Update(LocalMap& localmap, GameObject& my_obj, float elapsedTime)
+void UserMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime)
 {
-	if (_newpos)
-	{
-		my_obj.getGraphics()->setPos(_init_pos);
-
-		_newpos = false; 
-	}
-
-	if (isZero(_direction))
-		return;
-
-	my_obj.getGraphics()->setDir(_direction);
-
-	int scalar = SCRN_TILE_SIZE;
+	// set _direction with speed
+	float scalar = 1.f;
 	if (_run)
-		scalar = 2*SCRN_TILE_SIZE;
-
-	sf::Vector2f temp_dir(scalar * _speed * _direction.x  * elapsedTime, 0);
-	my_obj.getGraphics()->move(temp_dir);
-
-	if (!localmap.map()->canStepOn(my_obj))
-	{
-		my_obj.getGraphics()->undo_move();
-	//	_direction.x = 0;
-	}
-
-	temp_dir.y = scalar * _speed * _direction.y  * elapsedTime;
-	temp_dir.x = 0;
-	my_obj.getGraphics()->move(temp_dir);
-	if (!localmap.map()->canStepOn(my_obj))
-	{
-		my_obj.getGraphics()->undo_move();
-	//	_direction.y = 0;
-	}
-
-	localmap.map()->Step(localmap, my_obj);
-
+		scalar*=2.f;
+	_direction = _dir*(scalar*float(_speed));
+	// move
+	Movement::Update(localmap, my_obj, my_graphics, elapsedTime);
 }

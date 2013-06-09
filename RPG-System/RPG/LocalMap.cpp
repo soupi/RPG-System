@@ -6,6 +6,7 @@
 
 #include "Enemy.h"
 #include "ParamsCtrl.h"
+#include "ParamsMap.h"
 
 LocalMap::LocalMap()
 {

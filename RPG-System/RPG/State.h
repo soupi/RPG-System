@@ -1,3 +1,5 @@
+// base class state for states in state machine
+
 #pragma once
 
 #include <SFML/Graphics.hpp>

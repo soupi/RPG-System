@@ -36,9 +36,9 @@ void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTi
 	if (_act)
 	{
 		_act = false;
-		sf::FloatRect box = getGraphics()->getCollisionBox();
-		box.left += getGraphics()->getFacingDirection().x * getGraphics()->getSize().x;
-		box.top += getGraphics()->getFacingDirection().y * getGraphics()->getSize().y;
+		sf::FloatRect box = getCollisionBox();
+		box.left += getFacingDirection().x * getSize().x;
+		box.top += getFacingDirection().y * getSize().y;
 
 		localmap.map()->Act(localmap, *this, box);
 	}

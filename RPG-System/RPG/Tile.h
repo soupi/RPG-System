@@ -1,9 +1,7 @@
 #pragma once
 
 #include <SFML\Graphics.hpp>
-
-const unsigned TILE_SIZE = 32;
-const unsigned SCRN_TILE_SIZE = 64;
+#include "Macros.h"
 
 class Tile {
 public:

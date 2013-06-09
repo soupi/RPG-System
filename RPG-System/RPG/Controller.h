@@ -1,3 +1,6 @@
+// Responsible for the main loop and events handle
+// contains the window and view, clock, state machine and hero.
+
 #pragma once
 
 #include "StateMachine.h"

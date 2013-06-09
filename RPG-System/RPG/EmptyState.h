@@ -1,3 +1,5 @@
+// this state contains nothing.
+
 #pragma once
 
 #include "State.h"

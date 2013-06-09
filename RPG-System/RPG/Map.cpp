@@ -124,8 +124,8 @@ void Map::addGameObject(shared_ptr<GameObject>& obj, unsigned pos)
 		throw(e);
 	}
 
-	obj->setPos(sf::Vector2f((pos%_width)*float(SCRN_TILE_SIZE) + obj->getGraphics()->getRadius(), 
-		(pos/_width)*float(SCRN_TILE_SIZE) + obj->getGraphics()->getRadius()));
+	obj->setPos(sf::Vector2f((pos%_width)*float(SCRN_TILE_SIZE) + obj->getRadius(), 
+		(pos/_width)*float(SCRN_TILE_SIZE) + obj->getRadius()));
 
 	_game_objects.push_back(obj);
 
@@ -170,12 +170,12 @@ bool Map::canStepOnFG(sf::FloatRect& box) const
 
 bool Map::canStepOn(GameObject& obj)
 {
-	sf::FloatRect box = obj.getGraphics()->getCollisionBox();
+	sf::FloatRect box = obj.getCollisionBox();
 	if (!canStepOnFG(box))
 		return false;
 
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
-		if((it->get()) != &obj && it->get()->getGraphics()->checkCollision(box) && !obj.canStepOn(*(it->get())))
+		if((it->get()) != &obj && (*it)->checkCollision(box) && !obj.canStepOn(*(it->get())))
 			return false;
 	
 	return true;
@@ -183,16 +183,16 @@ bool Map::canStepOn(GameObject& obj)
 
 void Map::Step(LocalMap& localmap, GameObject& obj)
 {
-	sf::FloatRect box = obj.getGraphics()->getCollisionBox();
+	sf::FloatRect box = obj.getCollisionBox();
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
-		if((it->get()) != &obj && it->get()->getGraphics()->checkCollision(box))
+		if((it->get()) != &obj && (*it)->checkCollision(box))
 			obj.StepOn(localmap, *(it->get())); // dispatch
 }
 
 void Map::Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box)
 {
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
-		if((it->get()) != &obj && it->get()->getGraphics()->checkCollision(box))
+		if((it->get()) != &obj && (*it)->checkCollision(box))
 		{
 		//	obj.act(localmap, *(it->get())); // dispatch
 			(*it)->act(localmap, obj);

@@ -13,8 +13,6 @@
 #include <memory>
 
 using std::shared_ptr;
-
-
 using std::map;
 using std::string;
 using std::stack;

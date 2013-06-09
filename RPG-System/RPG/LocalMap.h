@@ -26,6 +26,9 @@ public:
 	void addScript(shared_ptr<Script>& script);
 	void NextScript(Controller& ctrl);
 
+	bool canStepOn(GameObject& obj) { return _map->canStepOn(obj); }
+	void Step(GameObject& obj) { _map->Step(*this, obj); }
+
 private:
 	Flag _change_state;
 	queue<shared_ptr<Script>> _scripts;

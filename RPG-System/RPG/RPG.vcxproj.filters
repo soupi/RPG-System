@@ -40,6 +40,15 @@
     <Filter Include="Source Files\Scripts">
       <UniqueIdentifier>{770ee44c-e83c-438d-b025-169b365c76c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObject\Graphics">
+      <UniqueIdentifier>{8e526498-845d-4de1-bd6e-cc8eb7ce4918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Movement">
+      <UniqueIdentifier>{682d7132-f7aa-4e91-bffe-a82e93345d36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Hero">
+      <UniqueIdentifier>{a1131b24-dad5-45e6-9dc9-8fb1ffc0ca67}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h">
@@ -81,26 +90,11 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Movement.h">
-      <Filter>Header Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Header Files\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Macros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Control.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UserMovement.h">
-      <Filter>Header Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="NoGraphics.h">
-      <Filter>Header Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="NoMovement.h">
-      <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="ItemBank.h">
       <Filter>Header Files</Filter>
@@ -109,12 +103,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LocalObject.h">
-      <Filter>Header Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="HeroCharacter.h">
-      <Filter>Header Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Hero.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Dialog.h">
@@ -136,9 +124,6 @@
       <Filter>Header Files\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="NPC.h">
-      <Filter>Header Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="HeroData.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="NoScript.h">
@@ -177,8 +162,35 @@
     <ClInclude Include="remObject.h">
       <Filter>Header Files\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="ParamsMap.h">
+      <Filter>Header Files\StatesMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Header Files\GameObject\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="NoGraphics.h">
+      <Filter>Header Files\GameObject\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="NoMovement.h">
+      <Filter>Header Files\GameObject\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>Header Files\GameObject\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="UserMovement.h">
+      <Filter>Header Files\GameObject\Movement</Filter>
+    </ClInclude>
     <ClInclude Include="RandMovement.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObject\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Header Files\GameObject\Hero</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroCharacter.h">
+      <Filter>Header Files\GameObject\Hero</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroData.h">
+      <Filter>Header Files\GameObject\Hero</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="RandMovement.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Movement.cpp">
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

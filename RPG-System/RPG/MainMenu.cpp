@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include "Controller.h"
 #include "ParamsCtrl.h"
+#include "ParamsMap.h"
 #include <memory>
 
 using std::shared_ptr;
