@@ -8,7 +8,7 @@
 void Enemy::attack(const Stats& stats)
 {
 	_HP -= calcDamage(stats, _stats);
-	_exp = unsigned(5 * double(_stats.ATK() + _stats.DEF())/(stats.ATK() + stats.DEF));
+	_exp = unsigned(5 * double(_stats.ATK() + _stats.DEF())/(stats.ATK() + stats.DEF()));
 	_coins = rand() % stats.LUCK();
 }
 
