@@ -10,9 +10,18 @@ public:
 		if (def == 0)
 			_DEF = 1;
 	}
-	unsigned ATK() { return _ATK; }
-	unsigned DEF() { return _DEF; }
-	unsigned LUCK() { return _LUCK; }
+	unsigned ATK() const { return _ATK; }
+	unsigned DEF() const { return _DEF; }
+	unsigned LUCK() const { return _LUCK; }
+
+	Stats Raise() 
+	{
+		Stats change(rand() % 3, rand() % 3, rand() % 2);
+		_ATK += change.ATK();
+		_DEF += change.DEF();
+		_LUCK += change.LUCK();
+		return change;
+	}
 
 private:
 	unsigned _ATK;

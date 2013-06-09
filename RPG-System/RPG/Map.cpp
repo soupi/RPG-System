@@ -132,6 +132,15 @@ void Map::addGameObject(shared_ptr<GameObject>& obj, unsigned pos)
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.end()-1; it != _game_objects.begin() && (*it)->getPos().y < (*(it-1))->getPos().y;)
 		std::swap(it, it-1);
 }
+void Map::addGameObject(shared_ptr<GameObject>& obj, sf::Vector2f& pos)
+{
+	obj->setPos(pos);
+
+	_game_objects.push_back(obj);
+
+	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.end()-1; it != _game_objects.begin() && (*it)->getPos().y < (*(it-1))->getPos().y;)
+		std::swap(it, it-1);
+}
 
 
 // ---------------- INTERACTIONS ----------------

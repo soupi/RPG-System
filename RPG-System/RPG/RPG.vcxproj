@@ -100,6 +100,7 @@
     <ClInclude Include="ItemBank.h" />
     <ClInclude Include="LocalMap.h" />
     <ClInclude Include="LocalObject.h" />
+    <ClInclude Include="Loot.h" />
     <ClInclude Include="Macros.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map.h" />

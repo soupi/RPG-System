@@ -49,6 +49,9 @@
     <Filter Include="Header Files\GameObject\Hero">
       <UniqueIdentifier>{a1131b24-dad5-45e6-9dc9-8fb1ffc0ca67}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\Movement">
+      <UniqueIdentifier>{fd641f4c-0373-44b3-981d-1c4635b84ba4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h">
@@ -192,6 +195,9 @@
     <ClInclude Include="HeroData.h">
       <Filter>Header Files\GameObject\Hero</Filter>
     </ClInclude>
+    <ClInclude Include="Loot.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -227,9 +233,6 @@
     <ClCompile Include="Control.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UserMovement.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Dialog.cpp">
       <Filter>Source Files\Scripts</Filter>
     </ClCompile>
@@ -240,12 +243,6 @@
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="NPC.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="NoMovement.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="LocalObject.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Parser.cpp">
@@ -272,11 +269,20 @@
     <ClCompile Include="remObjScript.cpp">
       <Filter>Source Files\Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="RandMovement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Movement.cpp">
+      <Filter>Source Files\GameObject\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalObject.cpp">
       <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="NoMovement.cpp">
+      <Filter>Source Files\GameObject\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="UserMovement.cpp">
+      <Filter>Source Files\GameObject\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="RandMovement.cpp">
+      <Filter>Source Files\GameObject\Movement</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -29,6 +29,7 @@ public:
 
 	void giveQuestItem(QuestItem& item);
 	bool hasQuestItem(const string& item_name);
+	void Loot(LocalMap& localmap, unsigned exp, unsigned coins) { _hero_data->Loot(localmap, exp, coins); }
 
 private:
 	sf::Texture _hero_texture;

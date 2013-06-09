@@ -24,4 +24,5 @@ public:
 private:
 	int _HP;
 	Stats _stats;
+	unsigned _exp, _coins;
 };

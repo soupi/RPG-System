@@ -27,7 +27,7 @@ void UserMovement::handleEvents(const Control& controls)
 
 void UserMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime)
 {
-	// set _direction with speed
+	// set _direction and speed speed
 	float scalar = 1.f;
 	if (_run)
 		scalar*=2.f;

@@ -1,5 +1,10 @@
 #include "HeroData.h"
 #include "Controller.h"
+#include "LocalMap.h"
+#include "Dialog.h"
+#include <cmath>
+
+using std::string;
 
 void HeroData::showHP(Controller& ctrl)
 {
@@ -21,4 +26,20 @@ void HeroData::takeDamage(unsigned amount)
 		if (isAlive())   
 			_HP = BASE_HP; 
 	}
+}
+
+void HeroData::checkLevelRaise(LocalMap& map)
+{
+	for (;_level < _exp/pow(2.f,int(_level)); ++_level)
+	{
+		Stats raise = _stats.Raise();
+
+		
+		stringstream ss;
+		ss << "You have been raised to level " << _level+1 << "!\nCongratulations!";
+		ss << std::endl << "ATK + " << raise.ATK() << "  |  DEF + " << raise.DEF() << "  |  LUCK + " << raise.LUCK();
+		string str(ss.str());
+		map.addScript(shared_ptr<Script>(new Dialog(str)));
+	}
+
 }

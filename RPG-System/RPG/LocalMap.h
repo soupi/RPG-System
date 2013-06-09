@@ -27,6 +27,7 @@ public:
 	void NextScript(Controller& ctrl);
 
 	void addGameObject(shared_ptr<GameObject>& obj, unsigned pos) { _map->addGameObject(obj, pos); }
+	void addGameObject(shared_ptr<GameObject>& obj, sf::Vector2f& pos) { _map->addGameObject(obj, pos); }
 	void remGameObject(GameObject* obj) { _map->remGameObject(obj); }
 
 	bool canStepOn(GameObject& obj) { return _map->canStepOn(obj); }
