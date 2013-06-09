@@ -22,7 +22,7 @@ void Movement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graph
 	my_graphics.setDir(_direction);
 
 	// try moving on x
-	sf::Vector2f temp_dir(_direction.x  * elapsedTime, 0);
+	sf::Vector2f temp_dir(_speed * _direction.x  * elapsedTime, 0);
 	my_graphics.move(temp_dir);
 
 	// check if move is valid
@@ -30,7 +30,7 @@ void Movement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graph
 		my_graphics.undo_move();
 
 	// try moving on y
-	temp_dir.y = _direction.y  * elapsedTime;
+	temp_dir.y = _speed * _direction.y  * elapsedTime;
 	temp_dir.x = 0;
 	my_graphics.move(temp_dir);
 	// check if move is valid

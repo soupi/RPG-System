@@ -22,12 +22,16 @@ public:
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(Controller& ctrl);
-	shared_ptr<Map> map() const { return _map; }
+//	shared_ptr<Map> map() const { return _map; }
 	void addScript(shared_ptr<Script>& script);
 	void NextScript(Controller& ctrl);
 
+	void addGameObject(shared_ptr<GameObject>& obj, unsigned pos) { _map->addGameObject(obj, pos); }
+	void remGameObject(GameObject* obj) { _map->remGameObject(obj); }
+
 	bool canStepOn(GameObject& obj) { return _map->canStepOn(obj); }
 	void Step(GameObject& obj) { _map->Step(*this, obj); }
+	void Act(GameObject& obj, sf::FloatRect& box) { _map->Act(*this, obj, box); }
 
 private:
 	Flag _change_state;

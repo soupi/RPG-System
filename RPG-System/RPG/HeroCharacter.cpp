@@ -40,7 +40,7 @@ void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTi
 		box.left += getFacingDirection().x * getSize().x;
 		box.top += getFacingDirection().y * getSize().y;
 
-		localmap.map()->Act(localmap, *this, box);
+		localmap.Act(*this, box);
 	}
 }
 

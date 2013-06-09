@@ -26,7 +26,7 @@ void RandMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_g
 	if (_moving_duration_timer > 0)
 		return;
 
-	_direction = _curr_dir * float(_speed);
+	_direction = _curr_dir;
 
 	Movement::Update(localmap, my_obj, my_graphics, elapsedTime);
 }

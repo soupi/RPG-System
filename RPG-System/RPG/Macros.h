@@ -13,4 +13,4 @@ const unsigned TILE_SIZE = 32;
 const unsigned SCRN_TILE_SIZE = 64;
 
 const float HERO_SPEED = 250.f;
-const unsigned DEFAULT_SPEED = 3*SCRN_TILE_SIZE; // three tiles per second
+const float DEFAULT_SPEED = 3.f*SCRN_TILE_SIZE; // three tiles per second

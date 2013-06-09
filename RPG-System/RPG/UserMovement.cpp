@@ -8,16 +8,16 @@
 void UserMovement::handleEvents(const Control& controls)
 {
 	if (controls.isPressed(RIGHT))
-		_dir.x = 1;
+		_direction.x = 1;
 	else if (controls.isPressed(LEFT))
-		_dir.x = -1;
-	else _dir.x = 0;
+		_direction.x = -1;
+	else _direction.x = 0;
 
 	if (controls.isPressed(UP))
-		_dir.y = -1;
+		_direction.y = -1;
 	else if (controls.isPressed(DOWN))
-		_dir.y = 1;
-	else _dir.y = 0;
+		_direction.y = 1;
+	else _direction.y = 0;
 
 	// toggle run mode
 	if (controls.isPressed(B))
@@ -31,7 +31,9 @@ void UserMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_g
 	float scalar = 1.f;
 	if (_run)
 		scalar*=2.f;
-	_direction = _dir*(scalar*float(_speed));
+	
+	_speed = _curr_speed * scalar;
+
 	// move
 	Movement::Update(localmap, my_obj, my_graphics, elapsedTime);
 }

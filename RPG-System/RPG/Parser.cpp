@@ -94,7 +94,7 @@ Movement* Parser::readMovement(istream& infd)
 	if (movement == "USERMOVEMENT")
 		return new UserMovement;
 	else if (movement == "RANDMOVEMENT")
-		return new RandMovement(3.f);
+		return new RandMovement(2.f);
 
 	return new NoMovement;
 }
