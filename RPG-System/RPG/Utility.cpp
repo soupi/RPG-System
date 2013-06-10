@@ -1,5 +1,6 @@
 #include "Utility.h"
 #include "Tile.h"
+#include <cmath>
 
 // load font from filename
 void LoadFont(sf::Font& font, const char* filename)
@@ -58,4 +59,10 @@ sf::Vector2f operator*(int scalar, sf::Vector2f vec)
 bool isZero(sf::Vector2f vec)
 {
 	return (vec.x == 0.f && vec.y == 0.f) ? true : false;
+}
+
+
+float distance(sf::Vector2f& u, sf::Vector2f& v)
+{
+	return sqrt(pow(u.x + v.y, 2) + pow(u.y + v.y, 2));
 }

@@ -29,6 +29,8 @@ public:
 	void Step(LocalMap& localmap, GameObject& obj);
 	void Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box);
 
+	const sf::Vector2f getPosById(int id);
+
 private:
 	vector<Tile> _background;
 	vector<Tile> _foreground;

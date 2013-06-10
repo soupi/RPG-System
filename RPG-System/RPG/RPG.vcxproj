@@ -89,6 +89,7 @@
     <ClInclude Include="Control.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Flag.h" />
+    <ClInclude Include="FollowIdMovement.h" />
     <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GiveItem.h" />
@@ -132,6 +133,7 @@
     <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="DialogBox.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="FollowIdMovement.cpp" />
     <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Graphics.cpp" />

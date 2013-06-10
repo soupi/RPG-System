@@ -40,6 +40,9 @@ public:
 	sf::Vector2f getSize() const { return _graphics->getSize(); }
 
 	shared_ptr<Graphics> getGraphics() { return _graphics; }
+
+	int getId() const { return _id; }
+	void setId(int id) { _id = id; }
 	
 	// interaction using double dispatch
 	virtual void act(LocalMap& localmap, GameObject& obj) = 0;
@@ -63,4 +66,6 @@ private:
 	// strategy pattern
 	shared_ptr<Graphics> _graphics;
 	shared_ptr<Movement> _movement;
+
+	int _id;
 };

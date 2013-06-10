@@ -123,6 +123,13 @@ void Map::addGameObject(shared_ptr<GameObject>& obj, unsigned pos)
 		std::exception e("bad location for obj on map");
 		throw(e);
 	}
+	int max = 0;
+
+	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+		if (max < (*it)->getId())
+			max = (*it)->getId();
+
+	obj->setId(max+1);
 
 	obj->setPos(sf::Vector2f((pos%_width)*float(SCRN_TILE_SIZE) + obj->getRadius(), 
 		(pos/_width)*float(SCRN_TILE_SIZE) + obj->getRadius()));
@@ -216,4 +223,12 @@ void Map::remGameObject(GameObject* obj)
 			_game_objects.erase(it);
 			break;
 		}
+}
+
+const sf::Vector2f Map::getPosById(int id)
+{
+	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+		if ((*it)->getId() == id)
+			return (*it)->getPos();
+	return sf::Vector2f(0,0);
 }

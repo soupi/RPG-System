@@ -29,6 +29,7 @@ public:
 	void addGameObject(shared_ptr<GameObject>& obj, unsigned pos) { _map->addGameObject(obj, pos); }
 	void addGameObject(shared_ptr<GameObject>& obj, sf::Vector2f& pos) { _map->addGameObject(obj, pos); }
 	void remGameObject(GameObject* obj) { _map->remGameObject(obj); }
+	const sf::Vector2f getPosById(int id) { return _map->getPosById(id); }
 
 	bool canStepOn(GameObject& obj) { return _map->canStepOn(obj); }
 	void Step(GameObject& obj) { _map->Step(*this, obj); }

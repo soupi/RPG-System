@@ -198,6 +198,9 @@
     <ClInclude Include="Loot.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="FollowIdMovement.h">
+      <Filter>Header Files\GameObject\Movement</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -282,6 +285,9 @@
       <Filter>Source Files\GameObject\Movement</Filter>
     </ClCompile>
     <ClCompile Include="RandMovement.cpp">
+      <Filter>Source Files\GameObject\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowIdMovement.cpp">
       <Filter>Source Files\GameObject\Movement</Filter>
     </ClCompile>
   </ItemGroup>

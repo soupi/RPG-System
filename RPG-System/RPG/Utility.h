@@ -15,3 +15,5 @@ unsigned round(float a);
 
 sf::Vector2f operator*(int scalar, sf::Vector2f vec);
 bool isZero(sf::Vector2f vec);
+
+float distance(sf::Vector2f& u, sf::Vector2f& v);

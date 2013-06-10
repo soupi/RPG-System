@@ -6,7 +6,7 @@
 
 // Constructor
 GameObject::GameObject(Graphics* graphics, Movement* movement) : 
-				 _graphics(graphics), _movement(movement)
+				 _graphics(graphics), _movement(movement), _id(0)
 {
 
 }

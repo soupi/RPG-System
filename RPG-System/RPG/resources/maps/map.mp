@@ -66,7 +66,7 @@
 # NPC to create on tile 111.
 NPC 
 	DIALOG hello, world!;Welcome!
-	NOMOVEMENT
+	RANDMOVEMENT 2
 	GRAPHICS char.png 
 		4 0 
 		64 96 
@@ -74,11 +74,11 @@ NPC
 	
 # NPC to create on tile 101.
 ENEMY 4 7 2
-	RANDMOVEMENT
+	FOLLOWIDMOVEMENT 1 4
 	GRAPHICS char.png 
 		4 4 
 		64 96 
-	101
+	108
 
 DOOR map2.mp 1
 	1

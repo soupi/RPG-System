@@ -44,9 +44,15 @@ public:
 	shared_ptr<Script> readScripts(istream& infd);
 	shared_ptr<Script> readNoScript(istream& infd);
 
+	Movement* readNoMovement(istream& infd);
+	Movement* readRandMovement(istream& infd);
+	Movement* readUserMovement(istream& infd);
+	Movement* readFollowIdMovement(istream& infd);
+
 private:
 	 istream& _infd;
 
 	 map<string, shared_ptr<GameObject> (Parser::*)(istream& infd)> _gameObjFactoryMap;
 	 map<string, shared_ptr<Script> (Parser::*)(istream& infd)> _scriptFactoryMap;
+	 map<string, Movement* (Parser::*)(istream& infd)> _movementFactoryMap;
 };

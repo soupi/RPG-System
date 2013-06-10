@@ -25,6 +25,7 @@
 #include "NoMovement.h"
 #include "UserMovement.h"
 #include "RandMovement.h"
+#include "FollowIdMovement.h"
 
 #include <iostream>
 #include <fstream>
@@ -44,6 +45,11 @@ Parser::Parser(istream& infd) : _infd(infd)
 	_scriptFactoryMap["GIVEITEM"] = &Parser::readGiveItem;
 	_scriptFactoryMap["IFQITEM"] = &Parser::readIFQItem;
 	_scriptFactoryMap["IFLEVEL"] = &Parser::readIFLevel;
+
+	_movementFactoryMap["NOMOVEMENT"] = &Parser::readNoMovement;
+	_movementFactoryMap["RANDMOVEMENT"] = &Parser::readRandMovement;
+	_movementFactoryMap["USERMOVEMENT"] = &Parser::readUserMovement;
+	_movementFactoryMap["FOLLOWIDMOVEMENT"] = &Parser::readFollowIdMovement;
 }
 
 void Parser::Read(Map& map)
@@ -91,13 +97,32 @@ Movement* Parser::readMovement(istream& infd)
 {
 	string movement;
 	infd >> movement;
-	if (movement == "USERMOVEMENT")
-		return new UserMovement;
-	else if (movement == "RANDMOVEMENT")
-		return new RandMovement(2.f);
 
+	return  (this->*_movementFactoryMap[movement])(_infd);
+}
+
+Movement* Parser::readUserMovement(istream& infd)
+{
+	return new UserMovement;
+}
+Movement* Parser::readRandMovement(istream& infd)
+{
+	float time_between_moves;
+	infd >> time_between_moves;
+	return new RandMovement(time_between_moves);
+}
+Movement* Parser::readFollowIdMovement(istream& infd)
+{
+	int id;
+	float radius;
+	infd >> id >> radius;
+	return new FollowIdMovement(id, radius);
+}
+Movement* Parser::readNoMovement(istream& infd)
+{
 	return new NoMovement;
 }
+
 
 
 shared_ptr<GameObject> Parser::makeNPC(istream& infd)
