@@ -15,6 +15,7 @@ class LocalMap;
 class HeroCharacter;
 class LocalObject;
 class Enemy;
+class Attack;
 
 using std::shared_ptr;
 
@@ -60,7 +61,11 @@ public:
 	// default for Enemy
 	virtual void act(LocalMap& localmap, Enemy&) { }
 	virtual void StepOn(LocalMap& localmap, Enemy&) {}
-	virtual bool canStepOn(Enemy&) { return true; } 
+	virtual bool canStepOn(Enemy&) { return true; }
+	// default for Attack
+	void StepOn(LocalMap& localmap, Attack& obj) {}
+	bool canStepOn(LocalMap& localmap, Attack& obj) { return true; }
+	bool act(LocalMap& localmap, Attack& obj) {}
 
 private:
 	// strategy pattern

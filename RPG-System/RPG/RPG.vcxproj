@@ -127,6 +127,7 @@
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Attack.cpp" />
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="Controller.cpp" />

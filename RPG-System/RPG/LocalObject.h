@@ -9,6 +9,7 @@ class LocalObject : public GameObject
 public:
 	LocalObject(shared_ptr<Script> script, Graphics* graphics = new NoGraphics, Movement* movement = new NoMovement,
 		bool passable = false) : GameObject(graphics, movement), _passable(passable), _script(script) {}
+	virtual ~LocalObject() {}
 
 	void act(LocalMap& localmap, GameObject& obj) { obj.act(localmap, *this); }
 	void StepOn(LocalMap& localmap, GameObject& obj) { obj.StepOn(localmap, *this); }
@@ -17,8 +18,11 @@ public:
 	virtual bool canStepOn(LocalObject& obj) { return _passable; }
 	virtual bool canStepOn(HeroCharacter& obj) { return _passable; }
 	virtual bool canStepOn(Enemy& obj) { return _passable; }
+	virtual bool canStepOn(Attack& obj) { return _passable; }
 
 	void act(LocalMap& localmap, HeroCharacter&);
+
+
 
 private:
 	bool _passable;

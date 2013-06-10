@@ -52,6 +52,12 @@
     <Filter Include="Source Files\GameObject\Movement">
       <UniqueIdentifier>{fd641f4c-0373-44b3-981d-1c4635b84ba4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObject\Attack">
+      <UniqueIdentifier>{2b7ea8f5-0e03-430c-b7e3-562206000116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Attack">
+      <UniqueIdentifier>{23e49c88-9f92-4588-9f68-23a19c2d51dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h">
@@ -153,9 +159,6 @@
     <ClInclude Include="Bank.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Attack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
@@ -200,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="FollowIdMovement.h">
       <Filter>Header Files\GameObject\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack.h">
+      <Filter>Header Files\GameObject\Attack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="FollowIdMovement.cpp">
       <Filter>Source Files\GameObject\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>Source Files\GameObject\Attack</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
