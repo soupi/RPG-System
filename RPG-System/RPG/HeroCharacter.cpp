@@ -21,7 +21,7 @@ void HeroCharacter::handleEvents(const Control& controls)
 	GameObject::handleEvents(controls);
 	if (_clock > PRESS_INTERVAL && controls.isPressed(A))
 	{
-		_act = true;
+		_act.set();
 		_clock = 0.f;
 	}
 }
@@ -33,9 +33,8 @@ void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTi
 	GameObject::Update(ctrl, localmap, elapsedTime);
 	
 	ctrl.getView().setCenter(getPos());
-	if (_act)
+	if (_act.state())
 	{
-		_act = false;
 		sf::FloatRect box = getCollisionBox();
 		box.left += getFacingDirection().x * getSize().x;
 		box.top += getFacingDirection().y * getSize().y;
@@ -60,13 +59,13 @@ void HeroCharacter::act(LocalMap& localmap, LocalObject& obj)
 
 void HeroCharacter::act(LocalMap& localmap, Enemy& obj)
 {
-	obj.attack(_hero_data->getStats());
+	obj.attack(_hero_data->getStats(), 20);
 }
-void HeroCharacter::attack(const Stats& stats)
+void HeroCharacter::attack(const Stats& stats, int power)
 {
 	if (_hurt_timer <= 0)
 	{
-		_hero_data->takeDamage(calcDamage(stats, _hero_data->getStats()));
+		_hero_data->takeDamage(calcDamage(stats, _hero_data->getStats(), power));
 		_hurt_timer = HURT_TIME;
 	}
 }

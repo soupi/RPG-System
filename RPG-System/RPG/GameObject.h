@@ -41,9 +41,10 @@ public:
 	sf::Vector2f getSize() const { return _graphics->getSize(); }
 
 	shared_ptr<Graphics> getGraphics() { return _graphics; }
+	const sf::Vector2f& getHeadPos() const { return _graphics->getHeadPos(); }
 
 	int getId() const { return _id; }
-	void setId(int id) { _id = id; }
+	virtual void setId(int id) { _id = id; }
 	
 	// interaction using double dispatch
 	virtual void act(LocalMap& localmap, GameObject& obj) = 0;

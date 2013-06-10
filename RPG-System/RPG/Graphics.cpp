@@ -74,9 +74,6 @@ void Graphics::undo_move()
 
 sf::Vector2f Graphics::getFacingDirection() const
 {
-//	sf::Vector2f dir = _shadow.getPosition() - _last_pos;
-//	dir.x = (dir.x != 0) ? abs(dir.x)/dir.x : 0;
-//	dir.y = (dir.y != 0) ? abs(dir.y)/dir.y : 0;
 
 	return _dir;
 }

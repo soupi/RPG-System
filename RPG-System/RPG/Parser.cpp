@@ -137,12 +137,12 @@ shared_ptr<GameObject> Parser::makeNPC(istream& infd)
 
 shared_ptr<GameObject> Parser::makeEnemy(istream& infd)
 {
-	unsigned atk, def, lck;
-	infd >> atk >> def >> lck;
+	unsigned atk, def, lck, hp;
+	infd >> atk >> def >> lck >> hp;
 
 	Stats stats(atk, def, lck);
 
-	return shared_ptr<GameObject>(new Enemy(readGraphics(infd), readMovement(infd), stats));
+	return shared_ptr<GameObject>(new Enemy(readGraphics(infd), readMovement(infd), stats, hp));
 }
 
 shared_ptr<GameObject> Parser::makeDoor(istream& infd)

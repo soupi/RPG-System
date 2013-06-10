@@ -77,8 +77,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Attack.h" />
+    <ClInclude Include="AttackAgainst.h" />
+    <ClInclude Include="AttackFactory.h" />
     <ClInclude Include="Bank.h" />
     <ClInclude Include="Bar.h" />
+    <ClInclude Include="BasicAttack.h" />
     <ClInclude Include="ChangeMap.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="Controller.h" />
@@ -122,17 +125,20 @@
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StateParams.h" />
     <ClInclude Include="Stats.h" />
+    <ClInclude Include="DirMovement.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="UserMovement.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Attack.cpp" />
+    <ClCompile Include="AttackAgainst.cpp" />
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="DialogBox.cpp" />
+    <ClCompile Include="DirMovement.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FollowIdMovement.cpp" />
     <ClCompile Include="GameMenu.cpp" />

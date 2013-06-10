@@ -48,7 +48,7 @@ void Bar::setColor()
 }
 
 
-void Bar::show(Controller& ctrl, sf::Vector2f& position)
+void Bar::show(Controller& ctrl, const sf::Vector2f& position)
 {
 
 
@@ -65,7 +65,7 @@ void Bar::show(Controller& ctrl, sf::Vector2f& position)
 	strs >> val;
 	// --------------------------
 
-	sf::Text text(val, Bank<sf::Font>::getInstance().get("resources/consola.ttf"), (unsigned)_bar.getSize().y - 2);
+	sf::Text text(val, Bank<sf::Font>::getInstance().get("resources/consola.ttf"), (unsigned)_bar.getSize().y);
 	text.setPosition(_bar.getPosition() + sf::Vector2f(_rect.getSize().x/2 - text.getCharacterSize(),-3.f));
 	text.setColor(sf::Color::White);
 
@@ -73,7 +73,7 @@ void Bar::show(Controller& ctrl, sf::Vector2f& position)
 
 }
 
-void Bar::setPosition(sf::Vector2f& pos)
+void Bar::setPosition(const sf::Vector2f& pos)
 {
 	_rect.setPosition(pos);
 	_bar.setPosition(pos + sf::Vector2f(PADDING, PADDING));

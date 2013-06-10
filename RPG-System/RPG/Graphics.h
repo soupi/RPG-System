@@ -25,9 +25,11 @@ public:
 	sf::FloatRect getCollisionBox() const;
 	sf::Vector2f getFacingDirection() const;
 	sf::Vector2f getSize() const;
+	const sf::Vector2f& getHeadPos() const { return _sprite.getPosition(); }
 
 protected:
 	Graphics();
+	
 
 private:
 	const sf::Texture* _texture;

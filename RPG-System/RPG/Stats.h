@@ -29,4 +29,4 @@ private:
 	unsigned _LUCK;
 };
 
-int calcDamage(Stats offense, Stats defense);
+int calcDamage(Stats offense, Stats defense, int power);

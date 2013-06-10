@@ -207,6 +207,18 @@
     <ClInclude Include="Attack.h">
       <Filter>Header Files\GameObject\Attack</Filter>
     </ClInclude>
+    <ClInclude Include="AttackAgainst.h">
+      <Filter>Header Files\GameObject\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackFactory.h">
+      <Filter>Header Files\GameObject\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="DirMovement.h">
+      <Filter>Header Files\GameObject\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicAttack.h">
+      <Filter>Header Files\GameObject\Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -298,6 +310,12 @@
     </ClCompile>
     <ClCompile Include="Attack.cpp">
       <Filter>Source Files\GameObject\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackAgainst.cpp">
+      <Filter>Source Files\GameObject\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="DirMovement.cpp">
+      <Filter>Source Files\GameObject\Movement</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

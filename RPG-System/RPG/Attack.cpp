@@ -10,3 +10,21 @@ void Attack::StepOn(LocalMap& localmap, LocalObject& obj)
 
 	localmap.addScript(shared_ptr<Script>(new remObjScript(localmap, this)));
 }
+
+void Attack::StepOn(LocalMap& localmap, Enemy& obj)
+{
+	_atk->StepOn(localmap, *this, obj);
+}
+void Attack::StepOn(LocalMap& localmap, HeroCharacter& obj)
+{
+	_atk->StepOn(localmap, *this, obj);
+}
+
+void Attack::attack(LocalMap& localmap, Enemy& obj)
+{
+	
+}
+void Attack::attack(LocalMap& localmap, HeroCharacter& obj)
+{
+
+}

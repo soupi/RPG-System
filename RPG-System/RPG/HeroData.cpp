@@ -33,11 +33,11 @@ void HeroData::checkLevelRaise(LocalMap& map)
 	for (;_level < _exp/pow(2.f,int(_level)); ++_level)
 	{
 		Stats raise = _stats.Raise();
-
-		
+		unsigned hp_raise = rand() % unsigned(_level*3.0/2 +1);
+		_HP += hp_raise;
 		stringstream ss;
 		ss << "You have been raised to level " << _level+1 << "!\nCongratulations!";
-		ss << std::endl << "ATK + " << raise.ATK() << "  |  DEF + " << raise.DEF() << "  |  LUCK + " << raise.LUCK();
+		ss << std::endl << "ATK + " << raise.ATK() << "  |  DEF + " << raise.DEF() << "  |  LUCK + " << raise.LUCK() << "  |  HP + " << hp_raise;
 		string str(ss.str());
 		map.addScript(shared_ptr<Script>(new Dialog(str)));
 	}

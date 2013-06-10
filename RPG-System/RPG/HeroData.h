@@ -28,9 +28,9 @@ public:
 	void Loot(LocalMap& localmap, unsigned exp, unsigned coins) { _exp += exp; _coins += coins; checkLevelRaise(localmap); }
 
 private:
-	unsigned _exp;
-	unsigned _level;
-	unsigned _coins;
+	unsigned long _exp;
+	unsigned long _level;
+	unsigned long _coins;
 	std::map<std::string, QuestItem> _quest_items;
 	
 	int _HP;

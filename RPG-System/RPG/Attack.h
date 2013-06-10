@@ -2,12 +2,14 @@
 
 #include "GameObject.h"
 #include "Stats.h"
+#include "AttackAgainst.h"
 
 class Attack : public GameObject
 {
 public:
-	Attack(Stats stats, unsigned power, Graphics* graphics = new NoGraphics, Movement* movement = new NoMovement) : 
-	  GameObject(graphics, movement), _stats(stats), _power(power) {}
+	Attack(Stats stats, int power, AttackAgainst* atk = new AttackAll, Graphics* graphics = new NoGraphics, 
+		Movement* movement = new NoMovement) : 
+	  GameObject(graphics, movement), _stats(stats), _power(power), _atk(atk) {}
 
 	virtual ~Attack() {}
 	void act(LocalMap& localmap, GameObject& obj) { obj.act(localmap, *this); }
@@ -19,8 +21,14 @@ public:
 	virtual bool canStepOn(Enemy& obj) { return true; }
 
 	void StepOn(LocalMap& localmap, LocalObject& obj);
+	void StepOn(LocalMap& localmap, Enemy& obj);
+	void StepOn(LocalMap& localmap, HeroCharacter& obj);
+	virtual void attack(LocalMap& localmap, LocalObject& obj);
+	void attack(LocalMap& localmap, Enemy& obj);
+	void attack(LocalMap& localmap, HeroCharacter& obj);
 
 private:
 	Stats _stats;
-	unsigned _power;
+	int _power;
+	shared_ptr<AttackAgainst> _atk;
 };
