@@ -10,7 +10,7 @@ public:
 };
 
 template <class ATK>
-class AttackFactoryT
+class AttackFactoryT : public AttackFactory
 {
 public:
 	virtual Attack* get(const sf::Vector2f pos, const sf::Vector2f dir, Stats stats, AttackAgainst* atk = new AttackAll)

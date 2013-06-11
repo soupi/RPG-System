@@ -9,25 +9,37 @@
 
 const float HURT_TIME = 1.f;
 
-HeroCharacter::HeroCharacter(shared_ptr<HeroData>& data) : _act(false), _clock(0.f), _hero_data(data)
+HeroCharacter::HeroCharacter(shared_ptr<HeroData>& data) : _act(false), _B_clock(0.f), _A_clock(0.f), _hero_data(data), _curr_attack(0)
 {
 	loadTexture(_hero_texture, "char.png");
 	GameObject::setGraphics(new Graphics(&_hero_texture, sf::Vector2i(0,0), sf::Vector2u(64,96)));
 	GameObject::setMovement(new UserMovement);
+
+	_atks.push_back(shared_ptr<AttackFactory>(new AttackFactoryT<BasicAttack>));
+	_atks.push_back(shared_ptr<AttackFactory>(new AttackFactoryT<BulletAttack>));
 }
 
 void HeroCharacter::handleEvents(const Control& controls)
 {
 	GameObject::handleEvents(controls);
-	if (_clock > PRESS_INTERVAL && controls.isPressed(A))
+	if (_A_clock > PRESS_INTERVAL && controls.isPressed(A))
 	{
 		_act.set();
-		_clock = 0.f;
+		_A_clock = 0.f;
+	}
+	if (_B_clock > PRESS_INTERVAL)
+	{
+		if (controls.isPressed(C))
+			_curr_attack = (_curr_attack - 1) % _atks.size();
+		if (controls.isPressed(D))
+			_curr_attack = (_curr_attack + 1) % _atks.size();
+		_B_clock = 0.f;
 	}
 }
 void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 {
-	_clock += elapsedTime;
+	_A_clock += elapsedTime;
+	_B_clock += elapsedTime;
 	if (_hurt_timer > 0.f)
 		_hurt_timer -= elapsedTime;
 	GameObject::Update(ctrl, localmap, elapsedTime);
@@ -42,7 +54,7 @@ void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTi
 		if (!localmap.Act(*this, box))
 		{
 
-			shared_ptr<GameObject> atk(_atk.get(getPos(), getFacingDirection(), _hero_data->getStats(), new AttackEnemy));
+			shared_ptr<GameObject> atk(_atks[_curr_attack]->get(getPos(), getFacingDirection(), _hero_data->getStats(), new AttackEnemy));
 
 			localmap.addCommand(shared_ptr<Script>(new addObjScript(localmap, atk, atk->getPos())));
 		}

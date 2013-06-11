@@ -9,8 +9,10 @@
 #include "AttackFactory.h"
 #include "BasicAttack.h"
 #include "BulletAttack.h"
+#include <vector>
 
-using std::weak_ptr;
+using std::shared_ptr;
+using std::vector;
 
 class HeroCharacter : public GameObject
 {
@@ -42,10 +44,13 @@ private:
 	Flag _attack1;
 	Flag _attack2;
 
-	float _clock;
+	float _A_clock;
+	float _B_clock;
 	shared_ptr<HeroData> _hero_data;
 	float _hurt_timer;
 	bool _ishurt;
 
-	AttackFactoryT<BulletAttack> _atk;
+	unsigned _curr_attack;
+
+	vector<shared_ptr<AttackFactory>> _atks;
 };
