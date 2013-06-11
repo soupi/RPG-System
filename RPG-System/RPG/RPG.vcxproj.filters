@@ -219,6 +219,12 @@
     <ClInclude Include="BasicAttack.h">
       <Filter>Header Files\GameObject\Attack</Filter>
     </ClInclude>
+    <ClInclude Include="BulletAttack.h">
+      <Filter>Header Files\GameObject\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="addObject.h">
+      <Filter>Header Files\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -296,9 +302,6 @@
     <ClCompile Include="LocalObject.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="NoMovement.cpp">
-      <Filter>Source Files\GameObject\Movement</Filter>
-    </ClCompile>
     <ClCompile Include="UserMovement.cpp">
       <Filter>Source Files\GameObject\Movement</Filter>
     </ClCompile>
@@ -316,6 +319,15 @@
     </ClCompile>
     <ClCompile Include="DirMovement.cpp">
       <Filter>Source Files\GameObject\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicAttack.cpp">
+      <Filter>Source Files\GameObject\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletAttack.cpp">
+      <Filter>Source Files\GameObject\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="addObject.cpp">
+      <Filter>Source Files\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

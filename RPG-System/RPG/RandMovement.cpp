@@ -10,7 +10,7 @@ void RandMovement::handleEvents(const Control& controls)
 
 }
 // set new direction and move
-void RandMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime)
+bool RandMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime)
 {
 	_next_move_timer -= elapsedTime;
 	_moving_duration_timer -= elapsedTime;
@@ -24,9 +24,9 @@ void RandMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_g
 	}
 
 	if (_moving_duration_timer > 0)
-		return;
+		return false;
 
 	_direction = _curr_dir;
 
-	Movement::Update(localmap, my_obj, my_graphics, elapsedTime);
+	return Movement::Update(localmap, my_obj, my_graphics, elapsedTime);
 }

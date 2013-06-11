@@ -6,17 +6,15 @@ class AttackFactory
 {
 public:
 	~AttackFactory() {}
-	virtual Attack* get(Stats stats, AttackAgainst* atk) = 0;
+	virtual Attack* get(const sf::Vector2f pos, const sf::Vector2f dir, Stats stats, AttackAgainst* atk = new AttackAll) = 0;
 };
 
 template <class ATK>
 class AttackFactoryT
 {
 public:
-	virtual Attack* get(Stats stats, AttackAgainst* atk)
+	virtual Attack* get(const sf::Vector2f pos, const sf::Vector2f dir, Stats stats, AttackAgainst* atk = new AttackAll)
 	{
-		return new ATK(stats, atk);
+		return new ATK(pos, dir, stats, atk);
 	}
-private:
-	ATK atk;
 };

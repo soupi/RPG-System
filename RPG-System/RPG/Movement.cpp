@@ -5,21 +5,16 @@
 
 
 // update movement
-void Movement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime)
+bool Movement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime)
 {
-	// set new pos
-	if (_newpos)
-	{
-		my_graphics.setPos(_init_pos);
-		_newpos = false; 
-	}
-
 	// if direction is zero stop and return.
 	if (isZero(_direction))
-		return;
+		return false; 
 
 	// set current graphical direction of movement
 	my_graphics.setDir(_direction);
+
+	sf::Vector2f last = my_obj.getPos();
 
 	// try moving on x
 	sf::Vector2f temp_dir(_speed * _direction.x  * elapsedTime, 0);
@@ -39,4 +34,5 @@ void Movement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graph
 
 	localmap.Step(my_obj);
 
+	return !(last == my_obj.getPos());
 }

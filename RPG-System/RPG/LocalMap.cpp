@@ -23,7 +23,11 @@ bool LocalMap::handleEvents(const Control& controls)
 	if (!_scripts.empty() && _scripts.front()->hasEntered())
 		_scripts.front()->handleEvents(controls);
 	else // controls to the map
+	{
+		if (!_commands.empty() && _commands.front()->hasEntered())
+			_commands.front()->handleEvents(controls);
 		_map->handleEvents(controls);
+	}
 
 	return false;
 }
@@ -47,7 +51,24 @@ void LocalMap::Update(Controller& ctrl, float elapsedTime)
 		
 	}
 	else // update map
+	{
+		if (!_commands.empty())
+		{
+			if (_commands.front()->hasEntered())
+			{
+				if (!_commands.front()->Update(ctrl, elapsedTime))
+					NextCommand(ctrl);
+			}
+			else {
+				_commands.front()->Enter(ctrl.getHero());
+				if (!_commands.front()->Update(ctrl, elapsedTime))
+					NextCommand(ctrl);
+			}
+		
+		}
+
 		_map->Update(ctrl, *this, elapsedTime);
+	}
 }
 
 // render local map and scripts
@@ -59,6 +80,9 @@ void LocalMap::Render(Controller& ctrl)
 		if (_scripts.front()->hasEntered())
 			_scripts.front()->Render(ctrl);
 
+	if (!_commands.empty())
+		if (_commands.front()->hasEntered())
+			_commands.front()->Render(ctrl);
 }
 
 // init local map
@@ -96,4 +120,21 @@ void LocalMap::NextScript(Controller& ctrl)
 	// enter next
 	if (!_scripts.empty())
 		_scripts.front()->Enter(ctrl.getHero());
+}
+
+// add commad to queue
+void LocalMap::addCommand(shared_ptr<Script>& script)
+{
+	_commands.push(script);
+}
+
+// change to next command
+void LocalMap::NextCommand(Controller& ctrl)
+{
+	// exit current
+	_commands.front()->Exit();
+	_commands.pop();
+	// enter next
+	if (!_commands.empty())
+		_commands.front()->Enter(ctrl.getHero());
 }

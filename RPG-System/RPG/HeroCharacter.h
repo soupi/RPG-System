@@ -6,6 +6,9 @@
 #include "HeroData.h"
 #include "Enemy.h"
 #include "Flag.h"
+#include "AttackFactory.h"
+#include "BasicAttack.h"
+#include "BulletAttack.h"
 
 using std::weak_ptr;
 
@@ -39,9 +42,10 @@ private:
 	Flag _attack1;
 	Flag _attack2;
 
-
 	float _clock;
 	shared_ptr<HeroData> _hero_data;
 	float _hurt_timer;
 	bool _ishurt;
+
+	AttackFactoryT<BulletAttack> _atk;
 };

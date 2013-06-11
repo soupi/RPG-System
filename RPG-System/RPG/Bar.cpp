@@ -19,10 +19,12 @@ Bar::Bar(unsigned base, sf::Vector2f& size, bool color) : _base(base), _value(ba
 	
 }
 
-void Bar::setValue(unsigned value)
+void Bar::setValue(int value)
 {
-	if (value > _base)
+	if (value > int(_base))
 		_value = _base;
+	else if (value < 0)
+		_value = 0;
 	else _value = value;
 
 	setColor();

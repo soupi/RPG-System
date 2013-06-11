@@ -12,17 +12,17 @@ public:
 	  GameObject(graphics, movement), _stats(stats), _power(power), _atk(atk) {}
 
 	virtual ~Attack() {}
-	void act(LocalMap& localmap, GameObject& obj) { obj.act(localmap, *this); }
-	void StepOn(LocalMap& localmap, GameObject& obj) { obj.StepOn(localmap, *this); }
-	bool canStepOn(GameObject& obj) { return obj.canStepOn(*this); }
+	virtual void act(LocalMap& localmap, GameObject& obj) { obj.act(localmap, *this); }
+	virtual void StepOn(LocalMap& localmap, GameObject& obj) { obj.StepOn(localmap, *this); }
+	virtual bool canStepOn(GameObject& obj) { return obj.canStepOn(*this); }
 
-	virtual bool canStepOn(LocalObject& obj) { return false; }
+	virtual bool canStepOn(LocalObject& obj) { return true; }
 	virtual bool canStepOn(HeroCharacter& obj) { return true; }
 	virtual bool canStepOn(Enemy& obj) { return true; }
 
-	void StepOn(LocalMap& localmap, LocalObject& obj);
-	void StepOn(LocalMap& localmap, Enemy& obj);
-	void StepOn(LocalMap& localmap, HeroCharacter& obj);
+	virtual void act(LocalMap& localmap, LocalObject& obj);
+	virtual void act(LocalMap& localmap, Enemy& obj);
+	virtual void act(LocalMap& localmap, HeroCharacter& obj);
 	virtual void attack(LocalMap& localmap, LocalObject& obj);
 	void attack(LocalMap& localmap, Enemy& obj);
 	void attack(LocalMap& localmap, HeroCharacter& obj);

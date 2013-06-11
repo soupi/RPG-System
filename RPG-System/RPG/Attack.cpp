@@ -3,28 +3,35 @@
 #include "LocalMap.h"
 #include "remObject.h"
 
-void Attack::StepOn(LocalMap& localmap, LocalObject& obj)
-{
-	if (obj.canStepOn(*this))
-		return;
 
-	localmap.addScript(shared_ptr<Script>(new remObjScript(localmap, this)));
+void Attack::act(LocalMap& localmap, LocalObject& obj)
+{
+	if (!obj.canStepOn(*this))
+		localmap.addCommand(shared_ptr<Script>(new remObjScript(localmap, this)));
 }
 
-void Attack::StepOn(LocalMap& localmap, Enemy& obj)
+void Attack::act(LocalMap& localmap, Enemy& obj)
 {
-	_atk->StepOn(localmap, *this, obj);
+	_atk->act(localmap, *this, obj);
+	localmap.addCommand(shared_ptr<Script>(new remObjScript(localmap, this)));
 }
-void Attack::StepOn(LocalMap& localmap, HeroCharacter& obj)
+void Attack::act(LocalMap& localmap, HeroCharacter& obj)
 {
-	_atk->StepOn(localmap, *this, obj);
+	_atk->act(localmap, *this, obj);
+	localmap.addCommand(shared_ptr<Script>(new remObjScript(localmap, this)));
 }
 
 void Attack::attack(LocalMap& localmap, Enemy& obj)
 {
-	
+	obj.attack(_stats, _power);
 }
+
 void Attack::attack(LocalMap& localmap, HeroCharacter& obj)
+{
+	obj.attack(_stats, _power);
+}
+void Attack::attack(LocalMap& localmap, LocalObject& obj)
 {
 
 }
+

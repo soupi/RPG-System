@@ -102,7 +102,7 @@ void Controller::initWindow()
 	double ratio = double(sf::VideoMode::getDesktopMode().height)/sf::VideoMode::getDesktopMode().width;
 
 	_window.create(sf::VideoMode(WINDOW_W, unsigned(WINDOW_W*ratio)), 
-		"RPG", sf::Style::Close, settings);
+		"RPG", sf::Style::Fullscreen, settings);
 
 	_window.setVerticalSyncEnabled(true); // set refresh rate as screen's refresh rate
 	_window.setJoystickThreshold(10000); // joystick threshold

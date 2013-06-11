@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "Script.h"
+#include "Attack.h"
 
 
 class LocalObject : public GameObject
@@ -11,9 +12,9 @@ public:
 		bool passable = false) : GameObject(graphics, movement), _passable(passable), _script(script) {}
 	virtual ~LocalObject() {}
 
-	void act(LocalMap& localmap, GameObject& obj) { obj.act(localmap, *this); }
-	void StepOn(LocalMap& localmap, GameObject& obj) { obj.StepOn(localmap, *this); }
-	bool canStepOn(GameObject& obj) { return obj.canStepOn(*this); }
+	virtual void act(LocalMap& localmap, GameObject& obj) { obj.act(localmap, *this); }
+	virtual void StepOn(LocalMap& localmap, GameObject& obj) { obj.StepOn(localmap, *this); }
+	virtual bool canStepOn(GameObject& obj) { return obj.canStepOn(*this); }
 
 	virtual bool canStepOn(LocalObject& obj) { return _passable; }
 	virtual bool canStepOn(HeroCharacter& obj) { return _passable; }

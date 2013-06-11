@@ -7,11 +7,11 @@
 class FollowIdMovement : public Movement
 {
 public:
-	FollowIdMovement(int id, float radius, sf::Vector2f pos = sf::Vector2f(0.f, 0.f), float speed = DEFAULT_SPEED/2.f) : Movement(pos, speed), 
+	FollowIdMovement(int id, float radius, float speed = DEFAULT_SPEED/1.2f) : Movement(speed), 
 		_id_to_follow(id), _radius(radius) 
 		 { }
 	virtual void handleEvents(const Control& controls){}
-	virtual void Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime);
+	virtual bool Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime);
 
 private:
 	int _id_to_follow;

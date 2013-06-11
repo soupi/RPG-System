@@ -56,6 +56,11 @@ sf::Vector2f operator*(int scalar, sf::Vector2f vec)
 {
 	return sf::Vector2f(scalar*vec.x, scalar*vec.y);
 }
+sf::Vector2f operator*(const sf::Vector2f u, const sf::Vector2f v)
+{
+	return sf::Vector2f(u.x * v.x, u.y * v.y);
+}
+
 bool isZero(sf::Vector2f vec)
 {
 	return (vec.x == 0.f && vec.y == 0.f) ? true : false;

@@ -1,11 +1,11 @@
-#pragma once
-
 #include "HeroCharacter.h"
 #include "UserMovement.h"
 #include "Utility.h"
 #include "Controller.h"
 #include "LocalMap.h"
 #include "Enemy.h"
+#include "AttackAgainst.h"
+#include "addObject.h"
 
 const float HURT_TIME = 1.f;
 
@@ -33,13 +33,19 @@ void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTi
 	GameObject::Update(ctrl, localmap, elapsedTime);
 	
 	ctrl.getView().setCenter(getPos());
+
 	if (_act.state())
 	{
 		sf::FloatRect box = getCollisionBox();
 		box.left += getFacingDirection().x * getSize().x;
 		box.top += getFacingDirection().y * getSize().y;
+		if (!localmap.Act(*this, box))
+		{
 
-		localmap.Act(*this, box);
+			shared_ptr<GameObject> atk(_atk.get(getPos(), getFacingDirection(), _hero_data->getStats(), new AttackEnemy));
+
+			localmap.addCommand(shared_ptr<Script>(new addObjScript(localmap, atk, atk->getPos())));
+		}
 	}
 }
 

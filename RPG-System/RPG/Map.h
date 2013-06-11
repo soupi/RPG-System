@@ -23,11 +23,11 @@ public:
 	void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 	void Render(Controller& ctrl);
 	void addGameObject(shared_ptr<GameObject>& obj, unsigned pos);
-	void addGameObject(shared_ptr<GameObject>& obj, sf::Vector2f& pos);
+	void addGameObject(shared_ptr<GameObject>& obj, const sf::Vector2f& pos);
 	void remGameObject(GameObject* obj);
 	bool canStepOn(GameObject& obj);
 	void Step(LocalMap& localmap, GameObject& obj);
-	void Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box);
+	bool Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box);
 
 	const sf::Vector2f getPosById(int id);
 

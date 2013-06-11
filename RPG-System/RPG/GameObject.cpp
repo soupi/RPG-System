@@ -6,7 +6,7 @@
 
 // Constructor
 GameObject::GameObject(Graphics* graphics, Movement* movement) : 
-				 _graphics(graphics), _movement(movement), _id(0)
+				 _graphics(graphics), _movement(movement), _id(0), _moved(false)
 {
 
 }
@@ -21,7 +21,7 @@ void GameObject::handleEvents(const Control& controls)
 void GameObject::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 {
 	// updates the movement
-	_movement->Update(localmap, *this, *_graphics, elapsedTime);
+	_moved = _movement->Update(localmap, *this, *_graphics, elapsedTime);
 }
 
 // render object

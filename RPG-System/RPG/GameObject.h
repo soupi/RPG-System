@@ -32,13 +32,13 @@ public:
 	void setGraphics(Graphics* new_graphics);
 	void setMovement(Movement* new_Movement);
 
-	sf::Vector2f getPos() const { return _graphics->getPos(); }
-	void setPos(sf::Vector2f pos) { _movement->setPos(pos); }
+	const sf::Vector2f getPos() const { return _graphics->getPos(); }
+	void setPos(sf::Vector2f pos) { _graphics->setPos(pos); }
 	float getRadius() const { return _graphics->getRadius(); }
 	bool checkCollision(sf::FloatRect& box) const { return _graphics->checkCollision(box); }
 	sf::FloatRect getCollisionBox() const { return _graphics->getCollisionBox(); }
-	sf::Vector2f getFacingDirection() const { return _graphics->getFacingDirection(); }
-	sf::Vector2f getSize() const { return _graphics->getSize(); }
+	const sf::Vector2f getFacingDirection() const { return _graphics->getFacingDirection(); }
+	const sf::Vector2f getSize() const { return _graphics->getSize(); }
 
 	shared_ptr<Graphics> getGraphics() { return _graphics; }
 	const sf::Vector2f& getHeadPos() const { return _graphics->getHeadPos(); }
@@ -64,9 +64,9 @@ public:
 	virtual void StepOn(LocalMap& localmap, Enemy&) {}
 	virtual bool canStepOn(Enemy&) { return true; }
 	// default for Attack
-	void StepOn(LocalMap& localmap, Attack& obj) {}
-	bool canStepOn(LocalMap& localmap, Attack& obj) { return true; }
-	bool act(LocalMap& localmap, Attack& obj) {}
+	virtual void StepOn(LocalMap& localmap, Attack& obj) {}
+	virtual bool canStepOn(Attack& obj) { return true; }
+	virtual void act(LocalMap& localmap, Attack& obj) {}
 
 private:
 	// strategy pattern
@@ -74,4 +74,7 @@ private:
 	shared_ptr<Movement> _movement;
 
 	int _id;
+
+protected:
+	bool _moved;
 };

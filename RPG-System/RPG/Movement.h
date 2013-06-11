@@ -12,18 +12,15 @@ class GameObject;
 class Movement
 {
 public:
-	Movement(sf::Vector2f pos = sf::Vector2f(0.f, 0.f), float speed = DEFAULT_SPEED) : 
-	  _direction(0.f,0.f), _speed(speed), _newpos(true), _init_pos(pos) { }
+	Movement(float speed = DEFAULT_SPEED) : 
+	  _direction(0.f,0.f), _speed(speed) { }
 	virtual ~Movement() { }
 
 	virtual void handleEvents(const Control& controls) = 0;
-	virtual void Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime) = 0;
-	void setPos(sf::Vector2f pos) { _init_pos = pos; _newpos = true; }
-
+	virtual bool Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime) = 0;
 
 protected:
 	sf::Vector2f _direction;
 	float _speed;
-	sf::Vector2f _init_pos;
-	bool _newpos;
+
 };

@@ -25,7 +25,7 @@ void UserMovement::handleEvents(const Control& controls)
 	else _run = false;
 }
 
-void UserMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime)
+bool UserMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime)
 {
 	// set _direction and speed speed
 	float scalar = 1.f;
@@ -35,5 +35,5 @@ void UserMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_g
 	_speed = _curr_speed * scalar;
 
 	// move
-	Movement::Update(localmap, my_obj, my_graphics, elapsedTime);
+	return Movement::Update(localmap, my_obj, my_graphics, elapsedTime);
 }

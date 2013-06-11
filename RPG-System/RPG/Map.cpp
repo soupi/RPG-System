@@ -126,8 +126,10 @@ void Map::addGameObject(shared_ptr<GameObject>& obj, unsigned pos)
 	int max = 0;
 
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+	{
 		if (max < (*it)->getId())
 			max = (*it)->getId();
+	}
 
 	obj->setId(max+1);
 
@@ -135,18 +137,31 @@ void Map::addGameObject(shared_ptr<GameObject>& obj, unsigned pos)
 		(pos/_width)*float(SCRN_TILE_SIZE) + obj->getRadius()));
 
 	_game_objects.push_back(obj);
+	//std::sort(_game_objects.begin(), _game_objects.end(), compare_obj_by_y());
 
-	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.end()-1; it != _game_objects.begin() && (*it)->getPos().y < (*(it-1))->getPos().y;)
-		std::swap(it, it-1);
+	for (int i = _game_objects.size() -1; 0 < i && _game_objects[i]->getPos().y < _game_objects[i-1]->getPos().y; --i)
+		std::swap(_game_objects[i], _game_objects[i-1]);
 }
-void Map::addGameObject(shared_ptr<GameObject>& obj, sf::Vector2f& pos)
+void Map::addGameObject(shared_ptr<GameObject>& obj, const sf::Vector2f& pos)
 {
 	obj->setPos(pos);
 
-	_game_objects.push_back(obj);
+	int max = 0;
 
-	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.end()-1; it != _game_objects.begin() && (*it)->getPos().y < (*(it-1))->getPos().y;)
-		std::swap(it, it-1);
+	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+	{
+		if (max < (*it)->getId())
+			max = (*it)->getId();
+
+	}
+	obj->setId(max+1);
+
+	_game_objects.push_back(obj);
+	
+
+	//std::sort(_game_objects.begin(), _game_objects.end(), compare_obj_by_y());
+	for (int i = _game_objects.size() -1; 0 < i && _game_objects[i]->getPos().y < _game_objects[i-1]->getPos().y; --i)
+		std::swap(_game_objects[i], _game_objects[i-1]);
 }
 
 
@@ -191,8 +206,10 @@ bool Map::canStepOn(GameObject& obj)
 		return false;
 
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+	{
 		if((it->get()) != &obj && (*it)->checkCollision(box) && !obj.canStepOn(*(it->get())))
 			return false;
+	}
 	
 	return true;
 }
@@ -201,34 +218,44 @@ void Map::Step(LocalMap& localmap, GameObject& obj)
 {
 	sf::FloatRect box = obj.getCollisionBox();
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+	{
 		if((it->get()) != &obj && (*it)->checkCollision(box))
+//			obj.StepOn(localmap, *(it->get())); // dispatch
 			obj.StepOn(localmap, *(it->get())); // dispatch
+	}
 }
 
-void Map::Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box)
+bool Map::Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box)
 {
+	bool acted = false;
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
 		if((it->get()) != &obj && (*it)->checkCollision(box))
 		{
 		//	obj.act(localmap, *(it->get())); // dispatch
 			(*it)->act(localmap, obj);
+			acted = true;
 		}
+		return acted;
 }
 
 void Map::remGameObject(GameObject* obj)
 {
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+	{
 		if ((*it).get() == obj)
 		{
 			_game_objects.erase(it);
 			break;
 		}
+	}
 }
 
 const sf::Vector2f Map::getPosById(int id)
 {
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
+	{
 		if ((*it)->getId() == id)
 			return (*it)->getPos();
+	}
 	return sf::Vector2f(0,0);
 }

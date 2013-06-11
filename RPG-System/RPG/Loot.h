@@ -17,7 +17,7 @@ public:
 	virtual void StepOn(LocalMap& localmap, HeroCharacter& hero)
 	{
 		hero.Loot(localmap, _exp, _coins);
-		localmap.addScript(shared_ptr<Script>(new remObjScript(localmap, this)));
+		localmap.addCommand(shared_ptr<Script>(new remObjScript(localmap, this)));
 	}
 	virtual void act(LocalMap& localmap, HeroCharacter&) {}
 private:

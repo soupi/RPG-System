@@ -74,7 +74,7 @@ NPC
 	
 # NPC to create on tile 101.
 ENEMY 4 7 2 50
-	FOLLOWIDMOVEMENT 0 4
+	FOLLOWIDMOVEMENT 0 8
 	GRAPHICS char.png 
 		4 4 
 		64 96 
