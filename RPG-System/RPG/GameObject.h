@@ -43,6 +43,8 @@ public:
 	shared_ptr<Graphics> getGraphics() { return _graphics; }
 	const sf::Vector2f& getHeadPos() const { return _graphics->getHeadPos(); }
 
+	void UpdateGraphics(float elapsedTime) { _graphics->Update(elapsedTime); }
+
 	int getId() const { return _id; }
 	virtual void setId(int id) { _id = id; }
 	

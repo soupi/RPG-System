@@ -10,7 +10,7 @@ class Graphics
 public:
 	Graphics(const sf::Texture* texture, sf::Vector2i loc_on_texture, const sf::Vector2u& size);
 	virtual ~Graphics() { }
-	virtual void Update();
+	virtual void Update(float elapsedTime);
 	virtual void Render(sf::RenderWindow& window);
 	// ----------------
 	void move(const sf::Vector2f& direction);

@@ -225,6 +225,9 @@
     <ClInclude Include="addObject.h">
       <Filter>Header Files\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="StaticGraphics.h">
+      <Filter>Header Files\GameObject\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

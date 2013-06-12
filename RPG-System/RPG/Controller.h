@@ -25,6 +25,8 @@ private:
 	sf::Clock _clock;
 	StateMachine _stateMachine;
 
+	float _a_button_timer;
+
 	Hero _hero;
 	Control _controls;
 

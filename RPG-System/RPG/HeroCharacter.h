@@ -35,8 +35,10 @@ public:
 
 	void giveQuestItem(QuestItem& item);
 	bool hasQuestItem(const string& item_name);
-	void Loot(LocalMap& localmap, unsigned exp, unsigned coins) { _hero_data->Loot(localmap, exp, coins); }
+	void Loot(LocalMap& localmap, unsigned exp, unsigned coins) { _hero_data->Loot(localmap, *this, exp, coins); }
 	virtual void setId(int id) { GameObject::setId(0); }
+
+	void addNewAttack(shared_ptr<AttackFactory> atk);
 
 private:
 	sf::Texture _hero_texture;
@@ -44,7 +46,6 @@ private:
 	Flag _attack1;
 	Flag _attack2;
 
-	float _A_clock;
 	float _B_clock;
 	shared_ptr<HeroData> _hero_data;
 	float _hurt_timer;

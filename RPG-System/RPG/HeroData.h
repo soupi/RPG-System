@@ -8,7 +8,7 @@
 #include "Bar.h"
 
 class LocalMap;
-
+class HeroCharacter;
 
 const unsigned BASE_HP = 100;
 const unsigned BASE_LIVES = 2;
@@ -25,7 +25,7 @@ public:
 	void takeDamage(unsigned amount);
 	const Stats& getStats() const { return _stats; }
 	void showHP(Controller& ctrl);
-	void Loot(LocalMap& localmap, unsigned exp, unsigned coins) { _exp += exp; _coins += coins; checkLevelRaise(localmap); }
+	void Loot(LocalMap& localmap, HeroCharacter& hero_char, unsigned exp, unsigned coins) { _exp += exp; _coins += coins; checkLevelRaise(localmap, hero_char); }
 
 private:
 	unsigned long _exp;
@@ -39,5 +39,5 @@ private:
 
 	Bar _HP_bar;
 
-	void checkLevelRaise(LocalMap& map);
+	void checkLevelRaise(LocalMap& map, HeroCharacter& hero_char);
 };

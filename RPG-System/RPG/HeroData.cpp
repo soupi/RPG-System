@@ -1,8 +1,11 @@
 #include "HeroData.h"
+#include "HeroCharacter.h"
 #include "Controller.h"
 #include "LocalMap.h"
 #include "Dialog.h"
 #include <cmath>
+#include "AttackFactory.h"
+#include "BulletAttack.h"
 
 using std::string;
 
@@ -28,16 +31,19 @@ void HeroData::takeDamage(unsigned amount)
 	}
 }
 
-void HeroData::checkLevelRaise(LocalMap& map)
+void HeroData::checkLevelRaise(LocalMap& map, HeroCharacter& hero_char)
 {
 	for (;_level < _exp/pow(2.f,int(_level)); ++_level)
 	{
 		Stats raise = _stats.Raise();
-		unsigned hp_raise = rand() % unsigned(_level*3.0/2 +1);
-		_HP += hp_raise;
 		stringstream ss;
 		ss << "You have been raised to level " << _level+1 << "!\nCongratulations!";
-		ss << std::endl << "ATK + " << raise.ATK() << "  |  DEF + " << raise.DEF() << "  |  LUCK + " << raise.LUCK() << "  |  HP + " << hp_raise;
+		ss << std::endl << "ATK + " << raise.ATK() << "  |  DEF + " << raise.DEF() << "  |  LUCK + " << raise.LUCK();
+		if (_level+1 == 2)
+		{
+			hero_char.addNewAttack(shared_ptr<AttackFactory>(new AttackFactoryT<BulletAttack>));
+			ss << "\nYou have learned a new Attack: Bullet!";
+		}
 		string str(ss.str());
 		map.addScript(shared_ptr<Script>(new Dialog(str)));
 	}

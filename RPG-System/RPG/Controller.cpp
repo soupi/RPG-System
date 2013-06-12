@@ -10,7 +10,7 @@ using std::shared_ptr;
 
 
 // Constructor for controller
-Controller::Controller() {
+Controller::Controller() : _a_button_timer(0.f) {
 	initWindow();
 	initStateMachine();
 }
@@ -22,6 +22,8 @@ void Controller::run()
 	{
 		// time since last loop
 		float deltaTime = _clock.restart().asSeconds();
+
+		_a_button_timer += deltaTime;
 
 		// handle events
 		sf::Event event;
@@ -77,8 +79,13 @@ bool Controller::handleEvents(sf::Event& event)
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		controls[DOWN] = true;
 	// set keyboard controls: action keys
+	if (_a_button_timer > PRESS_INTERVAL)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+	{
 		controls[A] = true;
+		_a_button_timer = 0.f;
+	}
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
 		controls[B] = true;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -102,7 +109,7 @@ void Controller::initWindow()
 	double ratio = double(sf::VideoMode::getDesktopMode().height)/sf::VideoMode::getDesktopMode().width;
 
 	_window.create(sf::VideoMode(WINDOW_W, unsigned(WINDOW_W*ratio)), 
-		"RPG", sf::Style::Close, settings);
+		"RPG", sf::Style::Fullscreen, settings);
 
 	_window.setVerticalSyncEnabled(true); // set refresh rate as screen's refresh rate
 	_window.setJoystickThreshold(10000); // joystick threshold

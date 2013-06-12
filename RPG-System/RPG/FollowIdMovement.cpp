@@ -26,7 +26,6 @@ bool FollowIdMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& 
 	}
 	
 	else _direction = sf::Vector2f(0,0);
-	
 
 	return Movement::Update(localmap, my_obj, my_graphics, elapsedTime);
 }

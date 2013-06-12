@@ -72,8 +72,8 @@ NPC
 		64 96 
 	200
 
-DOOR map.mp 0
-	370
+DOOR map.mp 21
+	0
 	
 # NPC to create on tile 10. will check if you have the "key" item
 NPC 

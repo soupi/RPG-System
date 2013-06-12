@@ -13,6 +13,7 @@ bool Movement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graph
 
 	// set current graphical direction of movement
 	my_graphics.setDir(_direction);
+	my_obj.UpdateGraphics(elapsedTime);
 
 	sf::Vector2f last = my_obj.getPos();
 

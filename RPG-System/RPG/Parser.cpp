@@ -20,6 +20,7 @@
 // Graphics types
 #include "Graphics.h"
 #include "NoGraphics.h"
+#include "StaticGraphics.h"
 // movement types
 #include "Movement.h"
 #include "NoMovement.h"
@@ -83,15 +84,17 @@ Graphics* Parser::readGraphics(istream& infd)
 	infd >> type;
 	if (type == "NOGRAPHICS")
 		return new NoGraphics;
-
 	string filename;
 	sf::Vector2i loc_on_file;
 	sf::Vector2u size;
 	//try
 	infd >> filename >> loc_on_file.x >> loc_on_file.y >> size.x >> size.y;
 	//catch
+	if (type == "STATICGRAPHICS")
+		return new StaticGraphics(&(Bank<sf::Texture>::getInstance().get(filename)), loc_on_file, size);
+	else return new Graphics(&(Bank<sf::Texture>::getInstance().get(filename)), loc_on_file, size);
 
-	return new Graphics(&(Bank<sf::Texture>::getInstance().get(filename)), loc_on_file, size);
+	return new NoGraphics;
 }
 Movement* Parser::readMovement(istream& infd)
 {

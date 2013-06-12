@@ -16,7 +16,6 @@ public:
 private:
 	DialogBox _dialogbox;
 	string _str;
-	float _clock;
 
 	virtual void enter(Hero& hero);
 	virtual void exit();

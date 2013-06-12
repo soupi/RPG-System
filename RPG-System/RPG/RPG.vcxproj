@@ -126,6 +126,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StateParams.h" />
+    <ClInclude Include="StaticGraphics.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="DirMovement.h" />
     <ClInclude Include="Tile.h" />

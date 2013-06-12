@@ -1,5 +1,6 @@
 #include "Graphics.h"
 #include "Tile.h"
+#include "Macros.h"
 
 Graphics::Graphics(const sf::Texture* texture, sf::Vector2i loc_on_texture, const sf::Vector2u& size) : _texture(texture), _loc_on_texture(loc_on_texture), 
 	_display(true), _animation(0), _animation_clock(0.f)
@@ -44,9 +45,27 @@ void Graphics::setPos(const sf::Vector2f pos)
 		_shadow.getPosition().y - _sprite.getGlobalBounds().height + _shadow.getRadius()/2.f);
 }
 
-void Graphics::Update()
+void Graphics::Update(float deltaTime)
 {
 	// animation
+	_animation_clock += deltaTime;
+	if (_animation_clock > ANIMATION_SPEED)
+	{
+		sf::Vector2f direction = getFacingDirection();
+		unsigned dir;
+		if (direction.x == 1)
+			dir = RIGHT_DIR;
+		else if (direction.x == -1)
+			dir = LEFT_DIR;
+		else if (direction.y == -1)
+			dir = UP_DIR;
+		else dir = DOWN_DIR;
+
+		if (_sprite.getTextureRect().width > 0)
+			_sprite.setTextureRect(sf::IntRect(_loc_on_texture.x*_sprite.getTextureRect().width + (((_sprite.getTextureRect().left - _loc_on_texture.x*_sprite.getTextureRect().width) + _sprite.getTextureRect().width) % (3*_sprite.getTextureRect().width)),
+				 _loc_on_texture.y*_sprite.getTextureRect().height + _sprite.getTextureRect().height * dir, _sprite.getTextureRect().width, _sprite.getTextureRect().height));
+		_animation_clock = 0.f;
+	}
 }
 
 bool Graphics::checkCollision(sf::FloatRect& box) const
