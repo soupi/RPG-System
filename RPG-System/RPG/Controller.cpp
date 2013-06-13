@@ -6,6 +6,7 @@
 #include "ParamsCtrl.h"
 #include "Macros.h"
 #include <memory>
+#include "Bank.h"
 
 using std::shared_ptr; 
 
@@ -111,6 +112,9 @@ void Controller::initWindow()
 
 	_window.create(sf::VideoMode(WINDOW_W, unsigned(WINDOW_W*ratio)), 
 		"RPG", sf::Style::Fullscreen, settings);
+
+	sf::Image icon = Bank<sf::Image>::getInstance().get("resources/icon.png");
+	_window.setIcon(32, 32, icon.getPixelsPtr());
 
 	_window.setVerticalSyncEnabled(true); // set refresh rate as screen's refresh rate
 	_window.setJoystickThreshold(10000); // joystick threshold

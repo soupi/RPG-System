@@ -5,10 +5,11 @@
 
 void Splash::init()
 {
-	_logo.setTexture(Bank<sf::Texture>::getInstance().get("logo.png"));
+	_logo.setTexture(Bank<sf::Texture>::getInstance().get("resources/logo.png"));
 	_logo.setOrigin(_logo.getTextureRect().width/2.f, _logo.getTextureRect().height/2.f);
 	_rect.setFillColor(sf::Color::White);
 	_shader.loadFromFile("resources/wave.vert", sf::Shader::Vertex);
+	//_shader.loadFromFile("resources/wave.vert", "resources/pixelate.frag");
 	_shade_timer = 0.f;
 	
 }
@@ -24,9 +25,8 @@ void Splash::Update(Controller& ctrl, float elapsedTime)
 	{
 		_shader.setParameter("wave_phase", elapsedTime);
 		_shader.setParameter("wave_amplitude", tan(_timer-1) * 50, sin(_shade_timer-1) * 40);
-		//_shader.setParameter("blur_radius", (_timer) * 0.018f);
 	}
-	else if (4.17f < _shade_timer)
+	else if (4.67f < _shade_timer)
 	{
 		if (!_fading)
 		{
