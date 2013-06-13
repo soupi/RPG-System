@@ -10,6 +10,7 @@
 #include "BasicAttack.h"
 #include "BulletAttack.h"
 #include <vector>
+#include "Control.h"
 
 using std::shared_ptr;
 using std::vector;
@@ -39,6 +40,13 @@ public:
 	virtual void setId(int id) { GameObject::setId(0); }
 
 	void addNewAttack(shared_ptr<AttackFactory> atk);
+
+	void stop() 
+	{ 
+		bool controls[NUM_OF_CONTROLS] = { false };
+		//Control con(controls);
+		handleEvents(Control(controls));
+	}
 
 private:
 	sf::Texture _hero_texture;

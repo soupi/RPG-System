@@ -93,6 +93,7 @@
     <ClInclude Include="EmptyState.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="FadeEffect.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="FollowIdMovement.h" />
     <ClInclude Include="GameMenu.h" />
@@ -123,6 +124,7 @@
     <ClInclude Include="remObject.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="Scripts.h" />
+    <ClInclude Include="Splash.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StateParams.h" />
@@ -146,6 +148,7 @@
     <ClCompile Include="DialogBox.cpp" />
     <ClCompile Include="DirMovement.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="FadeEffect.cpp" />
     <ClCompile Include="FollowIdMovement.cpp" />
     <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -164,6 +167,7 @@
     <ClCompile Include="RandMovement.cpp" />
     <ClCompile Include="remObjScript.cpp" />
     <ClCompile Include="Scripts.cpp" />
+    <ClCompile Include="Splash.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="UserMovement.cpp" />

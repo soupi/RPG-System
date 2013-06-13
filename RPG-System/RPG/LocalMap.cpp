@@ -35,6 +35,10 @@ bool LocalMap::handleEvents(const Control& controls)
 // Update the localmap
 void LocalMap::Update(Controller& ctrl, float elapsedTime)
 {
+	_first_update = true;
+	if (_fade.isFading())
+		_fade.update(ctrl, elapsedTime);
+
 	// if change state flag is set, stack game menu state
 	if (_change_state)
 		ctrl.getStateMachine().Stack("gamemenu", shared_ptr<StateParams>(new ParamsCtrl(ctrl)));
@@ -74,6 +78,8 @@ void LocalMap::Update(Controller& ctrl, float elapsedTime)
 // render local map and scripts
 void LocalMap::Render(Controller& ctrl)
 {
+	if (!_first_update)
+		return;
 	_map->Render(ctrl);
 	ctrl.getHero().getHeroData()->showHP(ctrl);
 	if (!_scripts.empty())
@@ -83,6 +89,9 @@ void LocalMap::Render(Controller& ctrl)
 	if (!_commands.empty())
 		if (_commands.front()->hasEntered())
 			_commands.front()->Render(ctrl);
+
+	if (_fade.isFading())
+		_fade.render(ctrl);
 }
 
 // init local map
@@ -103,6 +112,7 @@ void LocalMap::init(shared_ptr<StateParams>& params)
 		
 	// add hero to map
 	_map->addGameObject(shared_ptr<GameObject>(params->getCtrl().getHero().getHeroForMap()), starting_tile);
+	_fade.fadeIn();
 }
 
 // add script to queue

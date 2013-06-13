@@ -2,6 +2,7 @@
 #include "MainMenu.h"
 #include "GameMenu.h"
 #include "LocalMap.h"
+#include "Splash.h"
 #include "ParamsCtrl.h"
 #include "Macros.h"
 #include <memory>
@@ -104,7 +105,7 @@ void Controller::initWindow()
 {
 	// create window, size and settings
 	sf::ContextSettings settings;
-	settings.antialiasingLevel = 8;
+	settings.antialiasingLevel = 4;
 	
 	double ratio = double(sf::VideoMode::getDesktopMode().height)/sf::VideoMode::getDesktopMode().width;
 
@@ -118,9 +119,8 @@ void Controller::initWindow()
 	_window.setMouseCursorVisible(false); // hide mouse
 
 	// create view
-	_view.setCenter(WINDOW_W/2.f, WINDOW_H/2.f);
-	_view.setSize(float(WINDOW_W), float(WINDOW_H));
-	_view.zoom(2.f); // zoom out
+	_view.setCenter(_window.getSize().x/2.f, _window.getSize().y/2.f);
+	_view.setSize(float(_window.getSize().x), float(_window.getSize().y));
 
 	_window.setView(_view);
 }
@@ -131,8 +131,9 @@ void Controller::initStateMachine()
 	_stateMachine.Add("mainmenu", shared_ptr<State>(new MainMenu));
 	_stateMachine.Add("gamemenu", shared_ptr<State>(new GameMenu));
 	_stateMachine.Add("localmap", shared_ptr<State>(new LocalMap));
+	_stateMachine.Add("splash", shared_ptr<State>(new Splash));
 
 	// change to main menu state
 	shared_ptr<StateParams> params( new ParamsCtrl(*this));
-	_stateMachine.Change("mainmenu", params);
+	_stateMachine.Change("splash", params);
 }

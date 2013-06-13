@@ -9,6 +9,7 @@ Dialog::Dialog(const string& str) : _dialogbox(str), _str(str)
 }
 void Dialog::enter(Hero& hero)
 {
+	hero.getHeroForMap()->stop();
 	_dialogbox.setString(_str);
 	_continue = true;
 }

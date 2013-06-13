@@ -49,21 +49,28 @@ void Graphics::Update(float deltaTime)
 {
 	// animation
 	_animation_clock += deltaTime;
+
+	sf::Vector2f direction = getFacingDirection();
+	unsigned dir;
+
+	dir = DOWN_DIR;
+	if (direction.y > 0)
+		dir = DOWN_DIR;
+	else if (direction.y < 0)
+		dir = UP_DIR;
+	else if (direction.x > 0)
+		dir = RIGHT_DIR;
+	else if (direction.x < 0)
+		dir = LEFT_DIR;
+
+	_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left, _loc_on_texture.y*_sprite.getTextureRect().height + _sprite.getTextureRect().height * dir,
+		 _sprite.getTextureRect().width, _sprite.getTextureRect().height));
+
 	if (_animation_clock > ANIMATION_SPEED)
 	{
-		sf::Vector2f direction = getFacingDirection();
-		unsigned dir;
-		if (direction.x == 1)
-			dir = RIGHT_DIR;
-		else if (direction.x == -1)
-			dir = LEFT_DIR;
-		else if (direction.y == -1)
-			dir = UP_DIR;
-		else dir = DOWN_DIR;
-
 		if (_sprite.getTextureRect().width > 0)
 			_sprite.setTextureRect(sf::IntRect(_loc_on_texture.x*_sprite.getTextureRect().width + (((_sprite.getTextureRect().left - _loc_on_texture.x*_sprite.getTextureRect().width) + _sprite.getTextureRect().width) % (3*_sprite.getTextureRect().width)),
-				 _loc_on_texture.y*_sprite.getTextureRect().height + _sprite.getTextureRect().height * dir, _sprite.getTextureRect().width, _sprite.getTextureRect().height));
+				 _sprite.getTextureRect().top, _sprite.getTextureRect().width, _sprite.getTextureRect().height));
 		_animation_clock = 0.f;
 	}
 }

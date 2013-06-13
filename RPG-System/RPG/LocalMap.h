@@ -9,6 +9,7 @@
 #include "LocalObject.h"
 #include "Script.h"
 #include <queue>
+#include "FadeEffect.h"
 
 using std::queue;
 using std::shared_ptr;
@@ -17,8 +18,8 @@ class LocalMap : public State
 {
 public:
 	LocalMap();
-	virtual void Enter(shared_ptr<StateParams>& params) { init(params); }
-	virtual void Exit() {  }
+	virtual void Enter(shared_ptr<StateParams>& params) { _first_update = false; init(params); }
+	virtual void Exit() { }
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(Controller& ctrl);
@@ -43,4 +44,7 @@ private:
 	queue<shared_ptr<Script>> _commands;
 	void init(shared_ptr<StateParams>& params);
 	shared_ptr<Map> _map;
+
+	Fade _fade;
+	bool _first_update;
 };
