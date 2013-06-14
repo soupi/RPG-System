@@ -81,9 +81,6 @@
     <ClInclude Include="MainMenu.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="GameMenu.h">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
     <ClInclude Include="Flag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -201,9 +198,6 @@
     <ClInclude Include="Loot.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="FollowIdMovement.h">
-      <Filter>Header Files\GameObject\Movement</Filter>
-    </ClInclude>
     <ClInclude Include="Attack.h">
       <Filter>Header Files\GameObject\Attack</Filter>
     </ClInclude>
@@ -234,6 +228,12 @@
     <ClInclude Include="FadeEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EyeFollowIdMovement.h">
+      <Filter>Header Files\GameObject\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="Pause.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -246,9 +246,6 @@
       <Filter>Source Files\States</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files\States</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMenu.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
@@ -343,6 +340,9 @@
     </ClCompile>
     <ClCompile Include="FadeEffect.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pause.cpp">
+      <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

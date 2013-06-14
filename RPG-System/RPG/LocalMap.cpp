@@ -16,7 +16,7 @@ LocalMap::LocalMap()
 bool LocalMap::handleEvents(const Control& controls)
 {
 	// set flag to change the state if the mouse has been pressed
-	if (controls.isPressed(MOUSE_PRIMARY))
+	if (controls.isPressed(PAUSE) || controls.isPressed(ESC))
 		_change_state.set();
 
 	// controls to the scripts if there is one
@@ -41,7 +41,7 @@ void LocalMap::Update(Controller& ctrl, float elapsedTime)
 
 	// if change state flag is set, stack game menu state
 	if (_change_state)
-		ctrl.getStateMachine().Stack("gamemenu", shared_ptr<StateParams>(new ParamsCtrl(ctrl)));
+		ctrl.getStateMachine().Stack("pause", shared_ptr<StateParams>(new ParamsCtrl(ctrl)));
 	
 	// update scripts if there is one
 	if (!_scripts.empty())

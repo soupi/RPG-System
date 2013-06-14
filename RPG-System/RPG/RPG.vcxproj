@@ -93,10 +93,10 @@
     <ClInclude Include="EmptyState.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EyeFollowIdMovement.h" />
     <ClInclude Include="FadeEffect.h" />
     <ClInclude Include="Flag.h" />
-    <ClInclude Include="FollowIdMovement.h" />
-    <ClInclude Include="GameMenu.h" />
+    <ClInclude Include="Pause.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GiveItem.h" />
     <ClInclude Include="Graphics.h" />
@@ -150,7 +150,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FadeEffect.cpp" />
     <ClCompile Include="FollowIdMovement.cpp" />
-    <ClCompile Include="GameMenu.cpp" />
+    <ClCompile Include="Pause.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="HeroCharacter.cpp" />

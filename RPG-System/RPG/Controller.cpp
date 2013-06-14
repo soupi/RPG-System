@@ -1,6 +1,6 @@
 #include "Controller.h"
 #include "MainMenu.h"
-#include "GameMenu.h"
+#include "Pause.h"
 #include "LocalMap.h"
 #include "Splash.h"
 #include "ParamsCtrl.h"
@@ -12,7 +12,7 @@ using std::shared_ptr;
 
 
 // Constructor for controller
-Controller::Controller() : _a_button_timer(0.f) {
+Controller::Controller() : _A_button_timer(0.f), _P_button_timer(0.f), _ESC_button_timer(0.f)  {
 	initWindow();
 	initStateMachine();
 }
@@ -25,7 +25,9 @@ void Controller::run()
 		// time since last loop
 		float deltaTime = _clock.restart().asSeconds();
 
-		_a_button_timer += deltaTime;
+		_A_button_timer += deltaTime;
+		_P_button_timer += deltaTime;
+		_ESC_button_timer += deltaTime;
 
 		// handle events
 		sf::Event event;
@@ -33,7 +35,8 @@ void Controller::run()
 		{
 			if (handleEvents(event))
 				break;
-			else _stateMachine.handleEvents(_controls);
+			else if (_stateMachine.handleEvents(_controls))
+				break;
 		}
 
 		// Update
@@ -50,7 +53,7 @@ void Controller::run()
 			sf::sleep(sf::seconds(1.f/FRAME_RATE - deltaTime));
 	}
 	shared_ptr<StateParams> params( new ParamsCtrl(*this));
-	_stateMachine.Change("gamemenu", params);
+	_stateMachine.Change("pause", params);
 }
 
 // creates controls from events
@@ -81,19 +84,29 @@ bool Controller::handleEvents(sf::Event& event)
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		controls[DOWN] = true;
 	// set keyboard controls: action keys
-	if (_a_button_timer > PRESS_INTERVAL)
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+	if (_A_button_timer > PRESS_INTERVAL && sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 	{
 		controls[A] = true;
-		_a_button_timer = 0.f;
+		_A_button_timer = 0.f;
 	}
-
+	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
 		controls[B] = true;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		controls[C] = true;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		controls[D] = true;
+
+	if (_P_button_timer > PRESS_INTERVAL && sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+	{
+		controls[PAUSE] = true;
+		_P_button_timer = 0.f;
+	}
+	if (_ESC_button_timer > PRESS_INTERVAL && sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	{
+		controls[ESC] = true;
+		_ESC_button_timer = 0.f;
+	}
 
 	// set current controls
 	_controls.setControls(controls);
@@ -133,7 +146,7 @@ void Controller::initWindow()
 void Controller::initStateMachine()
 {
 	_stateMachine.Add("mainmenu", shared_ptr<State>(new MainMenu));
-	_stateMachine.Add("gamemenu", shared_ptr<State>(new GameMenu));
+	_stateMachine.Add("pause", shared_ptr<State>(new Pause));
 	_stateMachine.Add("localmap", shared_ptr<State>(new LocalMap));
 	_stateMachine.Add("splash", shared_ptr<State>(new Splash));
 

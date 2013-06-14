@@ -12,7 +12,7 @@ public:
 	virtual bool handleEvents(const Control& controls) = 0;
 	virtual bool Update(Controller&, float elapsedTime) = 0;
 	virtual void Render(Controller& ctrl) = 0;
-	virtual void Exit() { _entered = true; _continue = true; exit(); }
+	virtual void Exit() { _entered = false; _continue = false; exit(); }
 	bool Continue() const { return _continue; }
 	bool hasEntered() const { return _entered; }
 protected:

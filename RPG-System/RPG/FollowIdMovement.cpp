@@ -9,9 +9,12 @@ const float EPSILON = 0.4f;
 // set new direction and move
 bool FollowIdMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime)
 {
+	setDir(localmap, my_obj);
 
-	//	sf::Vector2f pos = my_obj.getPos();
-	//	sf::Vector2f b_pos = localmap.getPosById(_id_to_follow);
+	return Movement::Update(localmap, my_obj, my_graphics, elapsedTime);
+}
+void FollowIdMovement::setDir(LocalMap& localmap, GameObject& my_obj)
+{
 	sf::Vector2f dir = localmap.getPosById(_id_to_follow) - my_obj.getPos();
 
 	dir /= float(SCRN_TILE_SIZE);
@@ -26,6 +29,4 @@ bool FollowIdMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& 
 	}
 	
 	else _direction = sf::Vector2f(0,0);
-
-	return Movement::Update(localmap, my_obj, my_graphics, elapsedTime);
 }

@@ -11,10 +11,10 @@
 class Splash : public State
 {
 public:
-	Splash() : _timer(0.f), _fading(false) { init(); }
+	Splash() : _timer(0.f), _fading(false), _esc(false) { init(); }
 	virtual void Enter(shared_ptr<StateParams>& params) { _shade_timer = 0.f; _timer = 0.f; }
 	virtual void Exit() { }
-	virtual bool handleEvents(const Control& controls) { return true; }
+	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(Controller& ctrl);
 
@@ -26,6 +26,8 @@ private:
 	sf::Shader _shader;
 	bool _fading;
 	Fade _fade;
+
+	bool _esc;
 
 	void init();
 	

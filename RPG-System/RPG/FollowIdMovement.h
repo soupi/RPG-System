@@ -17,4 +17,7 @@ private:
 	int _id_to_follow;
 	float _radius;
 	sf::Vector2f _curr_dir;
+
+protected:
+	void setDir(LocalMap& localmap, GameObject& my_obj);
 };

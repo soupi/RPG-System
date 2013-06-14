@@ -121,6 +121,7 @@ Movement* Parser::readFollowIdMovement(istream& infd)
 	infd >> id >> radius;
 	return new FollowIdMovement(id, radius);
 }
+
 Movement* Parser::readNoMovement(istream& infd)
 {
 	return new NoMovement;

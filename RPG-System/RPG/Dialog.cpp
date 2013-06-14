@@ -11,7 +11,6 @@ void Dialog::enter(Hero& hero)
 {
 	hero.getHeroForMap()->stop();
 	_dialogbox.setString(_str);
-	_continue = true;
 }
 bool Dialog::handleEvents(const Control& controls)
 {
@@ -34,5 +33,4 @@ void Dialog::Render(Controller& ctrl)
 }
 void Dialog::exit()
 {
-	_continue = false;
 }

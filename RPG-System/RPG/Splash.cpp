@@ -38,7 +38,7 @@ void Splash::Update(Controller& ctrl, float elapsedTime)
 	}
 
 	_timer += elapsedTime;
-	if (_fading && !_fade.isFading())
+	if (_fading && !_fade.isFading() || _esc)
 	{
 		shared_ptr<StateParams> params( new ParamsCtrl(ctrl));
 		ctrl.getStateMachine().Change("mainmenu", params);
@@ -53,4 +53,10 @@ void Splash::Render(Controller& ctrl)
 
 	if (_fading)
 		_fade.render(ctrl);
+}
+
+bool Splash::handleEvents(const Control& controls)
+{
+	_esc = controls.isPressed(ESC);
+	return false;
 }
