@@ -75,9 +75,9 @@ NPC
 # ENEMY to create on tile 101.
 ENEMY 4 7 2 50
 	FOLLOWIDMOVEMENT 0 8
-	GRAPHICS char.png 
-		3 4
-		64 96 
+	GRAPHICS resources/art/slime.png
+		0 0
+		64 64 
 	108
 
 DOOR map2.mp 21

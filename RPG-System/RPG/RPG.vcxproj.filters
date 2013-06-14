@@ -228,11 +228,11 @@
     <ClInclude Include="FadeEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EyeFollowIdMovement.h">
-      <Filter>Header Files\GameObject\Movement</Filter>
-    </ClInclude>
     <ClInclude Include="Pause.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowIdMovement.h">
+      <Filter>Header Files\GameObject\Movement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

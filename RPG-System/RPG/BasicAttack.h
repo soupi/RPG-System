@@ -3,6 +3,7 @@
 #include "Attack.h"
 #include "Macros.h"
 #include "Utility.h"
+#include "Bank.h"
 
 class BasicAttack : public Attack
 {
