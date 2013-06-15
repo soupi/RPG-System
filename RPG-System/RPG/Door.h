@@ -14,9 +14,9 @@ public:
 	Door(const string& map, unsigned starting_tile) : LocalObject(shared_ptr<Script>(new ChangeMap(map, starting_tile)),
 		 new NoGraphics, new NoMovement, true) {}
 
-	virtual void StepOn(LocalMap& localmap, HeroCharacter& hero)
+	virtual void act(LocalMap& localmap, HeroCharacter& hero)
 	{
 		localmap.addScript(_script);
 	}
-	virtual void act(LocalMap& localmap, HeroCharacter&) {}
+	virtual void StepOn(LocalMap& localmap, HeroCharacter&) {}
 };

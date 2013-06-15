@@ -67,17 +67,17 @@
 NPC 
 	DIALOG hello, world!;Welcome!
 	RANDMOVEMENT 2
-	GRAPHICS char.png 
+	GRAPHICS resources/art/chara01.png 
 		3 0 
-		64 96 
+		32 48 
 	111
 	
 # ENEMY to create on tile 101.
 ENEMY 4 7 2 50
 	FOLLOWIDMOVEMENT 0 8
-	GRAPHICS resources/art/slime.png
+	GRAPHICS resources/art/slimex64.png
 		0 0
-		64 64 
+		64 64
 	108
 
 DOOR map2.mp 21
@@ -92,9 +92,9 @@ NPC
 		DIALOG You have found my key!; I will tell you my secret.;There is a door at the top left square of this town.
 		DIALOG You don't have the key.;find it and I will tell you something.
 	NOMOVEMENT
-	STATICGRAPHICS char.png 
+	STATICGRAPHICS resources/art/chara01.png
 		6 4
-		64 96 
+		32 48 
 	10
 
 # NPC on tile 15. will give you a ring if you don't have one.
@@ -106,8 +106,8 @@ NPC
 			GIVEITEM ring
 	END
 NOMOVEMENT
-STATICGRAPHICS char.png 
+STATICGRAPHICS resources/art/chara01.png
 	6 0 
-	64 96 
+	32 48
 15
 END

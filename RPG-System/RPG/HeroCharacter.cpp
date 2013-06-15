@@ -6,13 +6,13 @@
 #include "Enemy.h"
 #include "AttackAgainst.h"
 #include "addObject.h"
+#include "Bank.h"
 
 const float HURT_TIME = 1.f;
 
 HeroCharacter::HeroCharacter(shared_ptr<HeroData>& data) : _act(false), _B_clock(0.f), _hero_data(data), _curr_attack(0)
 {
-	loadTexture(_hero_texture, "resources/art/chara01.png");
-	GameObject::setGraphics(new Graphics(&_hero_texture, sf::Vector2i(0,0), sf::Vector2u(64,96)));
+	GameObject::setGraphics(new Graphics(&(Bank<sf::Texture>::getInstance().get("resources/art/chara01.png")), sf::Vector2i(0,0), sf::Vector2u(32,48)));
 	GameObject::setMovement(new UserMovement);
 
 	_atks.push_back(shared_ptr<AttackFactory>(new AttackFactoryT<BasicAttack>));

@@ -21,7 +21,6 @@ public:
 	HeroCharacter(shared_ptr<HeroData>& data);
 	virtual void handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
-	sf::Texture* getTexture() { return &_hero_texture; }
 
 	void act(LocalMap& localmap, GameObject& obj) { obj.act(localmap, *this); }
 	void StepOn(LocalMap& localmap, GameObject& obj) { obj.StepOn(localmap, *this); }
@@ -49,7 +48,6 @@ public:
 	}
 
 private:
-	sf::Texture _hero_texture;
 	Flag _act;
 	Flag _attack1;
 	Flag _attack2;

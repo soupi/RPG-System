@@ -7,8 +7,8 @@ Graphics::Graphics(const sf::Texture* texture, sf::Vector2i loc_on_texture, cons
 {
 	_sprite.setTexture(*_texture);
 	_sprite.setTextureRect(sf::IntRect(loc_on_texture.x*size.x, loc_on_texture.y * size.y, size.x, size.y));
-
-	_shadow.setRadius(size.x/2.8f);
+	_sprite.scale(float(SCRN_TILE_SIZE)/TILE_SIZE, float(SCRN_TILE_SIZE)/TILE_SIZE);
+	_shadow.setRadius(_sprite.getGlobalBounds().width/2.8f);
 	_shadow.setPosition(1 + _shadow.getRadius(), 1 + _shadow.getRadius());
 	_shadow.setFillColor(sf::Color::Color(0,0,0,170));
 	_shadow.setOrigin(_shadow.getRadius(), _shadow.getRadius());
