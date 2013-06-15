@@ -67,7 +67,7 @@
 NPC 
 	DIALOG how did I end up here?
 	NOMOVEMENT
-	GRAPHICS char.png 
+	GRAPHICS resources/art/chara01.png 
 		1 4 
 		64 96 
 	200
@@ -81,7 +81,7 @@ NPC
 		DIALOG Oh! is that ring for me???;why not?
 		DIALOG ...yes?
 	NOMOVEMENT
-	GRAPHICS char.png 
+	GRAPHICS resources/art/chara01.png 
 		6 5
 		64 96 
 	10

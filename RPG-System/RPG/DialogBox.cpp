@@ -13,7 +13,6 @@ DialogBox::DialogBox(const string& str) : _stream(str), _clock(0.f)
 	_rect.setOutlineThickness(2.f);
 
 	_text.setFont(Bank<sf::Font>::getInstance().get("resources/consola.ttf"));
-	_text.setCharacterSize(24);
 
 	newLine();
 }
@@ -69,6 +68,8 @@ void DialogBox::Render(Controller& ctrl)
 	_rect.setSize(sf::Vector2f(size.x/2.5f, size.y/4.f));
 	_rect.setPosition(center.x - (_rect.getSize().x/1.5f) , center.y + (_rect.getSize().y/2.f));
 	_text.setPosition(_rect.getPosition() + sf::Vector2f(20.f, 20.f));
+
+	_text.setCharacterSize(unsigned(_rect.getSize().y)/11);
 
 	ctrl.getWindow().draw(_rect);
 	ctrl.getWindow().draw(_text);
