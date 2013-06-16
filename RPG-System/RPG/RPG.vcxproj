@@ -131,6 +131,7 @@
     <ClInclude Include="StaticGraphics.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="DirMovement.h" />
+    <ClInclude Include="StepOnScriptObj.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="UserMovement.h" />
     <ClInclude Include="Utility.h" />

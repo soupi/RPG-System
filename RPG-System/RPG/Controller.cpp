@@ -138,7 +138,6 @@ void Controller::initWindow()
 	// create view
 	_view.setCenter(_window.getSize().x/2.f, _window.getSize().y/2.f);
 	_view.setSize(float(_window.getSize().x), float(_window.getSize().y));
-
 	_window.setView(_view);
 }
 

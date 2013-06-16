@@ -93,23 +93,6 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 # SIGN to create on tile 904.
-# Boy playing catch to create on tile 111.
-NPC 
-	DIALOG I make it look like he's winning.
-	RANDMOVEMENT 3
-	GRAPHICS resources/art/chara03.png 
-		9 4 
-		32 48 
-	111
-	
-# Girl playing catch to create on tile 101.
-NPC
-	DIALOG We are playing 'Catch'!
-	FOLLOWIDMOVEMENT 1 8
-	GRAPHICS resources/art/chara03.png
-		6 4 
-		32 48 
-	108
 NPC 
 	DIALOG TOWN
 	NOMOVEMENT

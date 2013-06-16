@@ -9,7 +9,6 @@ void Splash::init()
 	_logo.setOrigin(_logo.getTextureRect().width/2.f, _logo.getTextureRect().height/2.f);
 	_rect.setFillColor(sf::Color::White);
 	_shader.loadFromFile("resources/wave.vert", sf::Shader::Vertex);
-	//_shader.loadFromFile("resources/wave.vert", "resources/pixelate.frag");
 	_shade_timer = 0.f;
 	
 }
@@ -17,8 +16,9 @@ void Splash::init()
 void Splash::Update(Controller& ctrl, float elapsedTime)
 {
 	_logo.setPosition(ctrl.getView().getCenter());
-	_rect.setPosition(0,0);
+	_rect.setPosition(_logo.getPosition().x,0);
 	_rect.setSize(ctrl.getView().getSize());
+	_rect.setPosition(_logo.getPosition().x - _rect.getSize().x/2, _logo.getPosition().y - _rect.getSize().y/2);
 
 	_shade_timer += elapsedTime;
 	if (1.f < _shade_timer && _shade_timer < 4.17f)

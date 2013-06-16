@@ -42,7 +42,7 @@ void Graphics::setPos(const sf::Vector2f pos)
 	_last_pos = _shadow.getPosition();
 	_shadow.setPosition(pos.x,pos.y);
 	_sprite.setPosition(_shadow.getPosition().x - _sprite.getGlobalBounds().width/2,
-		_shadow.getPosition().y - _sprite.getGlobalBounds().height + _shadow.getRadius()/2.f);
+	_shadow.getPosition().y - _sprite.getGlobalBounds().height + _shadow.getRadius()/2.f);
 }
 
 void Graphics::Update(float deltaTime)
@@ -64,7 +64,7 @@ void Graphics::Update(float deltaTime)
 		dir = LEFT_DIR;
 
 	_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left, _loc_on_texture.y*_sprite.getTextureRect().height + _sprite.getTextureRect().height * dir,
-		 _sprite.getTextureRect().width, _sprite.getTextureRect().height));
+		_sprite.getTextureRect().width, _sprite.getTextureRect().height));
 
 	if (_animation_clock > ANIMATION_SPEED)
 	{
@@ -77,14 +77,11 @@ void Graphics::Update(float deltaTime)
 
 bool Graphics::checkCollision(sf::FloatRect& box) const
 {
-	bool f = getCollisionBox().intersects(box);
 	return getCollisionBox().intersects(box);
 }
 
 sf::FloatRect Graphics::getCollisionBox() const
 {
-	sf::Vector2f pos = _shadow.getPosition();
-	float radius = _shadow.getRadius();
 	return _shadow.getGlobalBounds();
 }
 

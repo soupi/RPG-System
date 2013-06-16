@@ -36,6 +36,7 @@ public:
 	shared_ptr<GameObject> makeEnemy(istream& infd);
 	shared_ptr<GameObject> makeDoor(istream& infd);
 	shared_ptr<GameObject> makeChest(istream& infd);
+	shared_ptr<GameObject> makeStepOnScriptObj(istream& infd);
 	
 	shared_ptr<Script> readDialog(istream& infd);
 	shared_ptr<Script> readGiveItem(istream& infd);

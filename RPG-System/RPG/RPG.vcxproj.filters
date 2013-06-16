@@ -234,6 +234,9 @@
     <ClInclude Include="FollowIdMovement.h">
       <Filter>Header Files\GameObject\Movement</Filter>
     </ClInclude>
+    <ClInclude Include="StepOnScriptObj.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -273,9 +276,6 @@
       <Filter>Source Files\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="HeroCharacter.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="NPC.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Parser.cpp">
@@ -343,6 +343,9 @@
     </ClCompile>
     <ClCompile Include="Pause.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

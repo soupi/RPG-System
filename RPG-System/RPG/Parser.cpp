@@ -10,6 +10,7 @@
 #include "Door.h"
 #include "NPC.h"
 #include "Enemy.h"
+#include "StepOnScriptObj.h"
 // include scripts
 #include "Script.h"
 #include "Scripts.h"
@@ -39,6 +40,7 @@ Parser::Parser(istream& infd) : _infd(infd)
 	_gameObjFactoryMap["ENEMY"] = &Parser::makeEnemy;
 	_gameObjFactoryMap["DOOR"] = &Parser::makeDoor;
 	_gameObjFactoryMap["CHEST"] = &Parser::makeChest;
+	_gameObjFactoryMap["STEPON"] = &Parser::makeStepOnScriptObj;
 
 	_scriptFactoryMap["SCRIPTS"] = &Parser::readScripts;
 	_scriptFactoryMap["NOSCRIPT"] = &Parser::readNoScript;
@@ -165,7 +167,16 @@ shared_ptr<GameObject> Parser::makeChest(istream& infd)
 	infd >> item;
 	return shared_ptr<GameObject>(new  Chest(item));
 }
-	
+
+shared_ptr<GameObject> Parser::makeStepOnScriptObj(istream& infd)
+{
+	string script_name;
+	infd >> script_name;
+
+	shared_ptr<Script> (Parser::*readscript)(istream& infd) = _scriptFactoryMap[script_name];
+	shared_ptr<Script> script = (this->*readscript)(infd);
+	return shared_ptr<GameObject>(new StepOnScriptObj(script));
+}
 shared_ptr<Script> Parser::readDialog(istream& infd)
 {
 	string str;

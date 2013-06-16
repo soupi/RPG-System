@@ -14,7 +14,7 @@
 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 
 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 
 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 
-0 0 0 0 0 0 0 0 0 0 33 0 0 0 0 0 0 0 0 0 
+33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 33 
 20 15 Tiles/house-fore.png
 49 50 50 50 50 51 0 0 5 6 0 0 139 140 158 238 159 239 240 160 
 65 185 0 0 77 67 0 0 21 22 0 0 155 156 222 206 222 255 256 192 
@@ -30,7 +30,7 @@
 65 0 0 0 0 67 0 0 0 0 0 0 0 0 0 0 0 0 0 244 
 65 0 0 0 0 67 0 0 0 0 0 0 0 0 0 251 252 253 0 246 
 65 0 0 62 63 67 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-81 82 82 82 82 83 118 118 245  118 0 118 118 118 118 118 118 118 188 118 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 20 15 Tiles/house-fore.png
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
@@ -47,6 +47,23 @@
 0 0 0 46 47 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 71 229 0 0 230 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 87 0 0 0 0 0 0 0 0 0 0 0 0 
-DOOR map.mp 593
+DOOR map.mp 673
 	290
+	
+# Dorothy
+NPC 
+	IFQITEM cat
+		IFQITEM ladder
+			DIALOG Dorothy: you can use this to climb down places.
+			SCRIPTS
+				DIALOG Dorothy: You have found my Dolly! Thank You so much! Please take this!
+				GIVEITEM ladder
+				DIALOG Dorothy: you can use this to climb down places.
+			END
+		DIALOG Dorothy: Please help me find my cat, Dolly.
+	RANDMOVEMENT 2
+	GRAPHICS resources/art/chara04.png 
+		3 0
+		32 48 
+	58
 END

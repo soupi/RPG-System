@@ -29,7 +29,9 @@ public:
 	void act(LocalMap& localmap, LocalObject& obj);
 	void act(LocalMap& localmap, Enemy& obj);
 	void StepOn(LocalMap& localmap, Enemy& obj) { obj.StepOn(localmap, *this); }
-//	bool canStepOn(Enemy& obj);
+
+	virtual bool canStepOn(LocalObject& obj) { return false; }
+	virtual bool canStepOn(Enemy& obj) { return false; }
 
 	void attack(const Stats& stats, int power);
 

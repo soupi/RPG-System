@@ -12,8 +12,8 @@ const unsigned FRAME_RATE = 60;
 const unsigned TILE_SIZE = 32;
 const unsigned SCRN_TILE_SIZE = 64;
 
-const float HERO_SPEED = 250.f;
 const float DEFAULT_SPEED = 3.f*SCRN_TILE_SIZE; // three tiles per second
+const float HERO_SPEED = DEFAULT_SPEED;
 
 // for graphics
 const float ANIMATION_SPEED = 0.2f;
@@ -24,3 +24,6 @@ enum DIRECTION {
 	RIGHT_DIR = 2,
 	UP_DIR	  = 3
 };
+
+// for dialogs
+const unsigned TEXT_SPEED = 32; // letters per second
