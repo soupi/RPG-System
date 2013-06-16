@@ -92,25 +92,25 @@
 0 0 0 0 0 0 178 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 178 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 194 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-ENEMY 8 7 2 70
+ENEMY 3 4 2 50
 	FOLLOWIDMOVEMENT 0 3
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	84
-ENEMY 8 7 2 70
+ENEMY 4 5 2 70
 	FOLLOWIDMOVEMENT 0 3
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	21
-ENEMY 6 9 2 60
+ENEMY 2 9 2 60
 	RANDMOVEMENT 3
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	297
-ENEMY 10 10 2 70
+ENEMY 6 6 2 70
 	RANDMOVEMENT 2
 	GRAPHICS resources/art/slime.png
 		0 0
@@ -146,10 +146,10 @@ ENEMY 3 5 2 90
 		0 0
 		32 32 
 	273
-ENEMY 3 5 5 80
-	RANDMOVEMENT 3
-	GRAPHICS resources/art/slime.png
+ENEMY 10 5 3 50
+	FOLLOWIDMOVEMENT 0 6
+	GRAPHICS resources/art/slimex64.png
 		0 0
-		32 32 
+		64 64 
 	340
 END
