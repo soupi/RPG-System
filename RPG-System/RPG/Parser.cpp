@@ -18,6 +18,7 @@
 #include "Dialog.h"
 #include "GiveItem.h"
 #include "NoScript.h"
+#include "ChangeMap.h"
 // Graphics types
 #include "Graphics.h"
 #include "NoGraphics.h"
@@ -48,6 +49,7 @@ Parser::Parser(istream& infd) : _infd(infd)
 	_scriptFactoryMap["GIVEITEM"] = &Parser::readGiveItem;
 	_scriptFactoryMap["IFQITEM"] = &Parser::readIFQItem;
 	_scriptFactoryMap["IFLEVEL"] = &Parser::readIFLevel;
+	_scriptFactoryMap["CHANGEMAP"] = &Parser::readChangeMap;
 
 	_movementFactoryMap["NOMOVEMENT"] = &Parser::readNoMovement;
 	_movementFactoryMap["RANDMOVEMENT"] = &Parser::readRandMovement;
@@ -153,13 +155,7 @@ shared_ptr<GameObject> Parser::makeEnemy(istream& infd)
 
 shared_ptr<GameObject> Parser::makeDoor(istream& infd)
 {
-	string map_name;
-	infd >> map_name;
-
-	unsigned s_pos;
-	infd >> s_pos;
-
-	return shared_ptr<GameObject>(new Door(map_name, s_pos));
+	return shared_ptr<GameObject>(new Door(readChangeMap(infd)));
 }
 shared_ptr<GameObject> Parser::makeChest(istream& infd)
 {
@@ -232,7 +228,16 @@ shared_ptr<Script> Parser::readNoScript(istream& infd)
 	return shared_ptr<Script>(new NoScript);
 }
 
+shared_ptr<Script> Parser::readChangeMap(istream& infd)
+{
+	string map_name;
+	infd >> map_name;
 
+	unsigned s_pos;
+	infd >> s_pos;
+
+	return shared_ptr<Script>(new ChangeMap(map_name, s_pos));
+}
 
 
 

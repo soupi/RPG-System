@@ -93,16 +93,15 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 # SIGN to create on tile 904.
-# Boy playing catch to create on tile 111.
+# Girl playing catch to create on tile 111.
 NPC 
 	DIALOG I make it look like he's winning.
 	RANDMOVEMENT 3
 	GRAPHICS resources/art/chara03.png 
 		9 4 
 		32 48 
-	111
-	
-# Girl playing catch to create on tile 101.
+	111	
+# Boy playing catch to create on tile 101.
 NPC
 	DIALOG We are playing 'Catch'!
 	FOLLOWIDMOVEMENT 1 8
@@ -110,6 +109,20 @@ NPC
 		6 4 
 		32 48 
 	108
+
+NPC
+	IFQITEM cat
+		DIALOG meow.
+		SCRIPTS
+			GIVEITEM cat
+			DIALOG MEOW!
+		END
+	RANDMOVEMENT 3
+	GRAPHICS resources/art/animals.png
+	0 0
+	32 32
+	640
+	
 NPC 
 	DIALOG TOWN
 	NOMOVEMENT
@@ -134,6 +147,11 @@ NPC
 	162
 DOOR house1-back.mp 270
 	593
-DOOR underground1.mp 57
+NPC
+	IFQITEM ladder
+		CHANGEMAP underground1.mp 57
+		DIALOG I need something to climb down with...
+	NOMOVEMENT
+	NOGRAPHICS
 	655
 END

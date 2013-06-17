@@ -10,8 +10,8 @@
 class LocalMap;
 class HeroCharacter;
 
-const unsigned BASE_HP = 100;
-const unsigned BASE_LIVES = 2;
+const unsigned BASE_HP = 200;
+const unsigned BASE_LIVES = 0;
 
 class HeroData
 {

@@ -44,6 +44,7 @@ public:
 	shared_ptr<Script> readIFLevel(istream& infd);
 	shared_ptr<Script> readScripts(istream& infd);
 	shared_ptr<Script> readNoScript(istream& infd);
+	shared_ptr<Script> readChangeMap(istream& infd);
 
 	Movement* readNoMovement(istream& infd);
 	Movement* readRandMovement(istream& infd);
