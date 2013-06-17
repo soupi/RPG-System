@@ -35,10 +35,10 @@ bool LocalMap::handleEvents(const Control& controls)
 // Update the localmap
 void LocalMap::Update(Controller& ctrl, float elapsedTime)
 {
-	_first_update = true;
 	if (_fade.isFading())
 		_fade.update(ctrl, elapsedTime);
 
+	_first_update = true;
 	// if change state flag is set, stack game menu state
 	if (_change_state)
 		ctrl.getStateMachine().Stack("pause", shared_ptr<StateParams>(new ParamsCtrl(ctrl)));
@@ -90,8 +90,8 @@ void LocalMap::Render(Controller& ctrl)
 		if (_commands.front()->hasEntered())
 			_commands.front()->Render(ctrl);
 
-	if (_fade.isFading())
-		_fade.render(ctrl);
+//	if (_fade.isFading())
+	//	_fade.render(ctrl);
 }
 
 // init local map

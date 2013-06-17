@@ -3,26 +3,20 @@
 #include <SFML/Graphics.hpp>
 #include "State.h"
 #include "StateParams.h"
-#include "Flag.h"
-#include "Dialog.h"
+#include "menu\Menu.h"
 
 class MainMenu : public State
 {
 public:
-	MainMenu() : _dialog("Welcome to a new game made by WhiteStar Games! I hope you'll enjoy it as much as i enjoyed making it!\nHave Fun!") { }
-	virtual void Enter(shared_ptr<StateParams>& params) { init(); }
+	virtual void Enter(shared_ptr<StateParams>& params) { init(params); }
 	virtual void Exit() { }
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(Controller& ctrl);
 
 private:
-	sf::RectangleShape _rect;
-	Flag _change_state;
+	shared_ptr<Menu> _menu;
 
-	Dialog _dialog;
-
-	char _color;
-	void init();
+	void init(shared_ptr<StateParams>& params);
 
 };

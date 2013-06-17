@@ -4,24 +4,21 @@
 #include "State.h"
 #include "StateParams.h"
 #include "Flag.h"
-#include "menu/Menu.h"
 
-class Pause : public State
+class GameOver : public State
 {
 public:
-	Pause() : _escape(false) {  }
-	virtual void Enter(shared_ptr<StateParams>& params) { init(params); }
+	GameOver() : _escape(false) { init(); }
+	virtual void Enter(shared_ptr<StateParams>& params) {  }
 	virtual void Exit() { }
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(Controller& ctrl);
 
-	void escape() { _escape = true; }
-
 private:
-	shared_ptr<Menu> _menu;
+	sf::Text _text;
 	bool _escape;
 
-	void init(shared_ptr<StateParams>& params);
+	void init();
 
 };

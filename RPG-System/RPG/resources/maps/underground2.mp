@@ -92,6 +92,8 @@
 0 0 0 0 0 0 178 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 178 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 194 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+DOOR underground1.mp 211
+	89
 ENEMY 3 4 2 50
 	FOLLOWIDMOVEMENT 0 3
 	GRAPHICS resources/art/slime.png

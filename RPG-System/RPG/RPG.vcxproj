@@ -96,6 +96,12 @@
     <ClInclude Include="FadeEffect.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="FollowIdMovement.h" />
+    <ClInclude Include="GameOverState.h" />
+    <ClInclude Include="Help.h" />
+    <ClInclude Include="menu\Button.h" />
+    <ClInclude Include="menu\Command.h" />
+    <ClInclude Include="menu\Commands.h" />
+    <ClInclude Include="menu\Menu.h" />
     <ClInclude Include="Pause.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GiveItem.h" />
@@ -151,6 +157,11 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FadeEffect.cpp" />
     <ClCompile Include="FollowIdMovement.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
+    <ClCompile Include="Help.cpp" />
+    <ClCompile Include="menu\button.cpp" />
+    <ClCompile Include="menu\commands.cpp" />
+    <ClCompile Include="menu\menu.cpp" />
     <ClCompile Include="Pause.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Graphics.cpp" />

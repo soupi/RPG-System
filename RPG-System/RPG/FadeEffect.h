@@ -22,4 +22,5 @@ public:
 private:
 	sf::RectangleShape _rect;
 	FADE_TYPE _fade_type;
+	int _alpha;
 };

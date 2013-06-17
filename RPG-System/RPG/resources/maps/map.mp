@@ -114,7 +114,7 @@ NPC
 	IFQITEM cat
 		DIALOG meow.
 		SCRIPTS
-			GIVEITEM cat
+			GIVEITEM cat-info
 			DIALOG MEOW!
 		END
 	RANDMOVEMENT 3
@@ -133,9 +133,9 @@ NPC
 # SIGNBOARD to create on tile 904.
 NPC 
 	SCRIPTS
-		IFQITEM catdoll
+		IFQITEM ladder
 			NOSCRIPT
-			DIALOG 1) Help! I have lost my cat! If you have seen her please bring her back to me!; - Dorothy from House 1
+			DIALOG 1) Help! I have lost my cat! If you have seen her please tell me where she is!; - Dorothy from House 1
 		IFQITEM castlekey
 			NOSCRIPT
 			DIALOG 2) Help! My keys fell into the well in the middle of town and I'm locked outside my home. Please help!; - Matthew from House 2

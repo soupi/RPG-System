@@ -3,42 +3,35 @@
 #include "ParamsCtrl.h"
 #include "ParamsMap.h"
 #include <memory>
+#include "menu/Commands.h"
 
 using std::shared_ptr;
 
 bool MainMenu::handleEvents(const Control& controls)
-{
-
-	if (controls.isPressed(MOUSE_PRIMARY))
-		_change_state.set();
-			
-	else if (controls.isPressed(MOUSE_SECONDARY))
-		_color += 79 % 255;	
-
-	if (!_dialog.handleEvents(controls))
-			_change_state.set();
+{			
+	if (controls.isPressed(A) || controls.isPressed(ENTER))
+		_menu->execute();
+	
+	if (controls.isPressed(DOWN))
+		_menu->markNext();
+	else if (controls.isPressed(UP))
+		_menu->markPrev();
 
 	return false;
 }
 void MainMenu::Update(Controller& ctrl, float elapsedTime)
 {
-	if (_change_state)
-		ctrl.getStateMachine().Change("localmap", shared_ptr<StateParams>(new ParamsMap(ctrl, "map.mp", 19)));
 
-	_dialog.Update(ctrl, elapsedTime);
-
-	_rect.setFillColor(sf::Color::Color(_color, 100, 100));
 }
 
 void MainMenu::Render(Controller& ctrl)
 {
-	//ctrl.getWindow().draw(_rect);
-	_dialog.Render(ctrl);
+	_menu->display(ctrl.getWindow());
 }
 
-void MainMenu::init()
+void MainMenu::init(shared_ptr<StateParams>& params)
 {
-	_rect.setPosition(0.f,0.f);
-	_rect.setSize(sf::Vector2f(800.f, 600.f));
-	_rect.setFillColor(sf::Color::Red);
+	_menu = shared_ptr<Menu>(new Menu(params->getCtrl().getView().getCenter()*sf::Vector2f(0.918f,1), sf::Vector2f(200,200), 60));
+	_menu->add("New Game", new StartGame(params->getCtrl().getStateMachine(), shared_ptr<ParamsMap>(new ParamsMap(params->getCtrl(), "map.mp", 19))));
+	_menu->add("Help", new RunHelp(params->getCtrl().getStateMachine(), params));
 }

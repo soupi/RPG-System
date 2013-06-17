@@ -5,6 +5,8 @@
 #include "Splash.h"
 #include "ParamsCtrl.h"
 #include "Macros.h"
+#include "Help.h"
+#include "GameOverState.h"
 #include <memory>
 #include "Bank.h"
 
@@ -20,7 +22,7 @@ Controller::Controller() : _A_button_timer(0.f), _P_button_timer(0.f), _ESC_butt
 // main loop
 void Controller::run()
 {
-	while (_hero.isAlive())
+	while (true)
 	{
 		// time since last loop
 		float deltaTime = _clock.restart().asSeconds();
@@ -39,6 +41,8 @@ void Controller::run()
 				break;
 		}
 
+		if (!_hero.isAlive())
+			_stateMachine.Change("gameover", shared_ptr<StateParams>( new ParamsCtrl(*this)));
 		// Update
 		_stateMachine.Update(*this,deltaTime);
 
@@ -97,6 +101,9 @@ bool Controller::handleEvents(sf::Event& event)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		controls[D] = true;
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		controls[ENTER] = true;
+
 	if (_P_button_timer > PRESS_INTERVAL && sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 	{
 		controls[PAUSE] = true;
@@ -146,6 +153,8 @@ void Controller::initStateMachine()
 {
 	_stateMachine.Add("mainmenu", shared_ptr<State>(new MainMenu));
 	_stateMachine.Add("pause", shared_ptr<State>(new Pause));
+	_stateMachine.Add("help", shared_ptr<State>(new Help));
+	_stateMachine.Add("gameover", shared_ptr<State>(new GameOver));
 	_stateMachine.Add("localmap", shared_ptr<State>(new LocalMap));
 	_stateMachine.Add("splash", shared_ptr<State>(new Splash));
 

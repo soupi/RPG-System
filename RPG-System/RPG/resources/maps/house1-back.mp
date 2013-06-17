@@ -50,17 +50,17 @@
 DOOR map.mp 673
 	290
 	
-# Dorothy
+# DOROTHY
 NPC 
-	IFQITEM cat
+	IFQITEM cat-info
 		IFQITEM ladder
-			DIALOG Dorothy: you can use this to climb down places.
+			DIALOG DOROTHY: you can use this to climb down places.
 			SCRIPTS
-				DIALOG Dorothy: You have found my Dolly! Thank You so much! Please take this!
+				DIALOG DOROTHY: You have found my Dolly! Thank You so much! Please take this!
 				GIVEITEM ladder
-				DIALOG Dorothy: you can use this to climb down places.
+				DIALOG DOROTHY: you can use this to climb down places.
 			END
-		DIALOG Dorothy: Please help me find my cat, Dolly.
+		DIALOG DOROTHY: Please help me find my cat, Dolly.
 	RANDMOVEMENT 2
 	GRAPHICS resources/art/chara04.png 
 		3 0

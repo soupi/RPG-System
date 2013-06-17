@@ -15,10 +15,11 @@ enum CONTROL {
 	PAUSE = 9,
 	MOUSE_PRIMARY = 10,
 	MOUSE_SECONDARY = 11,
-	ESC = 12
+	ENTER = 12,
+	ESC = 13
 };
 
-const unsigned NUM_OF_CONTROLS = 13;
+const unsigned NUM_OF_CONTROLS = 14;
 
 
 class Control

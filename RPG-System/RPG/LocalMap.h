@@ -19,11 +19,11 @@ class LocalMap : public State
 public:
 	LocalMap();
 	virtual void Enter(shared_ptr<StateParams>& params) { _first_update = false; init(params); }
-	virtual void Exit() { }
+	virtual void Exit() { _first_update = false; }
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);
 	virtual void Render(Controller& ctrl);
-//	shared_ptr<Map> map() const { return _map; }
+
 	void addScript(shared_ptr<Script>& script);
 	void NextScript(Controller& ctrl);
 	void addCommand(shared_ptr<Script>& script);

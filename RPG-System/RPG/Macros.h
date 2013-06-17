@@ -27,3 +27,6 @@ enum DIRECTION {
 
 // for dialogs
 const unsigned TEXT_SPEED = 32; // letters per second
+
+
+const int BAD = -1;
