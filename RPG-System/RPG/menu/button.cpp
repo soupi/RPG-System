@@ -9,7 +9,7 @@
 // gets: location, texture, pic mark on texture and command
 Button::Button(const sf::Vector2f& loc, const string& text, Command* cmd) : _is_marked(false), _cmd(cmd)
 {
-	// init rect and sprite
+	// init rect and text
 	_text.setString(text);
 	_text.setFont(Bank<sf::Font>::getInstance().get("resources/consola.ttf"));
 	_text.setPosition(loc);
@@ -20,9 +20,7 @@ Button::Button(const sf::Vector2f& loc, const string& text, Command* cmd) : _is_
 	_rect.setPosition(_text.getPosition().x - 5, _text.getPosition().y);
 }
 
-// will mark the button with underline if mouse_pos is in _rect
-// gets: mouse position x and y
-// returns whether the button is marked or not
+// will mark the button 
 void Button::mark()
 {
 	// if not, mark it
@@ -46,7 +44,7 @@ void Button::setPosition(const sf::Vector2f& pos)
 	_text.setPosition(pos);
 }
 
-// runs the preset action if the button is marked
+// runs the preseted action if the button is marked
 bool Button::execute()
 {
 	if (!_is_marked)

@@ -112,7 +112,7 @@ LOCALOBJECT
 
 # the cat.
 LOCALOBJECT
-	IFQITEM cat
+	IFQITEM cat-info
 		DIALOG meow.
 		SCRIPTS
 			GIVEITEM cat-info
@@ -132,6 +132,7 @@ LOCALOBJECT
 		1 23 
 		32 32 
 	904
+
 # SIGNBOARD to create on tile 904.
 LOCALOBJECT 
 	SCRIPTS

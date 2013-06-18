@@ -20,7 +20,6 @@ using std::shared_ptr;
 class LocalMap : public State
 {
 public:
-	LocalMap();
 	virtual void Enter(shared_ptr<StateParams>& params) { _first_update = false; init(params); }
 	virtual void Exit() { _first_update = false; }
 	virtual bool handleEvents(const Control& controls);

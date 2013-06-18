@@ -3,7 +3,13 @@
 #include <string>
 
 const float PRESS_INTERVAL = 1.f/3;
+const sf::Vector2f PADDING = sf::Vector2f(20.f, 20.f);
+const float ENEMY_ATTACK_INTERVAL = 1.f;
 
+// for heroData
+const unsigned BASE_HP = 200;
+const unsigned EXTRA_LIVES = 0;
+const unsigned LEARN_BULLET_ATTACK_LEVEL = 4;
 
 // For Controller
 const int WINDOW_W = 960;
@@ -34,8 +40,8 @@ const unsigned TEXT_SPEED = 32; // letters per second
 const int BAD = -1;
 
 // for attack
-const int BASIC_ATTACK_POWER = 5;
-const int BULLET_ATTACK_POWER = 4;
+const int BASIC_ATTACK_POWER = 7;
+const int BULLET_ATTACK_POWER = 5;
 
 // for credits
 const std::string CREDITS = "  THE WHITE STAR\n\nA game by Gil Mizrahi\n\n- Made as a final project in\n  OOP2 Class 2013\n  Hadassah College";

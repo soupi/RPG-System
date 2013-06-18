@@ -131,6 +131,7 @@ void Controller::initWindow()
 	_window.create(sf::VideoMode(WINDOW_W, unsigned(WINDOW_W*ratio)), 
 		"White Star", sf::Style::Fullscreen, settings);
 
+	// icon
 	sf::Image icon = Bank<sf::Image>::getInstance().get("resources/icon.png");
 	_window.setIcon(32, 32, icon.getPixelsPtr());
 
@@ -158,7 +159,7 @@ void Controller::initStateMachine()
 	_stateMachine.Add("intro", shared_ptr<State>(new IntroState));
 	_stateMachine.Add("credits", shared_ptr<State>(new ScrolledUpTextState(CREDITS)));
 
-	// change to main menu state
+	// change to splash state
 	shared_ptr<StateParams> params( new ParamsCtrl(*this));
 	_stateMachine.Change("splash", params);
 }

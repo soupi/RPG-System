@@ -2,7 +2,7 @@
 #include "Bank.h"
 #include "Controller.h"
 
-
+// raise text
 void ScrolledUpTextState::Update(Controller& ctrl, float elapsedTime)
 {
 	TextState::Update(ctrl, elapsedTime);
@@ -10,9 +10,9 @@ void ScrolledUpTextState::Update(Controller& ctrl, float elapsedTime)
 	if (_text.getPosition().y > ctrl.getView().getCenter().y)
 		_text.setPosition(_text.getPosition().x, _text.getPosition().y - elapsedTime * DEFAULT_SPEED);
 }
-
+// set starting location of the text
 void ScrolledUpTextState::Enter(shared_ptr<StateParams>& params) 
 { 
 	_text.setPosition(params->getCtrl().getView().getCenter().x, 
-		params->getCtrl().getView().getCenter().y + params->getCtrl().getView().getSize().y/2); 
+	params->getCtrl().getView().getCenter().y + params->getCtrl().getView().getSize().y/2); 
 }

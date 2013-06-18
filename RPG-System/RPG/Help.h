@@ -11,7 +11,7 @@ class Help : public State
 {
 public:
 	Help() { init(); }
-	virtual void Enter(shared_ptr<StateParams>& params) {  }
+	virtual void Enter(shared_ptr<StateParams>& params);
 	virtual void Exit() { }
 	virtual bool handleEvents(const Control& controls);
 	virtual void Update(Controller& ctrl, float elapsedTime);

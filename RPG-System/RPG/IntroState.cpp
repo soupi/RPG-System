@@ -7,19 +7,20 @@
 
 using std::shared_ptr;
 
+
 bool IntroState::handleEvents(const Control& controls)
 {
-	if (!_dialog->handleEvents(controls))
-		_change_state.set();
+	if (!_dialog->handleEvents(controls)) 
+		_change_state.set(); // change state when dialog is finished
 
 	return false;
 }
 void IntroState::Update(Controller& ctrl, float elapsedTime)
 {
-	if (_change_state)
+	if (_change_state) // change to starting map
 		ctrl.getStateMachine().Change("localmap", shared_ptr<StateParams>(new ParamsMap(ctrl, _map_name, _starting_tile)));
 
-	_dialog->Update(ctrl, elapsedTime);
+	_dialog->Update(ctrl, elapsedTime); // updated dialog
 }
 
 void IntroState::Render(Controller& ctrl)

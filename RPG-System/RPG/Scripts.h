@@ -1,5 +1,7 @@
 #pragma once
 
+// Scripts holds an array of Scripts
+
 #include "Script.h"
 #include <vector>
 

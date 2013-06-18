@@ -11,16 +11,12 @@ const float OUTLINE_THICKNESS = 2.f;
 
 
 // Constructor sets the location and size of the menu
-// size is the number of buttons in each row and column
-// gets: location, size and button texture filename
 Menu::Menu(const sf::Vector2f& loc, const sf::Vector2f& size, unsigned button_height) 
 			: _size(size), _pos(loc), _button_height(button_height), _marked_btn(BAD)
 {
 }
 
 // add new button
-// gets: pic mark on texture and command to execute
-// return success
 bool Menu::add(const string& text, Command* cmd)
 {
 	// if the buttons space is full
@@ -47,8 +43,6 @@ void Menu::display(sf::RenderWindow& window)
 }
 
 // execute button's command currently pressed
-// gets: location pressed
-// returns: success
 bool Menu::execute()
 {
 	bool executed = false;

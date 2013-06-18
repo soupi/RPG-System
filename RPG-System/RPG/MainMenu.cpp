@@ -7,6 +7,7 @@
 
 using std::shared_ptr;
 
+// handle menu
 bool MainMenu::handleEvents(const Control& controls)
 {			
 	if (controls.isPressed(A) || controls.isPressed(ENTER))
@@ -21,14 +22,14 @@ bool MainMenu::handleEvents(const Control& controls)
 }
 void MainMenu::Update(Controller& ctrl, float elapsedTime)
 {
-
+	// nothing to render
 }
 
 void MainMenu::Render(Controller& ctrl)
 {
 	_menu->display(ctrl.getWindow());
 }
-
+// create menu
 void MainMenu::init(shared_ptr<StateParams>& params)
 {
 	_menu = shared_ptr<Menu>(new Menu(params->getCtrl().getView().getCenter()*sf::Vector2f(0.918f,1), sf::Vector2f(200,200), 60));

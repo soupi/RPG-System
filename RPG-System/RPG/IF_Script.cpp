@@ -1,16 +1,16 @@
 #include "IFScript.h"
 
+// sets which script to run
 void IFScript::enter(Hero& hero)
 {
 	_if = check(hero);
-	_check = true;
-	_continue = true;
+
 	if (_if)
 		_if_script->Enter(hero);
 	else _else_script->Enter(hero);
 
 }
-
+// handle events for winning script
 bool IFScript::handleEvents(const Control& controls)
 {
 	if (_if)
@@ -22,6 +22,7 @@ bool IFScript::handleEvents(const Control& controls)
 	_continue = _else_script->handleEvents(controls);
 	return _continue;
 }
+// dido
 bool IFScript::Update(Controller& ctrl, float elapsedTime)
 {
 	if (_if)
@@ -32,25 +33,27 @@ bool IFScript::Update(Controller& ctrl, float elapsedTime)
 	_continue = _else_script->Update(ctrl, elapsedTime);
 	return _continue;
 }
+// dido
 void IFScript::Render(Controller& ctrl)
 {
 	if (_if)
 		_if_script->Render(ctrl);
 	else _else_script->Render(ctrl);
 }
+// dido
 void IFScript::exit()
 {
-	_continue = false;
 	if (_if)
 		_if_script->Exit();
 	else _else_script->Exit();
 }
 
+// check implemented for IFLevel class
 bool IFLevel::check(Hero& hero)
 {
 	return (hero.getHeroData()->heroLevel() >= _level);
 }
-
+// check implemented for IFQItem class
 bool IFQItem::check(Hero& hero)
 {
 	return hero.getHeroData()->hasQuestItem(_item_name);

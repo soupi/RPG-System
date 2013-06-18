@@ -44,7 +44,7 @@ public:
 	// get loot
 	void Loot(LocalMap& localmap, unsigned exp, unsigned coins) { _hero_data->Loot(localmap, *this, exp, coins); }
 
-	void addNewAttack(shared_ptr<AttackFactory> atk);
+	void addNewAttack(shared_ptr<AttackFactory>& atk);
 
 	// makes the hero stop in place
 	void stop() 

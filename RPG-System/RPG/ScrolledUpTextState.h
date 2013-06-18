@@ -1,6 +1,8 @@
 #include "TextState.h"
 #include "Macros.h"
 
+// a state where the text entered in the constructor rises up until the middle of the screen
+
 class ScrolledUpTextState : public TextState
 {
 public:

@@ -12,9 +12,11 @@ void RandMovement::handleEvents(const Control& controls)
 // set new direction and move
 bool RandMovement::Update(LocalMap& localmap, GameObject& my_obj, Graphics& my_graphics, float elapsedTime)
 {
+	// sometimes you move, sometimes you rest.
 	_next_move_timer -= elapsedTime;
 	_moving_duration_timer -= elapsedTime;
 
+	// randomize next move
 	if (_next_move_timer <= 0)
 	{
 		_curr_dir.x = float(rand() % 3 -1);

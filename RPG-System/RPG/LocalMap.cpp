@@ -8,10 +8,6 @@
 #include "ParamsCtrl.h"
 #include "ParamsMap.h"
 
-LocalMap::LocalMap()
-{
-}
-
 // handle events for localmap, check controls that has been pressed
 bool LocalMap::handleEvents(const Control& controls)
 {
@@ -20,7 +16,7 @@ bool LocalMap::handleEvents(const Control& controls)
 		_change_state.set();
 
 	// controls to the scripts if there is one
-	if (!_scripts.empty() && _scripts.front()->hasEntered())
+	if (!_scripts.empty() && _scripts.front()->hasEntered()) // if entered already, handle events
 		_scripts.front()->handleEvents(controls);
 	else // controls to the map
 	{
@@ -46,31 +42,32 @@ void LocalMap::Update(Controller& ctrl, float elapsedTime)
 	// update scripts if there is one
 	if (!_scripts.empty())
 	{
-		if (_scripts.front()->hasEntered())
+		if (_scripts.front()->hasEntered()) // if entered already, update
 		{
-			if (!_scripts.front()->Update(ctrl, elapsedTime))
+			if (!_scripts.front()->Update(ctrl, elapsedTime)) // if script is done
 				NextScript(ctrl);
 		}
-		else _scripts.front()->Enter(ctrl.getHero());
+		else _scripts.front()->Enter(ctrl.getHero()); // else, enter
 		
 	}
 	else // update map
 	{
+		// update commands if there is one
 		if (!_commands.empty())
 		{
-			if (_commands.front()->hasEntered())
+			if (_commands.front()->hasEntered()) // if entered already, update
 			{
-				if (!_commands.front()->Update(ctrl, elapsedTime))
+				if (!_commands.front()->Update(ctrl, elapsedTime)) // if command is done
 					NextCommand(ctrl);
 			}
-			else {
+			else { // else, enter and update
 				_commands.front()->Enter(ctrl.getHero());
 				if (!_commands.front()->Update(ctrl, elapsedTime))
 					NextCommand(ctrl);
 			}
 		
 		}
-
+		// updated the map
 		_map->Update(ctrl, *this, elapsedTime);
 	}
 }
@@ -90,6 +87,8 @@ void LocalMap::Render(Controller& ctrl)
 		if (_commands.front()->hasEntered())
 			_commands.front()->Render(ctrl);
 
+
+	// # fade in is not working properly so i won't show it. #
 //	if (_fade.isFading())
 	//	_fade.render(ctrl);
 }
@@ -97,22 +96,23 @@ void LocalMap::Render(Controller& ctrl)
 // init local map
 void LocalMap::init(shared_ptr<StateParams>& params)
 {
+	// try loading map
 	unsigned starting_tile = 0;
 	try {
 		ParamsMap* params_map = (ParamsMap*)(params.get());
 		_map = shared_ptr<Map>(new Map(params_map->getMap())); // create new map from map
 		starting_tile = params_map->StartingTile();
 	}
-	catch (...)
+	catch (std::exception& e)
 	{
-		std::cerr << "No Map";
+		std::cerr << e.what();
 		exit(EXIT_FAILURE);
 	}
 	// add game objects to map
 		
 	// add hero to map
 	_map->addGameObject(shared_ptr<GameObject>(params->getCtrl().getHero().getHeroForMap()), starting_tile);
-	_fade.fadeIn();
+	_fade.fadeIn(); // start fade in
 }
 
 // add script to queue
