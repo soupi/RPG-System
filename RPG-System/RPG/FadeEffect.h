@@ -1,8 +1,10 @@
 #pragma once
 
+// creates a fade-in and fade-out effect
+
 #include <SFML\Graphics.hpp>
 
-class Controller;
+class Controller; // needs controller so it'll know where to be set
 
 enum FADE_TYPE {
 	FADE_IN = 1,

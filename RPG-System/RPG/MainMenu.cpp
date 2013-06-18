@@ -32,6 +32,7 @@ void MainMenu::Render(Controller& ctrl)
 void MainMenu::init(shared_ptr<StateParams>& params)
 {
 	_menu = shared_ptr<Menu>(new Menu(params->getCtrl().getView().getCenter()*sf::Vector2f(0.918f,1), sf::Vector2f(200,200), 60));
-	_menu->add("New Game", new StartGame(params->getCtrl().getStateMachine(), shared_ptr<ParamsMap>(new ParamsMap(params->getCtrl(), "map.mp", 19))));
+	_menu->add("Start Game", new StartGame(params->getCtrl().getStateMachine(), params));
 	_menu->add("Help", new RunHelp(params->getCtrl().getStateMachine(), params));
+	_menu->add("Credits", new RunCredits(params->getCtrl().getStateMachine(), params));
 }

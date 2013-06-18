@@ -1,13 +1,17 @@
 #pragma once
 
+// stats for battles
+
 #include <SFML/Graphics.hpp>
+
+const unsigned BASE = 10;
 
 class Stats 
 {
 public:
-	Stats(unsigned atk = 10, unsigned def = 10, unsigned luck = 10) : _ATK(atk), _DEF(def), _LUCK(luck) 
+	Stats(unsigned atk = BASE, unsigned def = BASE, unsigned luck = BASE) : _ATK(atk), _DEF(def), _LUCK(luck) 
 	{
-		if (def == 0)
+		if (def == 0) // avoid division by zero in calc damage
 			_DEF = 1;
 	}
 	unsigned ATK() const { return _ATK; }

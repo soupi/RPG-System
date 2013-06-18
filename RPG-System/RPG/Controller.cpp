@@ -7,6 +7,8 @@
 #include "Macros.h"
 #include "Help.h"
 #include "GameOverState.h"
+#include "ScrolledUpTextState.h"
+#include "IntroState.h"
 #include <memory>
 #include "Bank.h"
 
@@ -14,7 +16,7 @@ using std::shared_ptr;
 
 
 // Constructor for controller
-Controller::Controller() : _A_button_timer(0.f), _P_button_timer(0.f), _ESC_button_timer(0.f)  {
+Controller::Controller() : _A_button_timer(0.f)  {
 	initWindow();
 	initStateMachine();
 }
@@ -28,21 +30,22 @@ void Controller::run()
 		float deltaTime = _clock.restart().asSeconds();
 
 		_A_button_timer += deltaTime;
-		_P_button_timer += deltaTime;
-		_ESC_button_timer += deltaTime;
 
 		// handle events
 		sf::Event event;
 		if (_window.pollEvent(event))
 		{
-			if (handleEvents(event))
-				break;
+			// close game indicators
+			if (handleEvents(event)) 
+				break; 
 			else if (_stateMachine.handleEvents(_controls))
 				break;
 		}
 
+		// is hero is dead change state to game over
 		if (!_hero.isAlive())
 			_stateMachine.Change("gameover", shared_ptr<StateParams>( new ParamsCtrl(*this)));
+
 		// Update
 		_stateMachine.Update(*this,deltaTime);
 
@@ -104,16 +107,11 @@ bool Controller::handleEvents(sf::Event& event)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		controls[ENTER] = true;
 
-	if (_P_button_timer > PRESS_INTERVAL && sf::Keyboard::isKeyPressed(sf::Keyboard::P))
-	{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 		controls[PAUSE] = true;
-		_P_button_timer = 0.f;
-	}
-	if (_ESC_button_timer > PRESS_INTERVAL && sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	{
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		controls[ESC] = true;
-		_ESC_button_timer = 0.f;
-	}
 
 	// set current controls
 	_controls.setControls(controls);
@@ -131,7 +129,7 @@ void Controller::initWindow()
 	double ratio = double(sf::VideoMode::getDesktopMode().height)/sf::VideoMode::getDesktopMode().width;
 
 	_window.create(sf::VideoMode(WINDOW_W, unsigned(WINDOW_W*ratio)), 
-		"RPG", sf::Style::Fullscreen, settings);
+		"White Star", sf::Style::Fullscreen, settings);
 
 	sf::Image icon = Bank<sf::Image>::getInstance().get("resources/icon.png");
 	_window.setIcon(32, 32, icon.getPixelsPtr());
@@ -157,6 +155,8 @@ void Controller::initStateMachine()
 	_stateMachine.Add("gameover", shared_ptr<State>(new GameOver));
 	_stateMachine.Add("localmap", shared_ptr<State>(new LocalMap));
 	_stateMachine.Add("splash", shared_ptr<State>(new Splash));
+	_stateMachine.Add("intro", shared_ptr<State>(new IntroState));
+	_stateMachine.Add("credits", shared_ptr<State>(new ScrolledUpTextState(CREDITS)));
 
 	// change to main menu state
 	shared_ptr<StateParams> params( new ParamsCtrl(*this));

@@ -1,5 +1,7 @@
 #pragma once
 
+// a class that contains the data of the hero and it's representation on the map.
+
 #include "Stats.h"
 #include "HeroCharacter.h"
 #include "HeroData.h"

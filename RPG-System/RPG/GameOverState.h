@@ -1,24 +1,8 @@
-#pragma once
+#include "TextState.h"
 
-#include <SFML/Graphics.hpp>
-#include "State.h"
-#include "StateParams.h"
-#include "Flag.h"
-
-class GameOver : public State
+class GameOver : public TextState
 {
 public:
-	GameOver() : _escape(false) { init(); }
-	virtual void Enter(shared_ptr<StateParams>& params) {  }
-	virtual void Exit() { }
-	virtual bool handleEvents(const Control& controls);
-	virtual void Update(Controller& ctrl, float elapsedTime);
-	virtual void Render(Controller& ctrl);
-
-private:
-	sf::Text _text;
-	bool _escape;
-
-	void init();
-
+	GameOver() : TextState("GAME OVER.") { }
+	virtual bool handleEvents(const Control& controls) { return (controls.isPressed(ENTER) || controls.isPressed(ESC)); }
 };

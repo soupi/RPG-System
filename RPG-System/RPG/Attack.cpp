@@ -4,31 +4,34 @@
 #include "remObject.h"
 
 
-void Attack::act(LocalMap& localmap, LocalObject& obj)
+bool Attack::act(LocalMap& localmap, LocalObject& obj)
 {
-	if (!obj.canStepOn(*this))
-		localmap.addCommand(shared_ptr<Script>(new remObjScript(localmap, this)));
+	return true;
 }
 
-void Attack::act(LocalMap& localmap, Enemy& obj)
+bool Attack::act(LocalMap& localmap, Enemy& obj)
 {
-	_atk->act(localmap, *this, obj);
-	localmap.addCommand(shared_ptr<Script>(new remObjScript(localmap, this)));
+	if (!_attacked)
+		_atk->act(localmap, *this, obj);
+	return true;
 }
-void Attack::act(LocalMap& localmap, HeroCharacter& obj)
+bool Attack::act(LocalMap& localmap, HeroCharacter& obj)
 {
-	_atk->act(localmap, *this, obj);
-	localmap.addCommand(shared_ptr<Script>(new remObjScript(localmap, this)));
+	if (!_attacked)
+		_atk->act(localmap, *this, obj);
+	return true;
 }
 
 void Attack::attack(LocalMap& localmap, Enemy& obj)
 {
 	obj.attack(_stats, _power);
+	_attacked = true;
 }
 
 void Attack::attack(LocalMap& localmap, HeroCharacter& obj)
 {
 	obj.attack(_stats, _power);
+	_attacked = true;
 }
 void Attack::attack(LocalMap& localmap, LocalObject& obj)
 {

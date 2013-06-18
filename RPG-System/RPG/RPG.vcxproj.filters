@@ -66,9 +66,6 @@
     <ClInclude Include="Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EmptyState.h">
-      <Filter>Header Files\StatesMachine</Filter>
-    </ClInclude>
     <ClInclude Include="State.h">
       <Filter>Header Files\StatesMachine</Filter>
     </ClInclude>
@@ -105,9 +102,6 @@
     <ClInclude Include="Control.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ItemBank.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Stats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -131,9 +125,6 @@
     </ClInclude>
     <ClInclude Include="DialogBox.h">
       <Filter>Header Files\Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC.h">
-      <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="NoScript.h">
       <Filter>Header Files\Scripts</Filter>
@@ -255,7 +246,19 @@
     <ClInclude Include="Help.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
+    <ClInclude Include="EmptyState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="TextState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
     <ClInclude Include="GameOverState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="ScrolledUpTextState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
   </ItemGroup>
@@ -365,9 +368,6 @@
     <ClCompile Include="Pause.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="NPC.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="menu\menu.cpp">
       <Filter>Source Files\Menu</Filter>
     </ClCompile>
@@ -380,7 +380,19 @@
     <ClCompile Include="menu\commands.cpp">
       <Filter>Source Files\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="GameOverState.cpp">
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeMap.cpp">
+      <Filter>Source Files\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="TextState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrolledUpTextState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>

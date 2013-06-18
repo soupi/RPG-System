@@ -16,7 +16,6 @@ HeroCharacter::HeroCharacter(shared_ptr<HeroData>& data) : _act(false), _B_clock
 	GameObject::setMovement(new UserMovement);
 
 	_atks.push_back(shared_ptr<AttackFactory>(new AttackFactoryT<BasicAttack>));
-	//_atks.push_back(shared_ptr<AttackFactory>(new AttackFactoryT<BulletAttack>));
 }
 
 void HeroCharacter::handleEvents(const Control& controls)
@@ -37,8 +36,10 @@ void HeroCharacter::handleEvents(const Control& controls)
 void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 {
 	_B_clock += elapsedTime;
+
 	if (_hurt_timer > 0.f)
 		_hurt_timer -= elapsedTime;
+
 	GameObject::Update(ctrl, localmap, elapsedTime);
 	
 	ctrl.getView().setCenter(getPos());
@@ -50,9 +51,7 @@ void HeroCharacter::Update(Controller& ctrl, LocalMap& localmap, float elapsedTi
 		box.top += getFacingDirection().y * getSize().y;
 		if (!localmap.Act(*this, box))
 		{
-
 			shared_ptr<GameObject> atk(_atks[_curr_attack]->get(getPos(), getFacingDirection(), _hero_data->getStats(), new AttackEnemy));
-
 			localmap.addCommand(shared_ptr<Script>(new addObjScript(localmap, atk, atk->getPos())));
 		}
 	}
@@ -67,14 +66,14 @@ bool HeroCharacter::hasQuestItem(const string& item_name)
 	return _hero_data->hasQuestItem(item_name);
 }
 
-void HeroCharacter::act(LocalMap& localmap, LocalObject& obj)
+bool HeroCharacter::act(LocalMap& localmap, LocalObject& obj)
 {
-	obj.act(localmap, *this);
+	return obj.act(localmap, *this);
 }
 
-void HeroCharacter::act(LocalMap& localmap, Enemy& obj)
+bool HeroCharacter::act(LocalMap& localmap, Enemy& obj)
 {
-	obj.attack(_hero_data->getStats(), 20);
+	return false;
 }
 void HeroCharacter::attack(const Stats& stats, int power)
 {

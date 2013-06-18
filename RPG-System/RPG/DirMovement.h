@@ -1,6 +1,8 @@
 #pragma once
 #include "Movement.h"
 
+// moves in a set direction
+
 class DirMovement : public Movement
 {
 public:

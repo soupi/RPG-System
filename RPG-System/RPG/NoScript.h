@@ -1,5 +1,7 @@
 #pragma once
 
+// empty script
+
 #include "Script.h"
 
 class NoScript : public Script

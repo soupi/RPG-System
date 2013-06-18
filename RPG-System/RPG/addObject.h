@@ -1,5 +1,7 @@
 #pragma once
 
+// add a new object to the map
+
 #include "Script.h"
 
 class LocalMap;
@@ -17,6 +19,6 @@ private:
 	virtual void exit() {}
 
 	LocalMap& _localmap;
-	shared_ptr<GameObject> _obj;
-	sf::Vector2f _pos;
+	shared_ptr<GameObject> _obj; // object to add
+	sf::Vector2f _pos; // position to add it
 };

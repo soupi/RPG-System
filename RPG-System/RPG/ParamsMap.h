@@ -10,6 +10,7 @@ using std::string;
 class ParamsMap : public ParamsCtrl
 {
 public:
+	// needs the controller, the map name and the starting tile
 	ParamsMap(Controller& ctrl, const string& map_name, unsigned starting_tile) : _map_name(map_name), _starting_tile(starting_tile),ParamsCtrl(ctrl) {}
 	const string& getMap() const { return _map_name; }
 	const unsigned& StartingTile() const { return _starting_tile; }

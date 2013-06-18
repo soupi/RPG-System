@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 const float PRESS_INTERVAL = 1.f/3;
 
 
@@ -28,5 +30,12 @@ enum DIRECTION {
 // for dialogs
 const unsigned TEXT_SPEED = 32; // letters per second
 
-
+// for menu
 const int BAD = -1;
+
+// for attack
+const int BASIC_ATTACK_POWER = 5;
+const int BULLET_ATTACK_POWER = 4;
+
+// for credits
+const std::string CREDITS = "  THE WHITE STAR\n\nA game by Gil Mizrahi\n\n- Made as a final project in\n  OOP2 Class 2013\n  Hadassah College";

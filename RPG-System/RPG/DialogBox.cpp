@@ -6,10 +6,10 @@
 
 const sf::Vector2f PADDING = sf::Vector2f(20.f, 20.f);
 
-DialogBox::DialogBox(const string& str) : _stream(str), _clock(0.f)
+DialogBox::DialogBox(const string& str, const sf::Color& rect_color, const sf::Color& outline_color) : _stream(str), _clock(0.f)
 {
-	_rect.setFillColor(sf::Color::Color(0,160,200,200));
-	_rect.setOutlineColor(sf::Color::White);
+	_rect.setFillColor(rect_color);
+	_rect.setOutlineColor(outline_color);
 	_rect.setOutlineThickness(2.f);
 
 	_text.setFont(Bank<sf::Font>::getInstance().get("resources/consola.ttf"));

@@ -1,5 +1,7 @@
 #pragma once
 
+// base class for scripts
+
 #include "Hero.h"
 
 class Script 
@@ -16,8 +18,8 @@ public:
 	bool Continue() const { return _continue; }
 	bool hasEntered() const { return _entered; }
 protected:
-	bool _continue;
-	bool _entered;
+	bool _continue; // should we continue running this script?
+	bool _entered; // have we entered this script?
 private:
 	virtual void enter(Hero& hero) = 0;
 	virtual void exit() = 0;

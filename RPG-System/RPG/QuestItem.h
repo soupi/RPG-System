@@ -1,4 +1,7 @@
 #pragma once
+
+// a quest item. could have more functuallity but only a name for now.
+
 #include <string>
 
 using std::string;

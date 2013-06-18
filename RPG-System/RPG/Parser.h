@@ -15,6 +15,7 @@ using std::shared_ptr;
 using std::istream;
 using std::string;
 
+// forward declarations
 class Map;
 class GameObject;
 class Script;
@@ -31,13 +32,13 @@ public:
 
 
 	// --------------------------------------------------------
-
-	shared_ptr<GameObject> makeNPC(istream& infd);
+	// make objects
+	shared_ptr<GameObject> makeLocalObject(istream& infd);
 	shared_ptr<GameObject> makeEnemy(istream& infd);
 	shared_ptr<GameObject> makeDoor(istream& infd);
 	shared_ptr<GameObject> makeChest(istream& infd);
 	shared_ptr<GameObject> makeStepOnScriptObj(istream& infd);
-	
+	// read scripts
 	shared_ptr<Script> readDialog(istream& infd);
 	shared_ptr<Script> readGiveItem(istream& infd);
 	shared_ptr<Script> readIFQItem(istream& infd);
@@ -45,7 +46,7 @@ public:
 	shared_ptr<Script> readScripts(istream& infd);
 	shared_ptr<Script> readNoScript(istream& infd);
 	shared_ptr<Script> readChangeMap(istream& infd);
-
+	// read movements
 	Movement* readNoMovement(istream& infd);
 	Movement* readRandMovement(istream& infd);
 	Movement* readUserMovement(istream& infd);

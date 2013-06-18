@@ -1,5 +1,7 @@
 #pragma once
 
+// data of the hero: experience, level, num of coins, quest items, hp, stats and so on
+
 #include "Stats.h"
 #include "QuestItem.h"
 

@@ -8,7 +8,7 @@
 #include "QuestItem.h"
 #include "Chest.h"
 #include "Door.h"
-#include "NPC.h"
+#include "LocalObject.h"
 #include "Enemy.h"
 #include "StepOnScriptObj.h"
 // include scripts
@@ -35,9 +35,11 @@
 
 #include "Bank.h"
 
+// Constructor
+// create the database for the make functions
 Parser::Parser(istream& infd) : _infd(infd)
 {
-	_gameObjFactoryMap["NPC"] = &Parser::makeNPC;
+	_gameObjFactoryMap["LOCALOBJECT"] = &Parser::makeLocalObject;
 	_gameObjFactoryMap["ENEMY"] = &Parser::makeEnemy;
 	_gameObjFactoryMap["DOOR"] = &Parser::makeDoor;
 	_gameObjFactoryMap["CHEST"] = &Parser::makeChest;
@@ -57,21 +59,23 @@ Parser::Parser(istream& infd) : _infd(infd)
 	_movementFactoryMap["FOLLOWIDMOVEMENT"] = &Parser::readFollowIdMovement;
 }
 
+// read data from file and add GameObjects to map accordingly
 void Parser::Read(Map& map)
 {
-	while (true)
+	while (true) // end condition is finding END instead of a game object to create
 	{
 		std::string temp;
 		_infd >> temp;
+
 		if (temp == "END") // end condition
 			break;
 		else if (temp == "#") // documentation
 		{
-			getline(_infd, temp);
-			continue;
+			getline(_infd, temp); // skip line
+			continue; // start over
 		}
 
-		shared_ptr<GameObject> obj = (this->*_gameObjFactoryMap[temp])(_infd);
+		shared_ptr<GameObject> obj = (this->*_gameObjFactoryMap.at(temp))(_infd);
 
 		unsigned pos;
 		try { _infd >> pos; }
@@ -133,14 +137,14 @@ Movement* Parser::readNoMovement(istream& infd)
 
 
 
-shared_ptr<GameObject> Parser::makeNPC(istream& infd)
+shared_ptr<GameObject> Parser::makeLocalObject(istream& infd)
 {
 	string script_name;
 	infd >> script_name;
 
 	shared_ptr<Script> (Parser::*readscript)(istream& infd) = _scriptFactoryMap[script_name];
 	shared_ptr<Script> script = (this->*readscript)(infd);
-	return shared_ptr<GameObject>(new NPC( script, readGraphics(infd), readMovement(infd), false));
+	return shared_ptr<GameObject>(new LocalObject( script, readGraphics(infd), readMovement(infd), false));
 }
 
 shared_ptr<GameObject> Parser::makeEnemy(istream& infd)

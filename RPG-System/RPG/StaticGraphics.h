@@ -1,5 +1,7 @@
 #pragma once
 
+// graphics without animation
+
 #include "Graphics.h"
 
 class StaticGraphics : public Graphics

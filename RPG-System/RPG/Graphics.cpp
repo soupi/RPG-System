@@ -2,10 +2,10 @@
 #include "Tile.h"
 #include "Macros.h"
 
-Graphics::Graphics(const sf::Texture* texture, sf::Vector2i loc_on_texture, const sf::Vector2u& size) : _texture(texture), _loc_on_texture(loc_on_texture), 
+Graphics::Graphics(const sf::Texture* texture, sf::Vector2i loc_on_texture, const sf::Vector2u& size) : _loc_on_texture(loc_on_texture), 
 	_display(true), _animation(0), _animation_clock(0.f)
 {
-	_sprite.setTexture(*_texture);
+	_sprite.setTexture(*texture);
 	_sprite.setTextureRect(sf::IntRect(loc_on_texture.x*size.x, loc_on_texture.y * size.y, size.x, size.y));
 	_sprite.scale(float(SCRN_TILE_SIZE)/TILE_SIZE, float(SCRN_TILE_SIZE)/TILE_SIZE);
 	_shadow.setRadius(_sprite.getGlobalBounds().width/2.8f);

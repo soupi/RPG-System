@@ -77,9 +77,9 @@ void Map::loadMap(string& filename)
 		_top.push_back(Tile());
 	}
 
-	loadLayer(mapfile, _background, _tileset_back);
-	loadLayer(mapfile, _foreground, _tileset_fore);
-	loadLayer(mapfile, _top, _tileset_top);
+	loadLayer(mapfile, _background);
+	loadLayer(mapfile, _foreground);
+	loadLayer(mapfile, _top);
 
 	Parser parser(mapfile);
 	parser.Read(*this);
@@ -87,7 +87,7 @@ void Map::loadMap(string& filename)
 	mapfile.close();
 }
 
-void Map::loadLayer(std::ifstream& mapfile, vector<Tile>& layer, sf::Texture& tileset)
+void Map::loadLayer(std::ifstream& mapfile, vector<Tile>& layer)
 {
 	unsigned size_w, size_h;
 	mapfile >> size_w >> size_h;
@@ -99,7 +99,7 @@ void Map::loadLayer(std::ifstream& mapfile, vector<Tile>& layer, sf::Texture& ti
 	string tiles;
 	getline(mapfile, tiles);
 
-	loadTexture(tileset, "resources/" + tiles);
+	const sf::Texture& tileset = (Bank<sf::Texture>::getInstance().get("resources/" + tiles));
 
 	for (unsigned i = 0; i < size_w*size_h; i++)
 	{
@@ -108,7 +108,7 @@ void Map::loadLayer(std::ifstream& mapfile, vector<Tile>& layer, sf::Texture& ti
 			mapfile >> tile;
 			if (tile)
 			{
-				layer[i] = Tile(&tileset, tile);
+				layer[i] = Tile(tileset, tile);
 				layer[i].setPos(sf::Vector2f((i%size_w)*float(SCRN_TILE_SIZE), (i/size_w)*float(SCRN_TILE_SIZE)));
 			}
 		}
@@ -192,7 +192,8 @@ bool Map::canStepOnFG(sf::Vector2f& pos, float radius) const
 bool Map::canStepOnFG(sf::FloatRect& box) const
 {
 	
-	if (!(canStepOnFG(sf::Vector2f(box.left, box.top)) && canStepOnFG(sf::Vector2f(box.left + box.width, box.top)) &&
+	if (!(canStepOnFG(sf::Vector2f(box.left + box.width/2, box.top + box.height/2)) && 
+		canStepOnFG(sf::Vector2f(box.left, box.top)) && canStepOnFG(sf::Vector2f(box.left + box.width, box.top)) &&
 		canStepOnFG(sf::Vector2f(box.left, box.top + box.height)) && canStepOnFG(sf::Vector2f(box.left + box.width, box.top + box.height))))
 		return false;
 
@@ -220,7 +221,6 @@ void Map::Step(LocalMap& localmap, GameObject& obj)
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
 	{
 		if((it->get()) != &obj && (*it)->checkCollision(box))
-//			obj.StepOn(localmap, *(it->get())); // dispatch
 			obj.StepOn(localmap, *(it->get())); // dispatch
 	}
 }
@@ -230,11 +230,8 @@ bool Map::Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box)
 	bool acted = false;
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
 		if((it->get()) != &obj && (*it)->checkCollision(box))
-		{
-		//	obj.act(localmap, *(it->get())); // dispatch
-			(*it)->act(localmap, obj);
-			acted = true;
-		}
+			acted = (*it)->act(localmap, obj);
+
 		return acted;
 }
 

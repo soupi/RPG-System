@@ -1,5 +1,7 @@
 #pragma once
 
+// help state shows the controls
+
 #include <SFML/Graphics.hpp>
 #include "State.h"
 #include "StateParams.h"

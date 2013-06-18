@@ -32,9 +32,8 @@ protected:
 	
 
 private:
-	const sf::Texture* _texture;
 	sf::Sprite _sprite;
-	sf::CircleShape _shadow;
+	sf::CircleShape _shadow; // (also collision box)
 	sf::Vector2f _last_pos;
 	sf::Vector2f _dir;
 

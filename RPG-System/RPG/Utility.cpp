@@ -51,7 +51,7 @@ unsigned round(float a)
         return unsigned(a);
 }
 
-
+// utility functions for sf::Vector2f
 sf::Vector2f operator*(int scalar, sf::Vector2f vec)
 {
 	return sf::Vector2f(scalar*vec.x, scalar*vec.y);
@@ -65,7 +65,6 @@ bool isZero(sf::Vector2f vec)
 {
 	return (vec.x == 0.f && vec.y == 0.f) ? true : false;
 }
-
 
 float distance(sf::Vector2f& u, sf::Vector2f& v)
 {

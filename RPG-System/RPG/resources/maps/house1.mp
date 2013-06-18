@@ -47,11 +47,11 @@
 0 0 0 46 47 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 71 229 0 0 230 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 87 0 0 0 0 0 0 0 0 0 0 0 0 
-DOOR map.mp 673
+DOOR town.mp 673
 	290
 	
-# DOROTHY
-NPC 
+# NPC: DOROTHY
+LOCALOBJECT 
 	IFQITEM cat-info
 		IFQITEM ladder
 			DIALOG DOROTHY: you can use this to climb down places.

@@ -1,13 +1,17 @@
 #pragma once
 
-// the main menu will let the user start the game or view controls
+// introduction state.
 
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include "State.h"
 #include "StateParams.h"
-#include "menu\Menu.h"
+#include "Flag.h"
+#include "Dialog.h"
 
-class MainMenu : public State
+using std::shared_ptr;
+
+class IntroState : public State
 {
 public:
 	virtual void Enter(shared_ptr<StateParams>& params) { init(params); }
@@ -17,7 +21,11 @@ public:
 	virtual void Render(Controller& ctrl);
 
 private:
-	shared_ptr<Menu> _menu;
+	Flag _change_state;
+	shared_ptr<Dialog> _dialog; // introduction
+
+	string _map_name;
+	unsigned _starting_tile;
 
 	void init(shared_ptr<StateParams>& params);
 

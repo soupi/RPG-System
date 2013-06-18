@@ -12,11 +12,11 @@ class Controller
 public:
 	Controller();
 
-	void run();
-	Hero& getHero() { return _hero; }
-	StateMachine& getStateMachine() { return _stateMachine; }
-	sf::RenderWindow& getWindow() { return _window; }
-	sf::View& getView() { return _view; }
+	void run(); // run main loop
+	Hero& getHero() { return _hero; } // get the hero
+	StateMachine& getStateMachine() { return _stateMachine; } // get state machine
+	sf::RenderWindow& getWindow() { return _window; } // get window
+	sf::View& getView() { return _view; } // get view
 	bool handleEvents(sf::Event& event);
 
 private:
@@ -25,9 +25,8 @@ private:
 	sf::Clock _clock;
 	StateMachine _stateMachine;
 
+	// to ensure no "double press" will happen
 	float _A_button_timer;
-	float _P_button_timer;
-	float _ESC_button_timer;
 
 	Hero _hero;
 	Control _controls;

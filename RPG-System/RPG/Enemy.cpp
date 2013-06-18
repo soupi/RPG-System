@@ -17,11 +17,11 @@ void Enemy::StepOn(LocalMap& localmap, HeroCharacter& obj)
 {
 
 }
-void Enemy::act(LocalMap& localmap, HeroCharacter& obj)
+bool Enemy::act(LocalMap& localmap, HeroCharacter& obj)
 {
-	//obj.attack(_stats, 5);
 	shared_ptr<GameObject> atk(new BasicAttack(getPos(), getFacingDirection(), _stats, new AttackHero));
 	localmap.addCommand(shared_ptr<Script>(new addObjScript(localmap, atk, atk->getPos())));
+	return true;
 }
 
 void Enemy::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
@@ -41,7 +41,6 @@ void Enemy::Update(Controller& ctrl, LocalMap& localmap, float elapsedTime)
 		box.left += getFacingDirection().x * getSize().x;
 		box.top += getFacingDirection().y * getSize().y;
 		localmap.Act(*this, box);
-		//localmap.addCommand(shared_ptr<Script>(new addObjScript(localmap, shared_ptr<GameObject>(new BasicAttack(getPos(), getFacingDirection(), _stats, new AttackHero)), getPos())));
 	}
 }
 

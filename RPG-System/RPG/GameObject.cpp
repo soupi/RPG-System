@@ -41,6 +41,3 @@ void GameObject::setMovement(Movement* new_movement)
 	if (new_movement)
 		_movement = shared_ptr<Movement>(new_movement);
 }
-
-//bool GameObject::checkCollision(sf::FloatRect& box) const { return _graphics->checkCollision(box); }
-	

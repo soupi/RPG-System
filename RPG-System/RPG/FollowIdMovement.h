@@ -15,7 +15,7 @@ public:
 
 private:
 	int _id_to_follow;
-	float _radius;
+	float _radius; // follows if the object is in radius
 	sf::Vector2f _curr_dir;
 
 protected:

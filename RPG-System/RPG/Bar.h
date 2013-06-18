@@ -1,5 +1,7 @@
 #pragma once
 
+// creates a Bar (like a health bar)
+
 #include <SFML\Graphics.hpp>
 
 class Controller;

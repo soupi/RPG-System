@@ -1,5 +1,7 @@
 #pragma once
 
+// a flag you can set to true and when you check it's content it switches to false
+
 class Flag 
 {
 public:

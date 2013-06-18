@@ -1,5 +1,6 @@
 #pragma once
 
+// splash screen state. will display the company's logo with animation.
 
 #include <SFML/Graphics.hpp>
 #include "State.h"
@@ -20,14 +21,15 @@ public:
 
 private:
 	sf::Sprite _logo;
-	sf::RectangleShape _rect;
+	sf::RectangleShape _rect; // background
 	float _timer;
 	float _shade_timer;
-	sf::Shader _shader;
-	bool _fading;
+	sf::Shader _shader; // for animation
+	
 	Fade _fade;
+	bool _fading;
 
-	bool _esc;
+	bool _esc; // has esc been pressed?
 
 	void init();
 	

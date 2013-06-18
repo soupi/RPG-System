@@ -1,5 +1,7 @@
 #pragma once
 
+// this script removes an object from the map
+
 #include "Script.h"
 
 class LocalMap;
@@ -17,5 +19,5 @@ private:
 	virtual void exit() {}
 
 	LocalMap& _localmap;
-	GameObject* _obj;
+	GameObject* _obj; // object to remove
 };

@@ -1,5 +1,7 @@
 #pragma once
 
+// generic controls to be used in the game
+
 #include <SFML\Graphics.hpp>
 
 enum CONTROL {
@@ -20,7 +22,6 @@ enum CONTROL {
 };
 
 const unsigned NUM_OF_CONTROLS = 14;
-
 
 class Control
 {

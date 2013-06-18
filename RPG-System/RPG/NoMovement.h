@@ -1,5 +1,7 @@
 #pragma once
 
+// no movement
+
 #include "Movement.h"
 
 class NoMovement : public Movement

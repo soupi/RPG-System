@@ -25,6 +25,6 @@ void Help::Render(Controller& ctrl)
 
 void Help::init()
 {
-	_key_layout.setTexture(Bank<sf::Texture>::getInstance().get("resources/keyboardlayout.png"));
+	_key_layout.setTexture(Bank<sf::Texture>::getInstance().get("resources/keyboardlayout.jpg"));
 	_key_layout.setOrigin(_key_layout.getLocalBounds().width/2, _key_layout.getLocalBounds().height/2); 
 }

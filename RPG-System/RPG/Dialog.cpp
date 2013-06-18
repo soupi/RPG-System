@@ -2,7 +2,7 @@
 #include "Macros.h"
 #include <algorithm>
 
-Dialog::Dialog(const string& str) : _dialogbox(str), _str(str)
+Dialog::Dialog(const string& str, const sf::Color& rect_color, const sf::Color& outline_color) : _dialogbox(str, rect_color, outline_color), _str(str)
 {
 	std::replace(_str.begin(), _str.end(), ';', '\n');
 	_continue = true;

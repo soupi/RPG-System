@@ -1,5 +1,7 @@
 #pragma once
 
+// no graphics
+
 #include "Macros.h"
 #include "Graphics.h"
 

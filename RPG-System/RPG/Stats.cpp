@@ -2,12 +2,14 @@
 #include <ctime>
 #include <cstdlib>
 
+// calculate damage by stats and attack power
 int calcDamage(Stats offense, Stats defense, int power)
 {
-	int bonus = 1;
+	int critical = 1; // bonus scalar
 
-	if (rand() % (100/offense.LUCK()) == 0)
-		bonus = 2;
-	return int(bonus*(double(offense.ATK())/offense.DEF())*power);
+	if (rand() % (100/offense.LUCK()) == 0) // higher luck means more chance for critical strike
+		critical = 2;
+
+	return int(critical*(double(offense.ATK())/offense.DEF())*power);
 
 }

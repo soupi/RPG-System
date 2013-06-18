@@ -1,5 +1,7 @@
 #pragma once
 
+// Pause menu called from the game. will let the user go back to the game, view controls or exit.
+
 #include <SFML/Graphics.hpp>
 #include "State.h"
 #include "StateParams.h"
@@ -20,7 +22,7 @@ public:
 
 private:
 	shared_ptr<Menu> _menu;
-	bool _escape;
+	bool _escape; // the user wants to escape the program
 
 	void init(shared_ptr<StateParams>& params);
 

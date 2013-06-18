@@ -93,7 +93,39 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 # SIGN to create on tile 904.
-NPC 
+# Girl playing catch to create on tile 111.
+LOCALOBJECT 
+	DIALOG I make it look like he's winning.
+	RANDMOVEMENT 3
+	GRAPHICS resources/art/chara03.png 
+		9 4 
+		32 48 
+	111	
+# Boy playing catch to create on tile 101.
+LOCALOBJECT
+	DIALOG We are playing 'Catch'!
+	FOLLOWIDMOVEMENT 1 8
+	GRAPHICS resources/art/chara03.png
+		6 4 
+		32 48 
+	108
+
+# the cat.
+LOCALOBJECT
+	IFQITEM cat
+		DIALOG meow.
+		SCRIPTS
+			GIVEITEM cat-info
+			DIALOG MEOW!
+		END
+	RANDMOVEMENT 3
+	GRAPHICS resources/art/animals.png
+	0 0
+	32 32
+	640
+
+# Town sign
+LOCALOBJECT 
 	DIALOG TOWN
 	NOMOVEMENT
 	STATICGRAPHICS resources/Tiles/town-fore.png 
@@ -101,11 +133,11 @@ NPC
 		32 32 
 	904
 # SIGNBOARD to create on tile 904.
-NPC 
+LOCALOBJECT 
 	SCRIPTS
-		IFQITEM catdoll
+		IFQITEM ladder
 			NOSCRIPT
-			DIALOG 1) Help! I have lost my cat! If you have seen her please bring her back to me!; - Dorothy from House 1
+			DIALOG 1) Help! I have lost my cat! If you have seen her please tell me where she is!; - Dorothy from House 1
 		IFQITEM castlekey
 			NOSCRIPT
 			DIALOG 2) Help! My keys fell into the well in the middle of town and I'm locked outside my home. Please help!; - Matthew from House 2
@@ -115,8 +147,15 @@ NPC
 		1 24 
 		32 32 
 	162
-DOOR house1-back.mp 270
+DOOR house1.mp 270
 	593
-DOOR underground1.mp 57
+
+# the well's hole. you can climb down if you have a ladder.
+LOCALOBJECT
+	IFQITEM ladder
+		CHANGEMAP underground1.mp 57
+		DIALOG I need something to climb down with...
+	NOMOVEMENT
+	NOGRAPHICS
 	655
 END
