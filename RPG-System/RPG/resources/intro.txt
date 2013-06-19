@@ -1,2 +1,2 @@
-This is a story of a girl...;who became a hero...;that will later be known as...;The White Star.; 
-town.mp 19 
+This is a story about a girl, who lives in a small town;who went out on her own small town quest.
+my_house.mp 42
