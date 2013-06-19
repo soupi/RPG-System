@@ -19,6 +19,7 @@
 #include "GiveItem.h"
 #include "NoScript.h"
 #include "ChangeMap.h"
+#include "EndingScript.h"
 // Graphics types
 #include "Graphics.h"
 #include "NoGraphics.h"
@@ -52,6 +53,7 @@ Parser::Parser(istream& infd) : _infd(infd)
 	_scriptFactoryMap["IFQITEM"] = &Parser::readIFQItem;
 	_scriptFactoryMap["IFLEVEL"] = &Parser::readIFLevel;
 	_scriptFactoryMap["CHANGEMAP"] = &Parser::readChangeMap;
+	_scriptFactoryMap["ENDING"] = &Parser::readEndingScript;
 
 	_movementFactoryMap["NOMOVEMENT"] = &Parser::readNoMovement;
 	_movementFactoryMap["RANDMOVEMENT"] = &Parser::readRandMovement;
@@ -221,6 +223,14 @@ shared_ptr<Script> Parser::readDialog(istream& infd)
 	getline(infd, str); // get string of dialog
 	// return dialog script
 	return shared_ptr<Script>(new Dialog(str));
+}
+// read ending script
+shared_ptr<Script> Parser::readEndingScript(istream& infd)
+{
+	string str;
+	getline(infd, str); // get string to show at the end
+	// return Ending script
+	return shared_ptr<Script>(new EndingScript(str));
 }
 
 // read give item script

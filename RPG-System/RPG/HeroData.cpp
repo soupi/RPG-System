@@ -53,6 +53,7 @@ void HeroData::checkLevelRaise(LocalMap& map, HeroCharacter& hero_char)
 		}
 		string str(ss.str());
 		map.addScript(shared_ptr<Script>(new Dialog(str))); // write the message
+		_HP = BASE_HP; // regenerate health
 	}
 
 }

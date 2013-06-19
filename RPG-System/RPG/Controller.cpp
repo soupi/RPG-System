@@ -16,7 +16,7 @@ using std::shared_ptr;
 
 
 // Constructor for controller
-Controller::Controller() : _A_button_timer(0.f)  {
+Controller::Controller() : _A_button_timer(0.f), _ENTER_button_timer(0.f)  {
 	initWindow();
 	initStateMachine();
 }
@@ -30,7 +30,7 @@ void Controller::run()
 		float deltaTime = _clock.restart().asSeconds();
 
 		_A_button_timer += deltaTime;
-
+		_ENTER_button_timer += deltaTime;
 		// handle events
 		sf::Event event;
 		if (_window.pollEvent(event))
@@ -105,8 +105,11 @@ bool Controller::handleEvents(sf::Event& event)
 		controls[D] = true;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-		controls[ENTER] = true;
-
+		if (PRESS_INTERVAL < _ENTER_button_timer)
+		{
+			controls[ENTER] = true;
+			_ENTER_button_timer = 0.f;
+		}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 		controls[PAUSE] = true;
 
@@ -129,7 +132,7 @@ void Controller::initWindow()
 	double ratio = double(sf::VideoMode::getDesktopMode().height)/sf::VideoMode::getDesktopMode().width;
 
 	_window.create(sf::VideoMode(WINDOW_W, unsigned(WINDOW_W*ratio)), 
-		"White Star", sf::Style::Fullscreen, settings);
+		"Small Town Quest", sf::Style::Fullscreen, settings);
 
 	// icon
 	sf::Image icon = Bank<sf::Image>::getInstance().get("resources/icon.png");
@@ -161,5 +164,5 @@ void Controller::initStateMachine()
 
 	// change to splash state
 	shared_ptr<StateParams> params( new ParamsCtrl(*this));
-	_stateMachine.Change("splash", params);
+	_stateMachine.Stack("splash", params);
 }

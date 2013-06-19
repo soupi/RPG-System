@@ -46,6 +46,7 @@ public:
 	shared_ptr<Script> readScripts(istream& infd);
 	shared_ptr<Script> readNoScript(istream& infd);
 	shared_ptr<Script> readChangeMap(istream& infd);
+	shared_ptr<Script> readEndingScript(istream& infd);
 	// read movements
 	Movement* readNoMovement(istream& infd);
 	Movement* readRandMovement(istream& infd);

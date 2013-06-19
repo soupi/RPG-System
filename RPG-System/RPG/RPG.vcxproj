@@ -87,6 +87,7 @@
     <ClInclude Include="ChangeMap.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="EndingScript.h" />
     <ClInclude Include="ScrolledUpTextState.h" />
     <ClInclude Include="Dialog.h" />
     <ClInclude Include="DialogBox.h" />
@@ -153,6 +154,7 @@
     <ClCompile Include="ChangeMap.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="EndingScript.cpp" />
     <ClCompile Include="ScrolledUpTextState.cpp" />
     <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="DialogBox.cpp" />

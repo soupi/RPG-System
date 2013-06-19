@@ -27,6 +27,7 @@ private:
 
 	// to ensure no "double press" will happen
 	float _A_button_timer;
+	float _ENTER_button_timer;
 
 	Hero _hero;
 	Control _controls;
