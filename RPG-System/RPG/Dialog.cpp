@@ -19,8 +19,8 @@ void Dialog::enter(Hero& hero)
 // handle events
 bool Dialog::handleEvents(const Control& controls)
 {
-	// get new line if A or ENTER is pressed
-	if (controls.isPressed(A) || controls.isPressed(ENTER))
+	// get new line if A
+	if (controls.isPressed(A))
 		_continue = _dialogbox.newLine();
 	
 	return _continue;

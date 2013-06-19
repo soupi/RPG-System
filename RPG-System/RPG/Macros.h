@@ -45,3 +45,6 @@ const int BULLET_ATTACK_POWER = 5;
 
 // for credits
 const std::string CREDITS = "  THE WHITE STAR\n\nA game by Gil Mizrahi\n\n- Made as a final project in\n  OOP2 Class 2013\n  Hadassah College";
+
+
+const std::string A_BUTTON_INDICATOR = "Z";

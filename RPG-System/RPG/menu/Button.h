@@ -18,12 +18,11 @@ public:
 	Button(const sf::Vector2f& loc, const string& text, Command* cmd);
 	void display(sf::RenderWindow& window);
 	void mark();
-	void unmark() { _is_marked = false; _rect.setOutlineThickness(0.f); }
+	void unmark() { _is_marked = false; _text.setColor(sf::Color::White); }
 	void setPosition(const sf::Vector2f& pos);
 	bool execute();
 
 private:
-	sf::RectangleShape _rect; // surrounding rect
 	sf::Text _text; // button sprite
 	shared_ptr<Command> _cmd; // command
 	bool _is_marked;

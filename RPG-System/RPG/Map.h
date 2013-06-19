@@ -20,7 +20,6 @@ class Map
 {
 public:
 	Map(string filename);
-	~Map();
 	void handleEvents(const Control& controls);
 	void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 	void Render(Controller& ctrl);

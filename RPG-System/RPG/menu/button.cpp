@@ -14,17 +14,13 @@ Button::Button(const sf::Vector2f& loc, const string& text, Command* cmd) : _is_
 	_text.setFont(Bank<sf::Font>::getInstance().get("resources/consola.ttf"));
 	_text.setPosition(loc);
 	_text.setCharacterSize(40);
-	_rect.setFillColor(sf::Color::Transparent);
-	_rect.setOutlineColor(sf::Color::White);
-	_rect.setSize(sf::Vector2f(_text.getLocalBounds().width + 10, _text.getLocalBounds().height*1.5f));
-	_rect.setPosition(_text.getPosition().x - 5, _text.getPosition().y);
 }
 
 // will mark the button 
 void Button::mark()
 {
 	// if not, mark it
-	_rect.setOutlineThickness(1.f);
+	_text.setColor(sf::Color::Color(0,160,230,230));
 	_is_marked = true;
 
 }
@@ -32,15 +28,12 @@ void Button::mark()
 // draw button on window
 void Button::display(sf::RenderWindow& window)
 {
-	if (_is_marked)
-		window.draw(_rect);
 	window.draw(_text);
 }
 
 // set button position
 void Button::setPosition(const sf::Vector2f& pos)
 {
-	_rect.setPosition(pos);
 	_text.setPosition(pos);
 }
 
