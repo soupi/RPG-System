@@ -10,7 +10,7 @@ class Attack : public GameObject
 {
 public:
 	Attack(Stats stats, int power, AttackAgainst* atk = new AttackAll, Graphics* graphics = new NoGraphics, 
-		Movement* movement = new NoMovement) : _attacked(false), GameObject(graphics, movement), _stats(stats), _power(power), _atk(atk) {}
+		Movement* movement = new NoMovement) : GameObject(graphics, movement), _stats(stats), _power(power), _atk(atk) {}
 
 	virtual ~Attack() {}
 
@@ -35,6 +35,4 @@ private:
 	Stats _stats; // stats for damage calculation
 	int _power; // attacks power
 	shared_ptr<AttackAgainst> _atk;
-
-	bool _attacked;
 };

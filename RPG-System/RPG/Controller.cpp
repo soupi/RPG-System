@@ -132,7 +132,7 @@ void Controller::initWindow()
 	double ratio = double(sf::VideoMode::getDesktopMode().height)/sf::VideoMode::getDesktopMode().width;
 
 	_window.create(sf::VideoMode(WINDOW_W, unsigned(WINDOW_W*ratio)), 
-		"Small Town Quest", sf::Style::Fullscreen, settings);
+		"Little Adventure", sf::Style::Fullscreen, settings);
 
 	// icon
 	sf::Image icon = Bank<sf::Image>::getInstance().get("resources/icon.png");

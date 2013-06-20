@@ -40,8 +40,8 @@ const unsigned TEXT_SPEED = 32; // letters per second
 const int BAD = -1;
 
 // for attack
-const int BASIC_ATTACK_POWER = 7;
-const int BULLET_ATTACK_POWER = 4;
+const int BASIC_ATTACK_POWER = 12;
+const int BULLET_ATTACK_POWER = 10;
 
 // for credits
-const std::string CREDITS = "  SMALL TOWN QUEST\n\nA game by Gil Mizrahi (White Star Games)\n\n- Made as a final project in\n  OOP2 Class 2013\n  Hadassah College";
+const std::string CREDITS = "  LITTLE ADVENTURE\n\nA game by Gil Mizrahi (White Star Games)\n\n- Made as a final project in\n  OOP2 Class 2013\n  Hadassah College";

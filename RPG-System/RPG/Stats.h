@@ -20,7 +20,7 @@ public:
 
 	Stats Raise() 
 	{
-		Stats change(rand() % 3, rand() % 3, rand() % 2);
+		Stats change(rand() % 10, rand() % 10, rand() % 5);
 		_ATK += change.ATK();
 		_DEF += change.DEF();
 		_LUCK += change.LUCK();

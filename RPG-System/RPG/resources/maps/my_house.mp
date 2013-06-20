@@ -34,7 +34,7 @@
 20 15 Tiles/room.png
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-0 177 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 155 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
@@ -51,7 +51,16 @@ DOOR town.mp 273
 	289
 # Albert sign
 LOCALOBJECT 
-	DIALOG Good morning, milady.
+	IFQITEM picture
+		IFQITEM cape
+			DIALOG please come to visit me when you have the time.
+			SCRIPTS
+				DIALOG Oh, so it was you who found it after all?;Thank you.;This is a picture of your mother when she was your age.;always going around, helping people in need.;Until one day she decided to go on an adventure and leave town.;...;......;I think it's time I'll give you this.
+				GIVEITEM cape
+				DIALOG This was the cape she used to wear. it looks just like the one you have, but it's hers.;Maybe it's time for you to go out it your own adventure. just like her.
+			END
+		DIALOG Good morning, milady.
+		
 	NOMOVEMENT
 	STATICGRAPHICS resources/art/chara05.png
 		1 1

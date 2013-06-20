@@ -5,6 +5,7 @@
 #include "Utility.h"
 #include "Bank.h"
 #include "StaticGraphics.h"
+#include "Flag.h"
 
 class BasicAttack : public Attack
 {
@@ -17,10 +18,12 @@ public:
 
 		setGraphics(new StaticGraphics(&(Bank<sf::Texture>::getInstance().get("resources/art/basicattack.png")), loc, sf::Vector2u(TILE_SIZE,TILE_SIZE)));
 		setPos(pos+dir*getSize());
+
+		_first.set();
 	  }
 
 	virtual void Update(Controller& ctrl, LocalMap& localmap, float elapsedTime);
 private:
 	float _life_timer;
-	bool _first;
+	Flag _first;
 };

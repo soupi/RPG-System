@@ -1,7 +1,7 @@
 30 30
 30 30 Tiles/tile0.png
-4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 
-4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 
+4 4 0 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 
+4 4 0 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 
 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 7 
 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 
 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 
@@ -94,64 +94,78 @@
 0 0 0 0 0 193 194 195 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 DOOR underground1.mp 211
 	89
-ENEMY 3 4 2 50
+ENEMY 3 15 2 50
 	FOLLOWIDMOVEMENT 0 3
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	84
-ENEMY 4 5 2 70
+ENEMY 6 15 2 70
 	FOLLOWIDMOVEMENT 0 3
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	21
-ENEMY 2 9 2 60
+ENEMY 5 20 2 60
 	RANDMOVEMENT 3
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	297
-ENEMY 6 6 2 70
+ENEMY 30 20 2 70
 	RANDMOVEMENT 2
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	367
-ENEMY 7 5 2 90
+ENEMY 15 15 2 90
 	FOLLOWIDMOVEMENT 0 6
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	555
-ENEMY 7 5 2 90
+ENEMY 7 10 2 90
 	RANDMOVEMENT 3
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	848
-ENEMY 4 4 7 50
+ENEMY 4 15 7 50
 	FOLLOWIDMOVEMENT 0 6
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	548
-ENEMY 4 4 5 60
+ENEMY 7 12 5 60
 	FOLLOWIDMOVEMENT 0 10
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	166
-ENEMY 3 5 2 90
+ENEMY 5 10 2 90
 	RANDMOVEMENT 3
 	GRAPHICS resources/art/slime.png
 		0 0
 		32 32 
 	273
-ENEMY 10 5 3 50
+ENEMY 40 20 3 70
 	FOLLOWIDMOVEMENT 0 6
 	GRAPHICS resources/art/slimex64.png
 		0 0
 		64 64 
 	340
+	
+# frog
+LOCALOBJECT
+	IFQITEM picture
+		DIALOG You're welcome.
+		SCRIPTS
+			DIALOG oh, you're searching for a picture?;I know where it is. I will take you to it.; but be prepared.
+			CHANGEMAP underground3.mp 235
+		END
+	NOMOVEMENT
+	STATICGRAPHICS resources/art/animals.png
+	7 4
+	32 32
+	32
 END

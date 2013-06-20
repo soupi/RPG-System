@@ -247,7 +247,7 @@ bool Map::Act(LocalMap& localmap, GameObject& obj, sf::FloatRect& box)
 {
 	bool acted = false;
 	for (vector<shared_ptr<GameObject>>::iterator it = _game_objects.begin(); it != _game_objects.end(); ++it)
-		if((it->get()) != &obj && (*it)->checkCollision(box))
+		if ((it->get()) != &obj && (*it)->checkCollision(box))
 			acted = (*it)->act(localmap, obj);
 
 		return acted;

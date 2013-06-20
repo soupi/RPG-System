@@ -64,24 +64,22 @@ void DialogBox::Update(Controller& ctrl, float elapsedTime)
 	char c = _line.get(); // get next char
 
 	// -------- check size of text ------------
-	_text.setString(_str + "aaaa"); // extra 4 letters
+	_text.setString(_str + "aaaa"); // extra 4 letters so we check 'c' + '-' + '\n'
 	string str(_str); // save current
 
 	string temp; // chars to add to current text displayed
 	// if _text is bigger than it should
 	if (_text.getGlobalBounds().width > _rect.getSize().x - PADDING.x*2)
 	{
-		// and next char is not space
+		// and last char or next char is not space
 		if (_str.back() != ' ' && c != ' ')
-			if (_line.peek() != ' ') // if next char is not space, write this char and -
-			{
-				temp += c;
+			if (_line.peek() != ' ') // if next char is not space, write -
 				temp += '-';
-			}
+			
 			else { temp += c; _line.get(); } // next char is space. so we'll display this and clean the next
 		temp += '\n'; // add new line
 	}
-	if (temp.size() < 2) // if we didn't add it before the -
+	if (temp.size() < 1 || temp[0] != c) // if we didn't add it before breaking line
 		temp += c;
 
 	// set last string

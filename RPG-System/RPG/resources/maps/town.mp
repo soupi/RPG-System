@@ -124,37 +124,46 @@ LOCALOBJECT
 	32 32
 	640
 
+# Laundry Lady
+LOCALOBJECT 
+	DIALOG Well its a dirty job but someone's gotta do it.
+	NOMOVEMENT
+	STATICGRAPHICS resources/art/chara04.png 
+		4 3 
+		32 48 
+	323
+	
 # Town sign
 LOCALOBJECT 
-	DIALOG TOWN
+	DIALOG Small Town
 	NOMOVEMENT
 	STATICGRAPHICS resources/Tiles/town-fore.png 
 		1 23 
 		32 32 
 	904
 
-# SIGNBOARD to create on tile 904.
+# SIGNBOARD to create on tile 380.
 LOCALOBJECT 
 	SCRIPTS
 		IFQITEM ladder
 			NOSCRIPT
-			DIALOG 1) Help! I have lost my cat! If you have seen her please tell me where she is!; - Dorothy from House 1
-		IFQITEM castlekey
+			DIALOG 1) Help! I have lost my cat! If you have seen her please tell me where she is!; - Dorothy from House 2
+		IFQITEM cape
 			NOSCRIPT
-			DIALOG 2) Help! My keys fell into the well in the middle of town and I'm locked outside my home. Please help!; - Matthew from House 2
+			DIALOG 2) A picture of mine fell into the well in the middle of town. Please bring it back, it is very important to me.; - 	Albert from House 1
 	END
 	NOMOVEMENT
 	STATICGRAPHICS resources/Tiles/town-fore.png 
 		1 24 
 		32 32 
-	162
+	342
 	
 # door to house 1
 DOOR house1.mp 270
 	593
 	
 # door to my house
-DOOR my_house.mp 289
+DOOR my_house.mp 269
 	193
 
 # the well's hole. you can climb down if you have a ladder.
@@ -165,4 +174,21 @@ LOCALOBJECT
 	NOMOVEMENT
 	NOGRAPHICS
 	655
+	
+STEPON 
+	IFQITEM cape
+		SCRIPTS
+			DIALOG It is time...;for something bigger!
+			ENDING LITTLE TOWN ADVETURE;;by Gil Mizrahi;;; Thank You For Playing!
+		END
+		DIALOG Grandpa says it is still not time...
+	22
+STEPON 
+	IFQITEM cape
+		SCRIPTS
+			DIALOG It is time...;for something bigger!
+			ENDING   LITTLE TOWN ADVETURE;;- Gil Mizrahi;;; Thank You For Playing!
+		END
+		DIALOG Grandpa says it is still not time...
+	1182
 END
