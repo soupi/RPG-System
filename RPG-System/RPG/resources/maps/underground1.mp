@@ -36,7 +36,7 @@ DOOR town.mp 695
 	27
 STEPON IFQITEM picture
 		NOSCRIPT
-		DIALOG What is This place?
+		DIALOG What is this place?
 	57
 DOOR underground2.mp 88
 	210

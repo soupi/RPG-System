@@ -95,7 +95,7 @@
 # SIGN to create on tile 904.
 # Girl playing catch to create on tile 110.
 LOCALOBJECT 
-	DIALOG I make it look like he's winning.
+	DIALOG I let him win.
 	RANDMOVEMENT 3
 	GRAPHICS resources/art/chara03.png 
 		9 4 
@@ -150,7 +150,7 @@ LOCALOBJECT
 			DIALOG 1) Help! I have lost my cat! If you have seen her please tell me where she is!; - Dorothy from House 2
 		IFQITEM cape
 			NOSCRIPT
-			DIALOG 2) A picture of mine fell into the well in the middle of town. Please bring it back, it is very important to me.; - 	Albert from House 1
+			DIALOG 2) A picture of mine fell into the well in the middle of town. Please help me retrieve it, it is very dear to me.; - Albert from House 1; ...This is grandpa's note.
 	END
 	NOMOVEMENT
 	STATICGRAPHICS resources/Tiles/town-fore.png 
@@ -178,10 +178,10 @@ LOCALOBJECT
 STEPON 
 	IFQITEM cape
 		SCRIPTS
-			DIALOG It is time...;for something bigger!
+			DIALOG It is time...;for a bigger adventure!
 			ENDING LITTLE TOWN ADVETURE;;by Gil Mizrahi;;; Thank You For Playing!
 		END
-		DIALOG Grandpa says it is still not time...
+		DIALOG Grandpa says it is still not time to leave...
 	22
 STEPON 
 	IFQITEM cape
@@ -189,6 +189,6 @@ STEPON
 			DIALOG It is time...;for something bigger!
 			ENDING   LITTLE TOWN ADVETURE;;- Gil Mizrahi;;; Thank You For Playing!
 		END
-		DIALOG Grandpa says it is still not time...
+		DIALOG Grandpa says it is still not time to leave...
 	1182
 END

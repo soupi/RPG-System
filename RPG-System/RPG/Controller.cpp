@@ -127,7 +127,7 @@ void Controller::initWindow()
 {
 	// create window, size and settings
 	sf::ContextSettings settings;
-	settings.antialiasingLevel = 4;
+	//settings.antialiasingLevel = 4;
 	
 	double ratio = double(sf::VideoMode::getDesktopMode().height)/sf::VideoMode::getDesktopMode().width;
 

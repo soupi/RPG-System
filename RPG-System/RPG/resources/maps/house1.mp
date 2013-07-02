@@ -56,11 +56,11 @@ LOCALOBJECT
 		IFQITEM ladder
 			DIALOG DOROTHY: you can use this to climb down places.
 			SCRIPTS
-				DIALOG DOROTHY: You have found my Dolly! Thank You so much! Please take this!
+				DIALOG DOROTHY: You have found my cat! Thank You so much! Please take this!
 				GIVEITEM ladder
 				DIALOG DOROTHY: you can use this to climb down places.
 			END
-		DIALOG DOROTHY: Please help me find my cat, Dolly.
+		DIALOG DOROTHY: Please help me find my cat.
 	RANDMOVEMENT 2
 	GRAPHICS resources/art/chara04.png 
 		3 0
